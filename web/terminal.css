@@ -1,0 +1,46 @@
+  html, body { height: 100%; }
+  body { display: flex; flex-direction: column; }
+  header {
+    flex: none; display: flex; align-items: center; gap: 14px; flex-wrap: nowrap;
+    padding: 9px 12px; background: var(--plate-1); border-bottom: 1px solid var(--edge);
+  }
+  header h1 {
+    margin: 0; font: 700 13px/1 var(--label); text-transform: uppercase;
+    letter-spacing: .2em; color: var(--bone); flex: none; white-space: nowrap;
+  }
+  .spacer { flex: 1; }
+  /* which notes tab this shell is recorded into - lit bright red, as on a
+     module page, so the destination of a session is never a thing you have to
+     go looking for */
+  .notes-pick { display: inline-flex; align-items: center; gap: 7px; flex: none; }
+  .notes-pick .k, label.ck {
+    font: 600 10px/1 var(--label); text-transform: uppercase; letter-spacing: .16em;
+    color: var(--dim);
+  }
+  .notes-pick .k { color: var(--alarm); }
+  .notes-pick select {
+    color: var(--alarm); border-color: var(--alarm);
+    background: #1c0b0a; box-shadow: 0 0 0 1px rgba(255,59,48,.18),
+                                     0 0 10px -2px rgba(255,59,48,.45);
+  }
+  .notes-pick select:hover { background: #260f0d; }
+  .notes-pick select:focus {
+    border-color: var(--alarm); outline-color: var(--alarm);
+    box-shadow: 0 0 0 1px rgba(255,59,48,.32), 0 0 12px -2px rgba(255,59,48,.55);
+  }
+  .notes-pick select option { color: var(--bone); background: var(--plate-2); }
+  label.ck { display: inline-flex; align-items: center; gap: 6px; cursor: pointer;
+             flex: none; }
+  label.ck:hover { color: var(--tissue); }
+  label.ck input { width: 14px; height: 14px; accent-color: var(--iodine); }
+  /* the shell's own buttons sit ahead of the record picker, and stay on its
+     line */
+  .tools { display: inline-flex; align-items: center; gap: 8px; flex: none; }
+
+  #term { flex: 1; min-height: 0; padding: 8px 6px 6px 10px; overflow: hidden;
+          background: var(--plate); }
+  .xterm { height: 100%; }
+  #hint {
+    flex: none; padding: 6px 12px 8px; background: var(--plate-1);
+    border-top: 1px solid var(--edge); color: var(--dim); font-size: 11px;
+  }

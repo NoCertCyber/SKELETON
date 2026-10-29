@@ -1,0 +1,111 @@
+  /* --- SKELETON, read as a radiograph -----------------------------------
+     The plate is blue-black, the ink is bone, and colour is never decoration:
+     iodine means in flight, verdigris means set or finished clean, crimson
+     means it failed.  Both faces ship with Kali, so a launcher that binds
+     127.0.0.1 never reaches the network for a stylesheet. */
+  :root {
+    color-scheme: dark;
+    --plate:    #05090d;
+    --plate-1:  #0f1720;
+    --plate-2:  #151e27;
+    --plate-3:  #1c2832;
+    --edge:     #223039;
+    --edge-lit: #354853;
+    --bone:     #e6e0d2;
+    --tissue:   #8fa1ac;
+    --dim:      #66787f;
+    --iodine:   #e0a458;
+    --azure:    #4da6ff;
+    --verdigris:#5fbfa8;
+    --alarm:    #ff3b30;
+    --crimson:  #d9564f;
+    --data: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    --label: "Nimbus Sans Narrow", "Liberation Sans Narrow", "Arial Narrow",
+             "Roboto Condensed", sans-serif;
+    /* the narrow label face is for tracked caps only - it turns unreadable in a
+       sentence.  Prose a module wrote itself (its field labels, the gloss on a
+       switch) gets a normal-width humanist sans instead, also Kali-installed. */
+    --ui: "Cantarell", "DejaVu Sans", "Liberation Sans", system-ui, sans-serif;
+    --r: 3px;
+  }
+  * { box-sizing: border-box; }
+  html { scrollbar-color: var(--plate-3) var(--plate); scrollbar-width: thin; }
+  body {
+    margin: 0; background: var(--plate); color: var(--bone);
+    font: 13px/1.5 var(--data);
+    -webkit-font-smoothing: antialiased;
+  }
+  .panel > .body, #notes, #glossary, pre {
+    scrollbar-color: var(--plate-3) var(--plate); scrollbar-width: thin;
+  }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: var(--plate); }
+  ::-webkit-scrollbar-thumb {
+    background: var(--plate-3); border: 2px solid var(--plate); border-radius: 5px;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: var(--edge-lit); }
+
+  /* the instrument-labelling voice: narrow caps, tracked out, never for data */
+  .lab {
+    font: 600 11px/1 var(--label); text-transform: uppercase;
+    letter-spacing: .16em; color: var(--tissue);
+  }
+
+  button {
+    font: 600 11.5px/1 var(--label); text-transform: uppercase; letter-spacing: .12em;
+    background: var(--plate-2); color: var(--tissue);
+    border: 1px solid var(--edge); border-radius: var(--r);
+    padding: 7px 11px; cursor: pointer;
+    transition: color .12s, border-color .12s, background .12s;
+  }
+  button:hover { color: var(--bone); background: var(--plate-3); border-color: var(--edge-lit); }
+  button:active { transform: translateY(1px); }
+  button:disabled { opacity: .45; cursor: default; transform: none; }
+  button.primary { color: var(--verdigris); border-color: #2f5c56; background: #0d1a1a; }
+  button.primary:hover { color: var(--verdigris); background: #122624; border-color: var(--verdigris); }
+  :focus-visible { outline: 2px solid var(--iodine); outline-offset: 1px; }
+
+  input, select, textarea {
+    font: 13px/1.4 var(--data); color: var(--bone); background: var(--plate);
+    border: 1px solid var(--edge); border-radius: var(--r); padding: 5px 8px;
+  }
+  input::placeholder { color: var(--dim); }
+  input:focus, select:focus, textarea:focus {
+    outline: none; border-color: var(--iodine);
+    box-shadow: 0 0 0 1px rgba(224, 164, 88, .28);
+  }
+
+  /* a plate on the light box */
+  .panel {
+    display: flex; flex-direction: column; min-width: 0; min-height: 0;
+    background: var(--plate-1); border: 1px solid var(--edge); border-radius: var(--r);
+  }
+  .panel > .head {
+    display: flex; align-items: center; gap: 10px; flex: none; flex-wrap: wrap;
+    padding: 7px 10px; border-bottom: 1px solid var(--edge);
+    background: linear-gradient(var(--plate-2), var(--plate-1));
+    border-radius: var(--r) var(--r) 0 0;
+  }
+  .panel > .head .ttl {
+    font: 600 11px/1 var(--label); text-transform: uppercase; letter-spacing: .18em;
+    color: var(--bone);
+  }
+  .panel > .head .cnt { font: 10px/1 var(--data); color: var(--dim); }
+  .panel > .body { flex: 1; min-height: 0; overflow: auto; }
+
+  .empty {
+    padding: 18px 14px; color: var(--dim); max-width: 52ch;
+    white-space: normal; cursor: default; line-height: 1.6;
+  }
+
+  /* code inside prose: a switch is information, so it gets the contrast agent */
+  code {
+    font: inherit; color: var(--iodine); background: none; border: 0; padding: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: .001ms !important; animation-iteration-count: 1 !important;
+      transition-duration: .001ms !important;
+    }
+  }

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/web/favicon.svg">
+<title>SKELETON terminal</title>
+<link rel="stylesheet" href="/web/xterm.css">
+<link rel="stylesheet" href="/web/skeleton.css">
+<link rel="stylesheet" href="/web/terminal.css">
+</head>
+<body>
+<header>
+  <h1>Terminal</h1>
+  <div class="spacer"></div>
+  <div class="tools">
+    <button id="clear" title="Clear the screen; scrollback only, the shell keeps running">Clear</button>
+    <button id="dl" title="Download everything this shell has printed">Download</button>
+    <button id="kill" title="Kill this shell and start a fresh one">Restart shell</button>
+  </div>
+  <label class="notes-pick"><span class="k">Record to</span>
+    <select id="notesTab"></select>
+  </label>
+  <label class="ck" title="Copy a cleaned transcript into the chosen notes tab">
+    <input type="checkbox" id="rec"> Record
+  </label>
+</header>
+<div id="term"></div>
+<div id="hint">a live pty: paste works, and Ctrl-C / Ctrl-Z / Tab / arrows go straight to the program</div>
+<script src="/web/xterm.js"></script>
+<script src="/web/xterm-addon-fit.js"></script>
+<script src="/web/skeleton-term.js"></script>
+<script src="/web/terminal.js"></script>
+</body>
+</html>

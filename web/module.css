@@ -1,0 +1,153 @@
+  html, body { height: 100%; }
+  body { display: flex; flex-direction: column; }
+  header {
+    flex: none; display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    padding: 9px 12px; background: var(--plate-1); border-bottom: 1px solid var(--edge);
+  }
+  header h1 {
+    margin: 0; font: 400 13px/1.4 var(--data); color: var(--bone);
+    min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  /* the module's own name, picked out of the headline so the eye finds it first */
+  header h1 .name { color: var(--azure); }
+  .spacer { flex: 1; }
+  /* which notes tab this module's runs are recorded into - lit bright red so
+     the destination of a run is never a thing you have to go looking for */
+  .notes-pick { display: inline-flex; align-items: center; gap: 7px; }
+  .notes-pick .k, header label.ck {
+    font: 600 10px/1 var(--label); text-transform: uppercase;
+    letter-spacing: .16em; color: var(--dim);
+  }
+  .notes-pick .k { color: var(--alarm); }
+  .notes-pick select {
+    color: var(--alarm); border-color: var(--alarm);
+    background: #1c0b0a; box-shadow: 0 0 0 1px rgba(255,59,48,.18),
+                                     0 0 10px -2px rgba(255,59,48,.45);
+  }
+  .notes-pick select:hover { background: #260f0d; }
+  .notes-pick select:focus {
+    border-color: var(--alarm); outline-color: var(--alarm);
+    box-shadow: 0 0 0 1px rgba(255,59,48,.32), 0 0 12px -2px rgba(255,59,48,.55);
+  }
+  .notes-pick select option { color: var(--bone); background: var(--plate-2); }
+  header label.ck { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; }
+  header label.ck:hover { color: var(--tissue); }
+  header label.ck input { width: 14px; height: 14px; accent-color: var(--iodine); }
+
+  .wrap { flex: 1; min-height: 0; display: flex; flex-direction: column;
+          gap: 10px; padding: 10px 12px; overflow: auto; }
+  /* cheatsheet and terminal each keep a floor of readable lines (20 and 30);
+     when the two floors do not fit the window it is the page that scrolls,
+     not the panes that get squeezed into uselessness */
+  .panel.grow { flex: 1 1 auto; min-height: calc(20 * 1.5em + 24px); }
+  .panel.io   { flex: none; }
+  .body.pad { padding: 11px 12px; overflow: visible; }
+
+  /* the cheatsheet is the module's whole value, so it gets the room */
+  pre#info {
+    margin: 0; padding: 12px 14px; background: var(--plate); white-space: pre;
+    color: var(--bone); resize: vertical; border-radius: var(--r);
+    min-height: calc(20 * 1.5em + 24px);   /* 20 lines of cheatsheet, plus padding */
+  }
+  pre#info .i-head { color: var(--verdigris); font-weight: 700; }
+  pre#info .i-cmt  { color: var(--dim); }
+
+  #fields { display: flex; flex-direction: column; gap: 7px; }
+  .frow { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px; }
+  /* a module's own Tk label, often a sentence carrying worked examples
+     ("IP range EX 10.10.0.0/16, ..."), so never the narrow label face and
+     never uppercased - both make an example address hard to read.  It is the
+     data face, at the size and weight of the tick beside it ("All 65535
+     ports"): every prompt in the Input panel then reads as one voice. */
+  .fpair > .fl { font: 13px/1.3 var(--data); color: var(--tissue);
+                 white-space: nowrap; }
+  /* the prompt and its box, one unbreakable unit - label left, field right,
+     always on the same line.  A crowded row wraps between pairs instead.
+
+     A pair is laid out in characters, not pixels.  load() gives it a
+     flex-basis of its prompt plus a 14-character stub of box - a modest ask,
+     so a line carries several pairs and the panel costs few lines - and a
+     max-width of its prompt plus the width the module declared for that box.
+     The room left on a line is then shared back out between the pairs on it
+     in proportion to those declared widths, so a 15-character user name stops
+     growing long before a 52-character wordlist path does.  The font is
+     pinned so a `ch` is a character of the ink beside it. */
+  .fpair {
+    display: flex; align-items: center; gap: 6px;
+    font: 13px/1.3 var(--data);
+    flex: 1 1 auto; min-width: min-content;
+  }
+  /* width, not just min-width: an input's own intrinsic size (its `size`
+     attribute, 20 characters by default) is what a browser packs a line by,
+     and it would keep two prompts off a line that could hold both.  Pinned
+     small, the box grows only out of the room the row actually has. */
+  .fpair > input:not([type=checkbox]) {
+    flex: 1 1 8ch; width: 8ch; min-width: 8ch;
+  }
+  .fpair > select { flex: 0 1 auto; min-width: 8ch; }
+  /* every button of a row travels as one block, so a narrow window never
+     leaves two of a module's actions on one line and the third on the next */
+  .btnset { display: flex; gap: 8px; flex: none; }
+  /* a value that arrived from the engagement target rather than the module's
+     own example - the same mark the launcher's target strip uses */
+  input.from-session { border-color: #35635c; }
+  /* the module put this button in the same Tk frame as the fields beside it,
+     so it rides on their row instead of dropping to the bar below */
+  .frow > button { flex: none; padding: 6px 10px; }
+  .frow label.ck {
+    display: inline-flex; align-items: baseline; gap: 5px; color: var(--tissue);
+    white-space: nowrap; cursor: pointer; min-width: 0;
+  }
+  .frow label.ck:hover { color: var(--bone); }
+  .frow label.ck input { width: 14px; height: 14px; padding: 0; flex: none;
+                         align-self: center; accent-color: var(--verdigris); }
+  /* a tick label reads "-sV #version scan": the switch is data and keeps the
+     mono face, the "# ..." half is only a gloss and is set smaller in the UI
+     face - which is what makes a whole frame of ticks fit on one line. */
+  .frow label.ck .sw { font: 14px/1.3 var(--data); flex: none; }
+  .frow label.ck .gl { font: 12.5px/1.3 var(--ui); color: var(--dim);
+                       min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+  .frow label.ck:hover .gl { color: var(--tissue); }
+  /* a ticked switch is one that will be on the command line - same green the
+     launcher marks a set field with */
+  .frow label.ck:has(input:checked) .sw { color: var(--verdigris); }
+  /* a frame of nothing but ticks is one line, always: the module grouped them
+     that way and reading them as its three banks of switches depends on it, so
+     at a narrow window a gloss ellipsises (the full text is the hover title)
+     rather than the row wrapping into a second line. */
+  .frow.ticks { flex-wrap: nowrap; column-gap: 17px; }
+  .btns { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 11px;
+          padding-top: 11px; border-top: 1px solid var(--edge); }
+  .toolbar { display: flex; gap: 8px; margin-left: auto; }
+  /* nothing to fill in but several buttons - so the panel keeps only those:
+     no empty field box, no rule above them.  With a single button (it moves to
+     the terminal head) or none at all (the reference modules) the panel is not
+     rendered. */
+  #inputPanel.bare #fields { display: none; }
+  #inputPanel.bare .btns { margin-top: 0; padding-top: 0; border-top: 0; }
+  #inputPanel.gone { display: none; }
+  #btns:empty { display: none; }         /* no buttons -> no rule under the fields */
+  /* with the panel gone the cheatsheet is the whole page, so its floor grows by
+     the four lines the Input box was holding */
+  body.no-input .panel.grow, body.no-input pre#info {
+    min-height: calc(24 * 1.5em + 24px);
+  }
+
+  /* the output pane is a real terminal: same plate, still drag-resizable */
+  #termWrap {
+    flex: none; overflow: hidden; resize: vertical; background: var(--plate);
+    padding: 8px 6px 6px 10px; border-radius: 0 0 var(--r) var(--r);
+    /* 30 rows of shell: the drag handle may grow it, never shrink it below */
+    height: calc(30 * 1.35em + 22px); min-height: calc(30 * 1.35em + 22px);
+  }
+  #term, .xterm { height: 100%; }
+  /* a one-shot module's single button rides in the terminal head, left of the
+     word "Terminal", rather than alone in an Input panel of its own */
+  #loneBtn { display: flex; }
+  #loneBtn:empty { display: none; }
+  .head .hint { font-size: 11px; color: var(--dim); min-width: 0; overflow: hidden;
+                text-overflow: ellipsis; white-space: nowrap; }
+  .head .hint.live { color: var(--iodine); }
+  #olink { flex: none; padding: 0 12px; }
+  #olink:not(:empty) { padding: 8px 12px; border-top: 1px solid var(--edge); }
+  #olink a { color: var(--verdigris); }

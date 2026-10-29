@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/web/favicon.svg">
+<title>SKELETON</title>
+<link rel="stylesheet" href="/web/skeleton.css">
+<link rel="stylesheet" href="/web/launcher.css">
+</head>
+<body>
+<div class="app">
+
+<div class="notestrip">
+  <div id="tabbar" class="tabbar"></div>
+  <a href="https://payhip.com/b/dR8ng" target="_blank" rel="noopener noreferrer" class="pro-badge-btn" id="proBadgeBtn" title="Unlock all 233+ tools across 12 stages">⚡ SKELETON DEMO &bull; Unlock Full Arsenal ($30 AUD)</a>
+</div>
+
+<main>
+  <section class="panel">
+    <div class="body" id="notes" contenteditable="true" spellcheck="false"></div>
+  </section>
+
+  <div class="controls">
+    <!-- Row A: the notes buffer, the credential manager, and the target that
+         every module in this UI and in the Tk launcher pre-fills from. -->
+    <div class="crow">
+      <div class="grp">
+        <button id="btnNew" title="Clear these notes back to the banner and erase this tab's run history">New</button>
+        <button id="btnTime" title="Stamp the current time into the notes">Time</button>
+        <button id="btnSave" title="Write these notes to the working directory">Save</button>
+        <button id="btnLoad" title="Read these notes back">Load</button>
+        <input id="jobName" size="1" placeholder="Current_Job" aria-label="File name to save or load">
+      </div>
+      <div class="grp">
+        <input id="s_user" size="1" placeholder="username" title="User name" aria-label="User name">
+        <input id="s_pass" size="1" placeholder="password" title="Password" aria-label="Password">
+        <button id="btnCredAdd" title="Save this user / password pair - or remove it if it is already saved">add</button>
+        <select id="credPick" title="Saved user / password pairs - pick one to load it into the fields" aria-label="Saved credentials"></select>
+      </div>
+      <div class="grp">
+        <span class="k">Target</span>
+        <input id="s_target" size="1" placeholder="host/URL" title="Target host, IP range, domain or URL - fills both the host- and the url-typed fields of a module" aria-label="Target">
+        <button id="btnTargetAdd" title="Remember this target - or forget it if it is already in the list">add</button>
+        <select id="targetPick" title="Targets this engagement has been pointed at - pick one to make it the active target" aria-label="Saved targets"></select>
+      </div>
+    </div>
+    <!-- Row B: this box on the wire, the NICs, and a port to open. -->
+    <div class="crow local">
+      <div class="grp">
+        <button id="btnInsert" title="Append a file from the working directory">Insert</button>
+        <input id="insertName" size="1" placeholder="file.txt" aria-label="File name to insert">
+        <button id="btnFindIp" title="Read the IP off the Ethernet interfaces">Find my IP</button>
+        <button id="btnChangeIp" title="Set this box's IP to the address in the field">Change my IP</button>
+        <input id="ip" size="1" placeholder="My_IP" aria-label="My IP address">
+      </div>
+      <div class="grp">
+        <span class="k">NIC</span>
+        <input id="s_iface" size="1" placeholder="eth0" title="Wired interface" aria-label="Wired interface">
+        <input id="s_wlan" size="1" placeholder="wlan0" title="Wireless interface" aria-label="Wireless interface">
+        <button id="btnSession" title="Store the target, creds and NICs for every module">Set</button>
+      </div>
+      <div class="grp">
+        <button id="btnOpenPort" title="Open this TCP port with iptables">Open port</button>
+        <input id="port" size="1" placeholder="Port" aria-label="Port to open">
+      </div>
+    </div>
+  </div>
+
+  <div class="search-row">
+    <span class="k">Search modules:</span>
+    <input id="search" size="1" placeholder="name or description substring" aria-label="Search modules">
+    <button class="primary" id="btnRun" title="Open the selected module in a new tab">Run module</button>
+    <button id="btnNewTerm" title="A real shell on this machine, in a browser tab">New Terminal</button>
+  </div>
+
+  <section class="browse">
+    <div class="panel">
+      <div class="head"><span class="ttl">Stages</span></div>
+      <ul class="body list" id="stages" aria-label="Pentest chain stage"></ul>
+    </div>
+    <div class="panel">
+      <div class="head"><span class="ttl">Modules</span><span class="cnt" id="count"></span></div>
+      <ul class="body list" id="modules"></ul>
+    </div>
+    <div class="panel">
+      <div class="head"><span class="ttl">Run history</span><span class="cnt" id="runCount"></span></div>
+      <ul class="body list" id="history"></ul>
+    </div>
+  </section>
+
+  <div class="panel ref" id="refPanel">
+    <div class="head">
+      <span class="ttl">Reference</span><span id="refTitle"></span>
+      <button class="collapse" id="refToggle" aria-controls="glossary">&rsaquo;</button>
+    </div>
+    <div class="body" id="glossary">
+      <div class="empty">Select a module to read what it does, when to reach for
+it, and what to report.</div>
+    </div>
+  </div>
+
+</main>
+
+</div>
+
+<div id="proModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="proModalTitle">
+  <div class="modal-card">
+    <div class="modal-header">
+      <span class="modal-title" id="proModalTitle">🔒 SKELETON PRO MODULE</span>
+      <button class="modal-close" id="modalClose" aria-label="Close modal">&times;</button>
+    </div>
+    <div class="modal-body">
+      <h3 id="proModuleName" class="pro-module-title"></h3>
+      <p>This module and <strong>210+ advanced tools</strong> (Active Directory, Pivoting, Exploitation, Evasion, Wireless) are included in the <strong>SKELETON Full Version</strong>.</p>
+      <ul class="pro-features">
+        <li><span class="chk">✔</span> Full interactive automation for 233+ tools across 12 stages</li>
+        <li><span class="chk">✔</span> Complete Active Directory suite (NetExec, BloodHound, Mimikatz, Certipy)</li>
+        <li><span class="chk">✔</span> Network pivoting arsenal (Chisel, Ligolo-ng, Sshuttle)</li>
+        <li><span class="chk">✔</span> Lifetime updates &amp; offline engagement ready</li>
+      </ul>
+      <div class="pro-cta-wrap">
+        <a href="https://payhip.com/b/dR8ng" target="_blank" rel="noopener noreferrer" class="modal-buy-btn">Unlock Full Arsenal &bull; $30 AUD (Instant Access)</a>
+        <span class="modal-subtext">One-time purchase &bull; Instant download &bull; Lifetime access</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/web/launcher.js"></script>
+</body>
+</html>

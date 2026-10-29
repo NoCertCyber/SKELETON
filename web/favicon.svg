@@ -1,0 +1,12 @@
+<!-- SKELETON's tab icon: a spine on a film plate, in the console's own bone and
+     iodine.  Drawn rather than fetched, like the two faces the pages use - a
+     launcher bound to 127.0.0.1 must not need the network to finish rendering.
+     Kept to a bar and three ribs because at 16px that is all that survives. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <rect width="32" height="32" rx="6" fill="#05090d"/>
+  <g stroke="#e6e0d2" stroke-width="3" stroke-linecap="round">
+    <path d="M16 6.5v19"/>
+    <path d="M9.5 11.5h13M9.5 16h13M9.5 20.5h13"/>
+  </g>
+  <circle cx="16" cy="16" r="2.4" fill="#e0a458"/>
+</svg>

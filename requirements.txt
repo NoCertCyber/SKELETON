@@ -1,0 +1,9 @@
+# The only third-party Python the tree imports.  Everything else it drives is a
+# system tool - not a Python dependency.
+#
+#     pip install -r requirements.txt      (or: apt install python3-flask)
+#
+# Flask is for the launcher (SKELETON_WEB.py), which also wants xvfb on PATH to
+# introspect the Tk modules head-lessly.  The imports2/ modules themselves need
+# none of this - only Python 3 with Tk (apt install python3-tk).
+flask

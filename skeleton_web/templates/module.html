@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/web/favicon.svg">
+<title>SKELETON module</title>
+<link rel="stylesheet" href="/web/xterm.css">
+<link rel="stylesheet" href="/web/skeleton.css">
+<link rel="stylesheet" href="/web/module.css">
+</head>
+<body>
+<header>
+  <h1 id="title">loading&hellip;</h1>
+  <div class="spacer"></div>
+  <label class="notes-pick"><span class="k">Record to</span>
+    <select id="notesTab" title="Which notes tab this module's runs are written to"></select>
+  </label>
+  <label class="ck" title="Copy a cleaned transcript of this terminal into the chosen notes tab">
+    <input type="checkbox" id="rec"> Record
+  </label>
+</header>
+<div class="wrap">
+  <section class="panel grow">
+    <pre class="body" id="info"></pre>
+  </section>
+  <section class="panel io" id="inputPanel">
+    <div class="body pad">
+      <div id="fields"></div>
+      <div class="btns" id="btns"></div>
+    </div>
+  </section>
+  <section class="panel io">
+    <div class="head">
+      <span class="lone" id="loneBtn"></span>
+      <span class="ttl">Terminal</span>
+      <span class="hint" id="hint"></span>
+      <div class="toolbar">
+        <button id="btnInt" title="Send Ctrl-C to whatever is running in this shell">Interrupt</button>
+        <button id="btnClear" title="Clear the screen; a running command keeps going">Clear</button>
+        <button id="btnKill" title="Kill this shell and start a fresh one">Restart shell</button>
+        <button id="dl" title="Download everything this shell has printed">Download</button>
+      </div>
+    </div>
+    <div id="termWrap"><div id="term"></div></div>
+    <div id="olink"></div>
+  </section>
+</div>
+<script src="/web/xterm.js"></script>
+<script src="/web/xterm-addon-fit.js"></script>
+<script src="/web/skeleton-term.js"></script>
+<script src="/web/module.js"></script>
+</body>
+</html>

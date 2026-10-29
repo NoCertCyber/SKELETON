@@ -1,0 +1,351 @@
+  /* --- the console fills the viewport; every panel scrolls inside itself,
+         so watching the notes and scanning a long module list never fight
+         over one page scrollbar.  Notes is at the top and worked
+         continuously; the control rows, the stage / module / run-history
+         browser and the reference stack under it. */
+  .app {
+    display: grid; gap: 7px; padding: 8px;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    height: 100dvh;
+  }
+  /* Row heights are the outline's proportions: notes is roughly twice the
+     browser, and the reference takes about the notes' share back when it is
+     unfolded. */
+  main {
+    display: grid; gap: 7px; min-height: 0;
+    grid-template-rows:
+      minmax(150px, 1.9fr)    /* notes */
+      auto                    /* control rows */
+      auto                    /* search row */
+      minmax(168px, 1fr)      /* stages | modules | run history */
+      auto;                   /* reference, folded to its bar */
+  }
+  /* reference open: it takes a share of the height off the notes row */
+  main.ref-on {
+    grid-template-rows:
+      minmax(140px, 1.9fr) auto auto minmax(160px, 1fr) minmax(150px, 1.85fr);
+  }
+
+  /* --- notes tab strip ---------------------------------------------- */
+  .notestrip {
+    display: flex; align-items: center; gap: 10px;
+    padding: 6px 10px; background: var(--plate-1);
+    border: 1px solid var(--edge); border-radius: var(--r);
+  }
+  .tabbar {
+    display: flex; gap: 4px; align-items: center; flex-wrap: wrap;
+    min-width: 0;
+  }
+  .tabbtn {
+    display: inline-flex; align-items: center; gap: 7px; padding: 5px 9px;
+    background: transparent; color: var(--dim); border: 1px solid var(--edge);
+    font: 600 10.5px/1 var(--label); letter-spacing: .12em;
+  }
+  .tabbtn:hover { color: var(--tissue); background: var(--plate-2); }
+  .tabbtn.active { color: var(--bone); background: var(--plate-3); border-color: var(--edge-lit); }
+  .tabbtn .x {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 16px; height: 16px; margin: -4px -4px -4px 0; border-radius: 2px;
+    color: var(--dim); font-size: 15px; line-height: 1;
+  }
+  .tabbtn .x:hover { color: var(--crimson); background: var(--edge); }
+  .tabbtn .lbl[contenteditable="true"] {
+    background: var(--plate); box-shadow: 0 0 0 1px var(--iodine); border-radius: 2px;
+    padding: 0 4px; color: var(--bone); cursor: text;
+    font: 12px/1.3 var(--data); letter-spacing: 0; text-transform: none;
+  }
+  .tabadd { border-style: dashed; }
+
+  /* --- notes ------------------------------------------------------- */
+  #notes {
+    height: 100%; padding: 12px 15px; background: var(--plate); color: var(--bone);
+    white-space: pre; overflow: auto; outline: none;
+  }
+  #notes:focus { box-shadow: inset 0 0 0 1px rgba(224, 164, 88, .3); }
+  .ts { color: var(--dim); }
+  .cmd { color: var(--bone); }
+  .cmd .sig { color: var(--verdigris); }
+
+  /* --- control rows: notes actions + creds + target, then this box ---
+         The outline holds each row on ONE line at half-screen width, so the
+         rows never wrap: the buttons and group keys keep their natural size
+         and every text field shrinks instead.  Each field's flex-basis is its
+         placeholder's own width, so when there is room to spare they all end
+         up big enough to read their own placeholder. */
+  .controls { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
+  .crow {
+    display: flex; align-items: center; gap: 5px; flex-wrap: nowrap;
+    padding: 7px 9px; background: var(--plate-1);
+    border: 1px solid var(--edge); border-radius: var(--r);
+  }
+  /* min-content, not 0: a group is allowed to give its fields' slack up but
+     never to collapse under its own controls.  Every field carries size="1",
+     so an input's intrinsic minimum is one character and the real floor is
+     the min-width below - the width of the placeholder it must not clip. */
+  .grp {
+    display: flex; align-items: center; gap: 4px;
+    flex: 1 1 auto; min-width: min-content;
+  }
+  .grp + .grp { border-left: 1px solid var(--edge); padding-left: 7px; margin-left: 2px; }
+  .grp > .k {
+    font: 600 10px/1 var(--label); text-transform: uppercase;
+    letter-spacing: .12em; color: var(--dim); flex: none;
+  }
+  .crow.local .grp > .k { color: #4f6068; }
+  .crow.local input { border-color: #1b262e; }
+  .crow button { padding: 5px 7px; font-size: 11px; letter-spacing: .1em;
+                 white-space: nowrap; }
+  .crow input, .crow select { font-size: 11.5px; padding: 4px 6px; }
+  .grp > input:not([type=checkbox]), .grp > select {
+    flex: 1 1 auto; min-width: 0; width: auto;
+  }
+  .grp > button { flex: none; }
+  /* min-width is each field's floor at half screen, and it holds that field's
+     own placeholder - where a field was narrowed, its prompt was shortened to
+     match (Port, host/URL).  The credential pair is the one exception, and is
+     still the slack in the row: it floors a character under "username". */
+  /* box-sizing is border-box, so a min-width has to carry the field's own
+     padding and border on top of the placeholder it must not clip. */
+  #jobName    { flex: 1 1 12ch; min-width: calc(11ch + 14px); }
+  #insertName { flex: 1 1 16ch; min-width: calc(16ch + 14px); }
+  /* the my-IP field is sized to hold 15 characters; the target gives six of
+     its own to the credential pair, which holds real user names, not initials */
+  #s_target   { flex: 1 1 9ch; min-width: calc(9ch + 14px); }
+  #s_user, #s_pass { flex: 1 1 9ch; min-width: calc(7ch + 14px); }
+  /* both pickers list their entries by number (#1, #2, ...), so neither has to
+     hold more than three characters - the smallest controls in the row, on
+     purpose: what they hold is a password and a host name. */
+  #credPick   { flex: 0 1 calc(3ch + 26px); min-width: calc(3ch + 26px); }
+  #targetPick { flex: 0 1 calc(3ch + 26px); min-width: calc(3ch + 26px); }
+  #ip         { flex: 1 1 15ch; min-width: calc(15ch + 14px); }
+  /* a port is five digits at the most, so four of its characters go to the
+     file name next to it, which holds a real name */
+  #port       { flex: 1 1 8ch; min-width: calc(8ch + 14px); }
+  #s_iface, #s_wlan { flex: 1 1 7ch; min-width: calc(5ch + 14px); }
+  /* a target / cred / NIC field holding a real value is marked green, so a
+     row reads at a glance - same mark the module pages use */
+  #s_target:not(:placeholder-shown),
+  #s_user:not(:placeholder-shown), #s_pass:not(:placeholder-shown),
+  #s_iface:not(:placeholder-shown), #s_wlan:not(:placeholder-shown),
+  #ip:not(:placeholder-shown), #port:not(:placeholder-shown) { border-color: #35635c; }
+
+  /* --- search row ------------------------------------------------ */
+  .search-row {
+    display: flex; align-items: center; gap: 8px; flex-wrap: nowrap;
+    padding: 7px 9px; background: var(--plate-1);
+    border: 1px solid var(--edge); border-radius: var(--r);
+  }
+  .search-row > .k {
+    font: 600 10px/1 var(--label); text-transform: uppercase;
+    letter-spacing: .16em; color: var(--dim); flex: none;
+  }
+  .search-row #search { flex: 1 1 120px; min-width: 0; font-size: 11.5px; padding: 4px 6px; }
+  .search-row button { flex: none; padding: 5px 8px; font-size: 11px;
+                       letter-spacing: .1em; white-space: nowrap; }
+
+  /* --- stages | modules | run history --------------------------
+         Widths are the outline's: a narrow stage rail, the module list, and
+         a run history about twice the module list - its rows carry a whole
+         command line. */
+  .browse {
+    display: grid; gap: 7px; min-height: 0;
+    grid-template-columns: 104px minmax(0, 1fr) minmax(0, 2.2fr);
+  }
+  .panel > .head .cnt { margin-left: auto; }
+
+  /* --- lists -------------------------------------------------- */
+  ul.list { list-style: none; margin: 0; padding: 3px 0; }
+  ul.list li {
+    padding: 3px 8px; cursor: pointer; color: var(--tissue);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  ul.list li:hover { background: var(--plate-2); color: var(--bone); }
+  ul.list li.empty { white-space: normal; cursor: default; background: none; }
+  ul.list li .p { color: var(--dim); }
+  ul.list li:hover .p, ul.list li.sel .p { color: var(--tissue); }
+  ul.list li.sel {
+    background: var(--plate-3); color: var(--bone);
+    box-shadow: inset 3px 0 0 var(--bone);
+  }
+  #stages li { text-transform: none; }
+
+  /* --- reference, folds to a bar at the foot ---------------- */
+  #refTitle { font: 12px/1 var(--data); color: var(--iodine); }
+  .collapse {
+    margin-left: auto; padding: 3px 7px; font-size: 13px; line-height: 1;
+    letter-spacing: 0; color: var(--dim);
+  }
+  .collapse:hover { color: var(--bone); }
+  .panel.ref.off { cursor: pointer; }
+  .panel.ref.off > .body { display: none; }
+  .panel.ref.off > .head { border-bottom: 0; border-radius: var(--r); }
+  #glossary { padding: 14px 16px; line-height: 1.65; }
+  #glossary > * { max-width: 104ch; }
+  #glossary .g-head {
+    margin: 17px 0 7px; padding-bottom: 5px; border-bottom: 1px solid var(--edge);
+  }
+  #glossary .g-head:first-child { margin-top: 0; }
+  #glossary .g-head .g-name { color: var(--bone); font-weight: 700; }
+  #glossary .g-head .g-sub { color: var(--tissue); font-weight: 400; }
+  #glossary .g-item { display: flex; gap: 10px; padding: 3px 0 3px 2px; min-width: 0; }
+  #glossary .g-item::before {
+    content: ""; flex: none; width: 7px; height: 1px; margin-top: .78em;
+    background: var(--dim);
+  }
+  #glossary .g-item .g-text { flex: 1; min-width: 0; }
+  #glossary .g-more { padding: 2px 0; color: var(--tissue); }
+  /* a switch keeps its own token together when the paragraph wraps */
+  #glossary code { white-space: nowrap; }
+
+  /* --- run history rows ---------------------------------------------- */
+  li.run {
+    display: block; padding: 8px 10px; cursor: default; white-space: normal;
+    border-bottom: 1px solid #16212a;
+  }
+  li.run:hover { background: var(--plate-2); }
+  li.run .r-top { display: flex; align-items: center; gap: 8px; }
+  li.run .r-when { font-size: 11px; color: var(--dim); flex: none; }
+  li.run .r-mod { color: var(--bone); flex: 1; min-width: 0;
+                  overflow: hidden; text-overflow: ellipsis; }
+  li.run .r-state {
+    flex: none; padding: 3px 5px; border-radius: 2px;
+    font: 600 9.5px/1 var(--label); text-transform: uppercase; letter-spacing: .12em;
+    color: var(--verdigris); border: 1px solid #2f5c56;
+  }
+  li.run .r-cmd {
+    margin-top: 4px; font-size: 12px; color: var(--tissue);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  li.run .r-acts { display: flex; gap: 13px; margin-top: 6px; }
+  li.run .r-acts a {
+    font: 600 9.5px/1 var(--label); text-transform: uppercase; letter-spacing: .12em;
+    color: var(--dim); text-decoration: none;
+  }
+  li.run .r-acts a:hover { color: var(--bone); }
+
+  /* --- narrow: every row stacks and the page scrolls.  The outline is the
+         half-screen view (~860px), so the breakpoint sits well below it -
+         half a screen keeps the full three-column console. */
+  @media (max-width: 800px) {
+    .app { height: auto; grid-template-rows: auto; }
+    main, main.ref-on { grid-template-rows: auto auto auto auto auto; }
+    .browse { grid-template-columns: minmax(0, 1fr); }
+    .panel > .body { max-height: 44vh; }
+    #notes { min-height: 40vh; }
+  }
+
+  /* --- SKELETON Demo Edition: Pro Badges & Modal ----------------------- */
+  .pro-badge-btn {
+    margin-left: auto;
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 12px;
+    background: var(--plate-2); color: var(--iodine);
+    border: 1px solid var(--iodine); border-radius: var(--r);
+    font: 600 11px/1 var(--label); letter-spacing: .12em;
+    text-transform: uppercase; text-decoration: none;
+    transition: background .15s, color .15s, box-shadow .15s;
+    white-space: nowrap;
+  }
+  .pro-badge-btn:hover {
+    background: var(--iodine); color: var(--plate);
+    box-shadow: 0 0 10px rgba(224, 164, 88, 0.35);
+  }
+
+  .badge-pro {
+    margin-left: auto;
+    font: 700 9px/1 var(--label); letter-spacing: .1em;
+    padding: 2px 5px; border-radius: 2px;
+    background: rgba(224, 164, 88, 0.12);
+    color: var(--iodine);
+    border: 1px solid rgba(224, 164, 88, 0.4);
+    pointer-events: none;
+  }
+
+  .modal-backdrop {
+    position: fixed; inset: 0;
+    background: rgba(5, 9, 13, 0.85);
+    backdrop-filter: blur(4px);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 1000;
+    opacity: 1; transition: opacity .15s ease;
+  }
+  .modal-backdrop.hidden {
+    display: none; opacity: 0; pointer-events: none;
+  }
+  .modal-card {
+    background: var(--plate-1);
+    border: 1px solid var(--edge-lit);
+    border-radius: calc(var(--r) * 2);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.7);
+    width: min(520px, 92vw);
+    padding: 0;
+    overflow: hidden;
+  }
+  .modal-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 18px;
+    background: var(--plate-2);
+    border-bottom: 1px solid var(--edge);
+  }
+  .modal-title {
+    font: 700 12px/1 var(--label);
+    letter-spacing: .16em;
+    color: var(--iodine);
+    text-transform: uppercase;
+  }
+  .modal-close {
+    background: transparent; border: none;
+    color: var(--dim); font-size: 20px; line-height: 1;
+    padding: 2px 6px; cursor: pointer;
+  }
+  .modal-close:hover { color: var(--crimson); background: transparent; }
+  .modal-body {
+    padding: 20px 22px 24px;
+    color: var(--bone);
+  }
+  .pro-module-title {
+    margin: 0 0 10px;
+    font: 700 17px/1.3 var(--data);
+    color: var(--verdigris);
+  }
+  .modal-body p {
+    margin: 0 0 16px;
+    font: 13px/1.6 var(--ui);
+    color: var(--tissue);
+  }
+  .pro-features {
+    list-style: none; margin: 0 0 22px; padding: 0;
+    display: flex; flex-direction: column; gap: 8px;
+    font: 12.5px/1.4 var(--ui);
+    color: var(--bone);
+  }
+  .pro-features li {
+    display: flex; align-items: center; gap: 8px;
+  }
+  .pro-features .chk {
+    color: var(--verdigris); font-weight: bold;
+  }
+  .pro-cta-wrap {
+    display: flex; flex-direction: column; gap: 8px;
+    align-items: center;
+  }
+  .modal-buy-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 100%; padding: 12px 18px;
+    background: var(--iodine); color: var(--plate);
+    border: 1px solid var(--iodine); border-radius: var(--r);
+    font: 700 12px/1 var(--label); letter-spacing: .14em;
+    text-transform: uppercase; text-decoration: none;
+    transition: filter .15s, transform .12s;
+  }
+  .modal-buy-btn:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(224, 164, 88, 0.4);
+  }
+  .modal-subtext {
+    font: 11px/1.3 var(--ui);
+    color: var(--dim);
+    text-align: center;
+  }
